@@ -1,0 +1,184 @@
+
+
+slice get_external_message_body(int pk_index, int valid_until_index, int mode, int msg_index) inline method_id {
+    
+    return begin_cell()
+             .store_uint(get_pubkey(pk_index), 256) ;;
+             .store_builder(get_signature(pk_index, valid_until_index, mode, msg_index))
+             .store_ref(
+               begin_cell()
+                 .store_uint(get_valid_until(valid_until_index), 32)
+                 .store_uint(mode,8)
+                 .store_ref(get_message(msg_index))
+               .end_cell()
+             ).end_cell()
+             .begin_parse();
+}
+
+slice get_ext_wrong_sign_body() inline method_id {
+    
+    return begin_cell()
+             .store_uint(get_pubkey(0), 256) ;;
+             .store_uint(0,256).store_uint(0,256)
+             .store_ref(
+               begin_cell()
+                 .store_uint(get_valid_until(0), 32)
+                 .store_uint(3,8)
+                 .store_ref(get_message(0))
+               .end_cell()
+             ).end_cell()
+             .begin_parse();
+}
+
+slice get_ext_mixed_sign_body() inline method_id {
+    
+    return begin_cell()
+             .store_uint(get_pubkey(0), 256)
+             .store_builder(get_signature(1 , 0, 3, 0)) ;; ERROR here signature from second signer
+             .store_ref(
+               begin_cell()
+                 .store_uint(get_valid_until(0), 32)
+                 .store_uint(3,8)
+                 .store_ref(get_message(0))
+               .end_cell()
+             ).end_cell()
+             .begin_parse();
+}
+
+
+slice get_ext_wrong_key_body() inline method_id {
+    ;; signature is valid, but from random key
+    return begin_cell()
+             .store_uint(63911179038924947908770136586981136340886259613364110688561377075017453055770, 256) ;;
+             .store_uint(29338562728943621299922794912325358823019539285331648168856111505857735247795, 256)
+             .store_uint(105833630684407523520258817763895922149806935050171819987875262323809208735493, 256)
+             .store_ref(
+               begin_cell()
+                 .store_uint(get_valid_until(0), 32)
+                 .store_uint(3,8)
+                 .store_ref(get_message(0))
+               .end_cell()
+             ).end_cell()
+             .begin_parse();
+}
+
+
+slice get_ext_no_msg_body() inline method_id {
+    
+    return begin_cell()
+             .store_uint(get_pubkey(0), 256) ;;
+             .store_builder(get_signature(0, 0, 3, 0))
+             .store_ref(
+               begin_cell()
+                 .store_uint(get_valid_until(0), 32)
+                 .store_uint(3,8)
+               .end_cell()
+             ).end_cell()
+             .begin_parse();
+}
+
+slice get_ext_incorrect_request_body() inline method_id {
+    return begin_cell()
+             .store_uint(get_pubkey(0), 256) ;;
+             .store_builder(get_signature(0, 0, 3, 0))
+             .store_ref(
+               begin_cell()
+                 .store_uint(get_valid_until(0), 16) ;; ERROR IS HERE 16 instead of 32
+                 .store_uint(3,8)
+                 .store_ref(get_message(0))
+               .end_cell()
+             ).end_cell()
+             .begin_parse();
+}
+
+
+slice get_ext_incorrect_layout_body() inline method_id {
+    return begin_cell()
+             ;; ERROR IS HERE : NO PUBKEY
+             .store_builder(get_signature(0, 0, 3, 0))
+             .store_ref(
+               begin_cell()
+                 .store_uint(get_valid_until(0), 32)
+                 .store_uint(3,8)
+                 .store_ref(get_message(0))
+               .end_cell()
+             ).end_cell()
+             .begin_parse();
+}
+
+tuple get_external_message(int pk_index, int valid_until_index, int mode, int msg_index)  inline method_id {
+    int balance = 1100000000;
+    int msg_value = 0;
+    slice in_msg_body = get_external_message_body(pk_index, valid_until_index, mode, msg_index);
+
+    cell in_msg = begin_cell()
+                    .store_uint(8, 4)
+                    .store_slice(my_address())
+                    .store_grams(0)
+                    .store_uint(1, 2)
+                    .store_ref(
+                      begin_cell().store_slice(in_msg_body).end_cell()
+                    )
+                    .end_cell();
+    return unsafe_tuple([balance, msg_value, in_msg, in_msg_body]);
+}
+
+tuple get_wrong_external_message(int error_index)  method_id {
+    int balance = 1100000000;
+    int msg_value = 0;
+    slice in_msg_body = get_external_message_body(0, 0, 3, 0);
+    
+    if(error_index == 0) {
+      in_msg_body = get_ext_wrong_sign_body();
+    }
+    if(error_index == 1) {
+      in_msg_body = get_ext_mixed_sign_body();
+    }
+    if(error_index == 2) {
+      in_msg_body = get_ext_wrong_key_body();
+    }
+    if(error_index == 3) {
+      in_msg_body = get_ext_no_msg_body();
+    }
+    if(error_index == 4) {
+      in_msg_body = get_ext_incorrect_request_body();
+    }
+    if(error_index == 5) {
+      in_msg_body = get_ext_incorrect_layout_body();
+    }
+    cell body_cell = begin_cell().store_slice(in_msg_body).end_cell();
+    cell in_msg = begin_cell()
+                    .store_uint(8, 4)
+                    .store_slice(my_address())
+                    .store_grams(0)
+                    .store_uint(1, 2)
+                    .store_ref(body_cell)
+                    .end_cell();
+    return unsafe_tuple([balance, msg_value, in_msg, in_msg_body]);
+}
+
+
+
+() check_message_correctness (cell actions, int should_be_mode, int msg_index) impure method_id {
+    slice actions_list = actions.begin_parse();
+    cell prev_action_list = actions_list~load_ref();
+    slice action = actions_list;
+    ;; action_send_msg#0ec3c86d mode:(## 8)
+    ;;   out_msg:^(MessageRelaxed Any) = OutAction;
+
+    int action_id = action~load_uint(32);  ;; load action id
+    throw_if(error::wrong_action_id(), action_id != 0x0ec3c86d);
+
+    int mode = action~load_uint(8); ;; send mode
+
+    ;; TON value attached to message should be incoming value minus processing fees
+    ;; allow +2 flag
+    throw_unless(error::wrong_send_mode(), mode == should_be_mode);
+
+    actions_list = prev_action_list.begin_parse();
+    ;; Only one message: that is action_list is empty
+    throw_if(error::actions_unvalid(), actions_list.slice_bits() > 0);
+
+    cell message = action~load_ref();
+    throw_unless( error::actions_unvalid(), cell_hash(message) == cell_hash(get_message(msg_index)));
+}

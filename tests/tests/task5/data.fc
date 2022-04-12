@@ -1,0 +1,45 @@
+cell get_c4() inline method_id {
+    ;; * Tests will initially run with empty storage
+    cell data = begin_cell().end_cell();
+
+    return data;
+}
+
+
+;; c7 config (if you don't know what it is - just use as is)
+tuple get_c7_with_time(int time) inline method_id {
+    return unsafe_tuple([unsafe_tuple([
+        0x076ef1ea,           ;; magic
+        0,                    ;; actions
+        0,                    ;; msgs_sent
+        time,                ;; unixtime
+        1,                    ;; block_lt
+        1,                    ;; trans_lt
+        239,                  ;; randseed
+        unsafe_tuple([1000000000, null()]),  ;; balance_remaining
+        my_address(),         ;; myself
+        get_config()          ;; global_config
+    ])]);
+}
+
+cell get_environment() asm "c4 PUSH";
+() set_environment(cell c) impure asm "c4 POP";
+
+() init_environment() impure method_id {
+  set_environment(begin_cell().store_dict(null()).end_cell());
+}
+
+int storage_key(int tag) method_id {
+  return (17 << 117) + tag;
+}
+;;cell idict_get_ref__(cell dict, int key_len, int index) asm(index dict key_len) "DICTIGETREF" "NULLSWAPIFNOT" "DROP";
+cell load_storage_with_tag(int tag)  method_id {
+  return get_environment().begin_parse().preload_dict().idict_get_ref(256, storage_key(tag));
+}
+
+_ save_storage_with_tag(int tag, cell storage) impure method_id {
+  cell dict = get_environment().begin_parse().preload_dict();
+  dict~idict_set_ref(256, storage_key(tag), storage);
+  ;;throw_if(1273, is_null?(dict));
+  set_environment(begin_cell().store_dict(dict).end_cell());
+} 

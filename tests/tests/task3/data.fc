@@ -1,0 +1,10 @@
+cell get_c4() inline method_id {
+    ;; The initial address memorizer storage contains
+    ;; Manager address immediately followed by empty address (`addr_none` constructor for MsgAddress).
+
+    cell data = begin_cell()
+        .store_slice(get_example_address(1))
+        .store_slice(begin_cell().store_uint(0, 2).end_cell().begin_parse()) ;; addr_none
+        .end_cell();
+    return data;
+}

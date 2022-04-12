@@ -1,0 +1,415 @@
+_ prerare_storage() method_id(0) {
+    init_environment();
+    return [90427, [get_pubkey(0), get_pubkey(1)],
+            get_c4(), get_c7_with_time(get_valid_until(0) - 50), null()];
+}
+() prerare_storage_result(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(1) {
+  check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+  save_storage_with_tag(1, data);
+}
+
+[int, tuple, cell, tuple, tuple] get_one_ext_message_data() method_id(2) {
+    return [-1, get_external_message(0, 0, 3, 0),
+            load_storage_with_tag(1), get_c7_with_time(get_valid_until(0) - 50), unsafe_tuple([10000, 1000000000])];
+}
+
+() get_one_ext_message(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(3) {
+    check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+    slice actions_list = actions.begin_parse();
+    throw_if(error::actions_unvalid(), actions_list.slice_bits() > 0);
+
+}
+
+_ get_coupled_ext_message_data() method_id(4) {
+    return [-1, get_external_message(1, 0, 3, 0),
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) - 50), unsafe_tuple([10000, 1000000000])];
+}
+
+() get_coupled_ext_message(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(5) {
+    check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+    check_message_correctness(actions, 3, 0);
+}
+
+;; Start again, now lets add four one-sided messages and when co-sign them
+
+[int, tuple, cell, tuple, tuple] first_sign_1_() method_id(6) {
+    return [-1, get_external_message(0, 1, 3, 0),
+            load_storage_with_tag(1), get_c7_with_time(get_valid_until(0) - 50), unsafe_tuple([10000, 1000000000])];
+}
+
+() first_sign_1(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(7) {
+    check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+    slice actions_list = actions.begin_parse();
+    throw_if(error::actions_unvalid(), actions_list.slice_bits() > 0);
+
+}
+
+[int, tuple, cell, tuple, tuple] first_sign_2_() method_id(8) {
+    return [-1, get_external_message(0, 2, 3, 0),
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) - 50), unsafe_tuple([10000, 1000000000])];
+}
+
+() first_sign_2(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(9) {
+    check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+    slice actions_list = actions.begin_parse();
+    throw_if(error::actions_unvalid(), actions_list.slice_bits() > 0);
+}
+
+[int, tuple, cell, tuple, tuple] first_sign_3_() method_id(10) {
+    return [-1, get_external_message(0, 3, 3, 0),
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) - 50), unsafe_tuple([10000, 1000000000])];
+}
+
+() first_sign_3(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(11) {
+    check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+    slice actions_list = actions.begin_parse();
+    throw_if(error::actions_unvalid(), actions_list.slice_bits() > 0);
+}
+
+[int, tuple, cell, tuple, tuple] second_sign_4_() method_id(12) {
+    return [-1, get_external_message(1, 4, 3, 0),
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) - 50), unsafe_tuple([10000, 1000000000])];
+}
+
+() second_sign_4(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(13) {
+    check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+    slice actions_list = actions.begin_parse();
+    throw_if(error::actions_unvalid(), actions_list.slice_bits() > 0);
+}
+
+;; co-sign
+
+[int, tuple, cell, tuple, tuple] first_cosign_4_() method_id(14) {
+    return [-1, get_external_message(0, 4, 3, 0),
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) - 50), unsafe_tuple([10000, 1000000000])];
+}
+() first_cosign_1(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(15) {
+    check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+    check_message_correctness(actions, 3, 0);
+}
+
+[int, tuple, cell, tuple, tuple] second_cosign_2_() method_id(16) {
+    return [-1, get_external_message(1, 2, 3, 0),
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) - 50), unsafe_tuple([10000, 1000000000])];
+}
+() second_cosign_2(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(17) {
+    check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+    check_message_correctness(actions, 3, 0);
+}
+
+;; now check that replays will not be accepted
+[int, tuple, cell, tuple, tuple] second_cosign_2_replay_() method_id(18) {
+    return [-1, get_external_message(1, 2, 3, 0),
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) - 50), unsafe_tuple([10000, 1000000000])];
+}
+() second_cosign_2_replay(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(19) {
+    ;;check_unsuccess(exit_code); ;; we need to check gl == credit to detect abscence of accept
+}
+
+[int, tuple, cell, tuple, tuple] second_sign_4_replay_() method_id(20) {
+    return [-1, get_external_message(1, 4, 3, 0),
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) - 50), unsafe_tuple([10000, 1000000000])];
+}
+
+() second_sign_4_replay(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(21) {
+    ;;check_unsuccess(exit_code); ;; we need to check gl == credit to detect abscence of accept
+}
+
+;; now check that cosigns does not work after valid_until
+[int, tuple, cell, tuple, tuple] second_sign_1_too_late_() method_id(22) {
+    return [-1, get_external_message(1, 1, 3, 0),
+            load_storage_with_tag(1), get_c7_with_time(get_valid_until(0) + 2), unsafe_tuple([10000, 1000000000])];
+}
+
+() second_sign_1_too_late(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(23) {
+    ;;check_unsuccess(exit_code); ;; we need to check gl == credit to detect abscence of accept
+}
+
+[int, tuple, cell, tuple, tuple] second_sign_7_too_late_() method_id(24) {
+    return [-1, get_external_message(1, 7, 3, 0),
+            load_storage_with_tag(1), get_c7_with_time(get_valid_until(0) + 8), unsafe_tuple([10000, 1000000000])];
+}
+
+() second_sign_7_too_late(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(25) {
+    ;;check_unsuccess(exit_code); ;; we need to check gl == credit to detect abscence of accept
+}
+
+
+
+{- Now lets test incorrect requests -}
+
+[int, tuple, cell, tuple, tuple] wrong_sign_body_() method_id(26) {
+    return [-1, get_wrong_external_message(0),
+            load_storage_with_tag(1), get_c7_with_time(get_valid_until(0) - 50), unsafe_tuple([10000, 1000000000])];
+}
+
+() wrong_sign_body(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(27) {
+    ;;check_unsuccess(exit_code); ;; we need to check gl == credit to detect abscence of accept
+}
+
+[int, tuple, cell, tuple, tuple] mixed_sign_body_() method_id(28) {
+    return [-1, get_wrong_external_message(1),
+            load_storage_with_tag(1), get_c7_with_time(get_valid_until(0) - 50), unsafe_tuple([10000, 1000000000])];
+}
+
+() mixed_sign_body(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(29) {
+    ;;check_unsuccess(exit_code); ;; we need to check gl == credit to detect abscence of accept
+}
+
+
+[int, tuple, cell, tuple, tuple] wrong_key_body_() method_id(30) {
+    return [-1, get_wrong_external_message(2),
+            load_storage_with_tag(1), get_c7_with_time(get_valid_until(0) - 50), unsafe_tuple([10000, 1000000000])];
+}
+
+() wrong_key_body(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(31) {
+    ;;check_unsuccess(exit_code); ;; we need to check gl == credit to detect abscence of accept
+}
+
+
+[int, tuple, cell, tuple, tuple] no_msg_body_() method_id(32) {
+    return [-1, get_wrong_external_message(3),
+            load_storage_with_tag(1), get_c7_with_time(get_valid_until(0) - 50), unsafe_tuple([10000, 1000000000])];
+}
+
+() no_msg_body(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(33) {
+    ;;check_unsuccess(exit_code); ;; we need to check gl == credit to detect abscence of accept
+}
+
+
+
+[int, tuple, cell, tuple, tuple] incorrect_request_body_() method_id(34) {
+    return [-1, get_wrong_external_message(4),
+            load_storage_with_tag(1), get_c7_with_time(get_valid_until(0) - 50), unsafe_tuple([10000, 1000000000])];
+}
+
+() incorrect_request_body(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(35) {
+    ;;check_unsuccess(exit_code); ;; we need to check gl == credit to detect abscence of accept
+}
+
+
+
+[int, tuple, cell, tuple, tuple] incorrect_layout_body_() method_id(36) {
+    return [-1, get_wrong_external_message(5),
+            load_storage_with_tag(1), get_c7_with_time(get_valid_until(0) - 50), unsafe_tuple([10000, 1000000000])];
+}
+
+() incorrect_layout_body(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(37) {
+    ;;check_unsuccess(exit_code); ;; we need to check gl == credit to detect abscence of accept
+}
+
+
+{- Start again and just send bunch of messages -}
+;; #################################################
+
+[int, tuple, cell, tuple, tuple] mass_first_sign_1_() method_id(38) {
+    return [-1, get_external_message(0, 1, 3, 0),
+            load_storage_with_tag(1), get_c7_with_time(get_valid_until(0) - 55), unsafe_tuple([10000, 1000000000])];
+}
+
+() mass_first_sign_1(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(39) {
+    check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+    slice actions_list = actions.begin_parse();
+    throw_if(error::actions_unvalid(), actions_list.slice_bits() > 0);
+
+}
+
+[int, tuple, cell, tuple, tuple] mass_first_sign_2_() method_id(40) {
+    return [-1, get_external_message(0, 2, 3, 0),
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) - 55), unsafe_tuple([10000, 1000000000])];
+}
+
+() mass_first_sign_2(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(41) {
+    check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+    slice actions_list = actions.begin_parse();
+    throw_if(error::actions_unvalid(), actions_list.slice_bits() > 0);
+}
+
+[int, tuple, cell, tuple, tuple] mass_first_sign_3_() method_id(42) {
+    return [-1, get_external_message(0, 3, 3, 0),
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) - 55), unsafe_tuple([10000, 1000000000])];
+}
+
+() mass_first_sign_3(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(43) {
+    check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+    slice actions_list = actions.begin_parse();
+    throw_if(error::actions_unvalid(), actions_list.slice_bits() > 0);
+}
+
+[int, tuple, cell, tuple, tuple] mass_second_sign_4_() method_id(44) {
+    return [-1, get_external_message(1, 4, 3, 0),
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) - 55), unsafe_tuple([10000, 1000000000])];
+}
+
+() mass_second_sign_4(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(45) {
+    check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+    slice actions_list = actions.begin_parse();
+    throw_if(error::actions_unvalid(), actions_list.slice_bits() > 0);
+}
+
+
+[int, tuple, cell, tuple, tuple] mass_second_sign_5_() method_id(46) {
+    return [-1, get_external_message(1, 5, 3, 0),
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) - 52), unsafe_tuple([10000, 1000000000])];
+}
+
+() mass_second_sign_5(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(47) {
+    check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+    slice actions_list = actions.begin_parse();
+    throw_if(error::actions_unvalid(), actions_list.slice_bits() > 0);
+}
+
+
+[int, tuple, cell, tuple, tuple] mass_second_sign_6_() method_id(48) {
+    return [-1, get_external_message(1, 6, 3, 0),
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) - 52), unsafe_tuple([10000, 1000000000])];
+}
+
+() mass_second_sign_6(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(49) {
+    check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+    slice actions_list = actions.begin_parse();
+    throw_if(error::actions_unvalid(), actions_list.slice_bits() > 0);
+}
+
+
+[int, tuple, cell, tuple, tuple] mass_second_sign_7_251_() method_id(50) {
+    return [-1, get_external_message(1, 7, 251, 0),
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) - 52), unsafe_tuple([10000, 1000000000])];
+}
+
+() mass_second_sign_7_251(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(51) {
+    check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+    slice actions_list = actions.begin_parse();
+    throw_if(error::actions_unvalid(), actions_list.slice_bits() > 0);
+}
+
+
+[int, tuple, cell, tuple, tuple] mass_second_sign_8_251_() method_id(52) {
+    return [-1, get_external_message(1, 8, 251, 0),
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) - 49), unsafe_tuple([10000, 1000000000])];
+}
+
+() mass_second_sign_8_251(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(53) {
+    check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+    slice actions_list = actions.begin_parse();
+    throw_if(error::actions_unvalid(), actions_list.slice_bits() > 0);
+}
+
+
+
+[int, tuple, cell, tuple, tuple] mass_second_sign_9_77_() method_id(54) {
+    return [-1, get_external_message(1, 9, 77, 0),
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) - 49), unsafe_tuple([10000, 1000000000])];
+}
+
+() mass_second_sign_9_77(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(55) {
+    check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+    slice actions_list = actions.begin_parse();
+    throw_if(error::actions_unvalid(), actions_list.slice_bits() > 0);
+}
+
+
+[int, tuple, cell, tuple, tuple]  mass_first_cosign_9_77_() method_id(56) {
+    return [-1, get_external_message(0, 9, 77, 0),
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) ), unsafe_tuple([10000, 1000000000])];
+}
+() mass_first_cosign_9_77(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(57) {
+    check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+    check_message_correctness(actions, 77, 0);
+}
+
+[int, tuple, cell, tuple, tuple] mass_second_sign_10_77_() method_id(58) {
+    return [-1, get_external_message(1, 10, 77, 0),
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) ), unsafe_tuple([10000, 1000000000])];
+}
+
+() mass_second_sign_10_77(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(59) {
+    check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+    slice actions_list = actions.begin_parse();
+    throw_if(error::actions_unvalid(), actions_list.slice_bits() > 0);
+}
+
+[int, tuple, cell, tuple, tuple] mass_second_sign_11_77_() method_id(60) {
+    return [-1, get_external_message(1, 11, 77, 0),
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) ), unsafe_tuple([10000, 1000000000])];
+}
+
+() mass_second_sign_11_77(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(61) {
+    check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+    slice actions_list = actions.begin_parse();
+    throw_if(error::actions_unvalid(), actions_list.slice_bits() > 0);
+}
+
+
+[int, tuple, cell, tuple, tuple] mass_second_sign_12_77_() method_id(62) {
+    return [-1, get_external_message(1, 12, 77, 0),
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) + 11), unsafe_tuple([10000, 1000000000])];
+}
+
+() mass_second_sign_12_77(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(63) {
+    check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+    slice actions_list = actions.begin_parse();
+    throw_if(error::actions_unvalid(), actions_list.slice_bits() > 0);
+}
+
+
+[int, tuple, cell, tuple, tuple] mass_second_sign_13_77_() method_id(64) {
+    return [-1, get_external_message(1, 13, 77, 0),
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) + 11), unsafe_tuple([10000, 1000000000])];
+}
+
+() mass_second_sign_13_77(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(65) {
+    check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+    slice actions_list = actions.begin_parse();
+    throw_if(error::actions_unvalid(), actions_list.slice_bits() > 0);
+}
+
+
+[int, tuple, cell, tuple, tuple] mass_second_sign_14_77_() method_id(66) {
+    return [-1, get_external_message(1, 14, 77, 0),
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) + 11), unsafe_tuple([10000, 1000000000])];
+}
+
+() mass_second_sign_14_77(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(67) {
+    check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+    slice actions_list = actions.begin_parse();
+    throw_if(error::actions_unvalid(), actions_list.slice_bits() > 0);
+}
+
+
+[int, tuple, cell, tuple, tuple] mass_second_sign_15_77_() method_id(68) {
+    return [-1, get_external_message(1, 15, 77, 0),
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) + 11), unsafe_tuple([10000, 1000000000])];
+}
+
+() mass_second_sign_15_77(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(69) {
+    check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+    slice actions_list = actions.begin_parse();
+    throw_if(error::actions_unvalid(), actions_list.slice_bits() > 0);
+}
+
+
+
+[int, tuple, cell, tuple, tuple] mass_second_sign_16_251_() method_id(70) {
+    return [-1, get_external_message(1, 16, 251, 1),
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) + 11), unsafe_tuple([10000, 1000000000])];
+}
+
+() mass_second_sign_16_251(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(71) {
+    check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+    slice actions_list = actions.begin_parse();
+    throw_if(error::actions_unvalid(), actions_list.slice_bits() > 0);
+}
+
+
+[int, tuple, cell, tuple, tuple] mass_first_cosign_16_251_() method_id(72) {
+    return [-1, get_external_message(0, 16, 251, 1),
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) + 11), unsafe_tuple([10000, 1000000000])];
+}
+
+() mass_first_cosign_16_251(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(73) {
+    check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+    check_message_correctness(actions, 251, 1);
+}
+
+

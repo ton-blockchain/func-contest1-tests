@@ -1,0 +1,11 @@
+() check_unsuccess(int exit_code) impure method_id {
+    ;; 0 - standard successful execution exit code
+    ;; 1 - alternative successful execution exit code
+    throw_if(error::exit_code_not_unsuccess(), (exit_code == 1) | (exit_code == 0)); ;; code need to fail
+}
+
+() check_success(int exit_code) impure method_id {
+    ;; 0 - standard successful execution exit code
+    ;; 1 - alternative successful execution exit code
+    throw_if_not(error::exit_code_not_unsuccess(), (exit_code == 1) | (exit_code == 0)); ;; code need to fail
+}

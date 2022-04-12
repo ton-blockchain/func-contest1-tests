@@ -1,0 +1,630 @@
+
+[int, tuple, cell, tuple, int] set_message_data() method_id(0) {
+    int op = 1;
+    int query_id = 2;
+    int key = 3;
+    int valid_until = 10;
+    int value = 5;
+
+    return [0, get_message(op, query_id, key, valid_until, value), get_c4(),
+        get_c7_with_time(1), null()];
+}
+
+_ set_message(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(1) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] set_message_data_2() method_id(2) {
+    ;; replace valid_until
+    int op = 1;
+    int query_id = 2;
+    int key = 3;
+    int valid_until = 12;
+    int value = 50;
+
+    return [0, get_message(op, query_id, key, valid_until, value), get_prev_c4(),
+        get_c7_with_time(2), null()];
+}
+
+_ set_message_2(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(3) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] set_message_data_3() method_id(4) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 115792089237316195423570985008687907853269984665640564039457584007913129639935;
+    int valid_until = 14;
+    int value = 5;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(3), null()];
+}
+
+_ set_message_3(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(5) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] get_key_data() method_id(6) {
+    return [127977, unsafe_tuple([3]), get_prev_c4(), get_c7_with_time(4), null()];
+}
+
+_ get_key(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(7) {
+    ;; check key have been replaced
+    check_success(exit_code);
+    check_get_method_result (stack, 12, 50);
+}
+
+[int, tuple, cell, tuple, int] get_key_max_data() method_id(8) {
+    return [127977, unsafe_tuple([115792089237316195423570985008687907853269984665640564039457584007913129639935]),
+        get_prev_c4(), get_c7_with_time(5), null()];
+}
+
+_ get_key_max(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(9) {
+    ;; check key have been replaced
+    check_success(exit_code);
+    check_get_method_result (stack, 14, 5);
+}
+
+[int, tuple, cell, tuple, int] remove_outdated_data() method_id(10) {
+    int op = 2;
+    int query_id = 2;
+
+    return [0, get_delete_message(op, query_id),
+            get_prev_c4(), get_c7_with_time(13), null()];
+}
+
+_ remove_outdated(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(11) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] check_cant_get_outdated_data() method_id(12) {
+    return [127977, unsafe_tuple([3]), get_prev_c4(), get_c7_with_time(0), null()];
+}
+
+_ check_cant_get_outdated(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(13) {
+    check_unsuccess(exit_code);
+}
+
+[int, tuple, cell, tuple, int] check_can_get_not_outdated_data() method_id(14) {
+    return [127977, unsafe_tuple([115792089237316195423570985008687907853269984665640564039457584007913129639935]),
+            get_prev_c4(), get_c7_with_time(0), null()];
+}
+
+
+_ check_can_get_not_outdated(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(15) {
+    check_success(exit_code);
+    check_get_method_result (stack, 4749340378, 5);
+}
+
+
+[int, tuple, cell, tuple, int] set_message_data_4() method_id(16) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 71;
+    int valid_until = 112;
+    int value = 11;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(14), null()];
+}
+
+_ set_message_4(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(17) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] set_message_data_same_valid_until() method_id(18) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 72;
+    int valid_until = 112;
+    int value = 12;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(15), null()];
+}
+
+_ set_message_same_valid_until(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(19) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] set_message_data_same_value() method_id(20) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 74;
+    int valid_until = 112;
+    int value = 12;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(16), null()];
+}
+
+_ set_message_same_value(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(21) {
+    check_success(exit_code);
+}
+
+
+[int, tuple, cell, tuple, int] set_message_data_update_valid_until_before() method_id(22) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 100;
+    int valid_until = 25;
+    int value = 0;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(17), null()];
+}
+
+_ set_message_update_valid_until_before(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(23) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] set_message_data_update_valid_until() method_id(24) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 100;
+    int valid_until = 28;
+    int value = 0;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(18), null()];
+}
+
+_ set_message_update_valid_until(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(25) {
+    check_success(exit_code);
+}
+
+{- We set outdate_threshold after non-updated but before updated values. Value should survive -}
+[int, tuple, cell, tuple, int] remove_outdated2_data() method_id(26) {
+    int op = 2;
+    int query_id = 2;
+
+    return [0, get_delete_message(op, query_id),
+            get_prev_c4(), get_c7_with_time(26), null()];
+}
+
+_ remove_outdated2(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(27) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] check_can_get_not_outdated2_data() method_id(28) {
+    return [127977, unsafe_tuple([100]),
+            get_prev_c4(), get_c7_with_time(0), null()];
+}
+
+
+_ check_can_get_not_outdated2(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(29) {
+    check_success(exit_code);
+    check_get_method_result (stack, 28, 0);
+}
+
+[int, tuple, cell, tuple, int] set_message_data_update_valid_until_again() method_id(30) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 100;
+    int valid_until = 30;
+    int value = 0;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(27), null()];
+}
+
+_ set_message_update_valid_until_again(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(31) {
+    check_success(exit_code);
+}
+
+{- This time we set outdate_threshold after both non-updated and updated values. It should be absent-}
+[int, tuple, cell, tuple, int] remove_outdated3_data() method_id(32) {
+    int op = 2;
+    int query_id = 2;
+
+    return [0, get_delete_message(op, query_id),
+            get_prev_c4(), get_c7_with_time(35), null()];
+}
+
+_ remove_outdated3(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(33) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] check_can_not_not_outdated2_data() method_id(34) {
+    return [127977, unsafe_tuple([100]),
+            get_prev_c4(), get_c7_with_time(0), null()];
+}
+
+
+_ check_can_not_not_outdated2(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(35) {
+    check_unsuccess(exit_code);
+}
+
+{- And now just add many keys and remove them -}
+[int, tuple, cell, tuple, int] mass_key_addition1_p() method_id(36) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 1023;
+    int valid_until = 1112;
+    int value = 12;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(40), null()];
+}
+
+_ mass_key_addition1(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(37) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] mass_key_addition2_p() method_id(38) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 1024;
+    int valid_until = 113;
+    int value = 12;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(40), null()];
+}
+
+_ mass_key_addition2(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(39) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] mass_key_addition3_p() method_id(40) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 1025;
+    int valid_until = 114;
+    int value = 12;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(40), null()];
+}
+
+_ mass_key_addition3(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(41) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] mass_key_addition4_p() method_id(42) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 1026;
+    int valid_until = 115;
+    int value = 12;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(40), null()];
+}
+
+_ mass_key_addition4(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(43) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] mass_key_addition5_p() method_id(44) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 1027;
+    int valid_until = 116;
+    int value = 12;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(40), null()];
+}
+
+_ mass_key_addition5(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(45) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] mass_key_addition6_p() method_id(46) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 1028;
+    int valid_until = 117;
+    int value = 12;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(40), null()];
+}
+
+_ mass_key_addition6(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(47) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] mass_key_addition7_p() method_id(48) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 1029;
+    int valid_until = 118;
+    int value = 12;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(40), null()];
+}
+
+_ mass_key_addition7(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(49) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] mass_key_addition8_p() method_id(50) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 1030;
+    int valid_until = 119;
+    int value = 12;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(40), null()];
+}
+
+_ mass_key_addition8(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(51) {
+    check_success(exit_code);
+}
+
+
+[int, tuple, cell, tuple, int] mass_key_addition9_p() method_id(52) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 1031;
+    int valid_until = 122;
+    int value = 12;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(40), null()];
+}
+
+_ mass_key_addition9(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(53) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] mass_key_addition10_p() method_id(54) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 1032;
+    int valid_until = 123;
+    int value = 12;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(40), null()];
+}
+
+_ mass_key_addition10(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(55) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] mass_key_addition11_p() method_id(66) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 1023;
+    int valid_until = 1000;
+    int value = 12;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(40), null()];
+}
+
+_ mass_key_addition11(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(67) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] mass_key_addition12_p() method_id(68) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 1024;
+    int valid_until = 1001;
+    int value = 12;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(40), null()];
+}
+
+_ mass_key_addition12(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(69) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] mass_key_addition13_p() method_id(70) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 1025;
+    int valid_until = 1002;
+    int value = 12;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(40), null()];
+}
+
+_ mass_key_addition13(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(71) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] mass_key_addition14_p() method_id(72) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 1026;
+    int valid_until = 1003;
+    int value = 12;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(40), null()];
+}
+
+_ mass_key_addition14(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(73) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] mass_key_addition15_p() method_id(74) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 1027;
+    int valid_until = 1004;
+    int value = 12;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(40), null()];
+}
+
+_ mass_key_addition15(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(75) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] mass_key_addition16_p() method_id(76) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 1028;
+    int valid_until = 1005;
+    int value = 12;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(40), null()];
+}
+
+_ mass_key_addition16(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(77) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] mass_key_addition17_p() method_id(78) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 1029;
+    int valid_until = 1006;
+    int value = 12;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(40), null()];
+}
+
+_ mass_key_addition17(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(79) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] mass_key_addition18_p() method_id(80) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 1030;
+    int valid_until = 1007;
+    int value = 12;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(40), null()];
+}
+
+_ mass_key_addition18(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(81) {
+    check_success(exit_code);
+}
+
+
+[int, tuple, cell, tuple, int] mass_key_addition19_p() method_id(82) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 1031;
+    int valid_until = 1008;
+    int value = 12;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(40), null()];
+}
+
+_ mass_key_addition19(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(83) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] mass_key_addition110_p() method_id(84) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 1032;
+    int valid_until = 1009;
+    int value = 12;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(40), null()];
+}
+
+_ mass_key_addition110(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(85) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] remove_outdated4_data() method_id(86) {
+    int op = 2;
+    int query_id = 2;
+
+    return [0, get_delete_message(op, query_id),
+            get_prev_c4(), get_c7_with_time(40), null()];
+}
+
+_ remove_outdated4(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(87) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] remove_outdated5_data() method_id(88) {
+    int op = 2;
+    int query_id = 2;
+
+    return [0, get_delete_message(op, query_id),
+            get_prev_c4(), get_c7_with_time(113), null()];
+}
+
+_ remove_outdated5(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(89) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] remove_outdated6_data() method_id(90) {
+    int op = 2;
+    int query_id = 2;
+
+    return [0, get_delete_message(op, query_id),
+            get_prev_c4(), get_c7_with_time(1200), null()];
+}
+
+_ remove_outdated6(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(91) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] add_outdated_but_not_removed_p() method_id(92) {
+    ;; new key
+    int op = 1;
+    int query_id = 2;
+    int key = 1032;
+    int valid_until = 1009;
+    int value = 12;
+
+    return [0, get_message(op, query_id, key, valid_until, value),
+                get_prev_c4(), get_c7_with_time(1201), null()];
+}
+
+_ add_outdated_but_not_removed(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(93) {
+    check_success(exit_code);
+}
+
+[int, tuple, cell, tuple, int] check_can_get_not_yet_removed_data() method_id(94) {
+    return [127977, unsafe_tuple([1032]),
+            get_prev_c4(), get_c7_with_time(0), null()];
+}
+
+
+_ check_can_get_not_yet_removed(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(95) {
+    check_success(exit_code);
+    check_get_method_result (stack, 1009, 12);
+}

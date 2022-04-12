@@ -1,0 +1,8 @@
+cell get_c4() inline method_id {
+    ;; (it is guaranteed that storage data contains `total`)
+    cell data = begin_cell()             ;; initial data of contract
+        .store_uint(0, 64)               ;; counter
+        .end_cell();
+    return data;
+}
+

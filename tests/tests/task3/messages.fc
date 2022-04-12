@@ -1,0 +1,53 @@
+slice get_set_message_body() inline method_id {
+    ;;   * when contract get internal message from Manager which contains the following three fields:
+    ;;     * 32-bit unsigned `op` equal to 1 [more on op's here](https://ton.org/docs/#/howto/smart-contract-guidelines?id=internal-messages)
+    ;;     * immediately followed by some 64-bit unsigned `query_id`,
+    ;;     * immediately followed by valid MsgAddress,
+    return begin_cell()
+        .store_uint(1, 32)
+        .store_uint(18446744073709551615, 64) ;; just store max 64uint for fun
+        .store_slice(get_example_address(2))
+        .end_cell()
+        .begin_parse();
+}
+
+tuple get_set_message()  inline method_id {
+    int balance = 1100000000;
+    int msg_value = 1000000000;
+    slice in_msg_body = get_set_message_body();
+    cell in_msg = build_message(0, 1, 0, msg_value, begin_cell().store_slice(in_msg_body)); ;; from 1 to my_address()
+    return unsafe_tuple([balance, msg_value, in_msg, in_msg_body]);
+}
+
+slice get_request_address_message_body() inline method_id {
+    ;; 32-bit unsigned `op` equal to `2` immediately followed by
+    ;; some 64-bit unsigned `query_id`,
+
+    return begin_cell()
+        .store_uint(2, 32)
+        .store_uint(7, 64)
+        .end_cell()
+        .begin_parse();
+}
+
+
+tuple get_request_address_message()  inline method_id {
+    int balance = 1100000000;
+    int msg_value = 1000000000;
+    slice in_msg_body = get_request_address_message_body();
+    cell in_msg = build_message(0, 2, 0, msg_value, begin_cell().store_slice(in_msg_body)); ;; from 2 to my_address()
+    return unsafe_tuple([balance, msg_value, in_msg, in_msg_body]);
+}
+
+tuple get_unvalid_message()  inline method_id {
+    int balance = 1100000000;
+    int msg_value = 1000000000;
+    slice in_msg_body = begin_cell()
+                            .store_uint(3, 32)
+                            .store_uint(3, 64)
+                            .store_uint(3, 256)
+                            .end_cell()
+                            .begin_parse();
+    cell in_msg = build_message(0, 2, 0, msg_value, begin_cell().store_slice(in_msg_body)); ;; from 2 to my_address()
+    return unsafe_tuple([balance, msg_value, in_msg, in_msg_body]);
+}

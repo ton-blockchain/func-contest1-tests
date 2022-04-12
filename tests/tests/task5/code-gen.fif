@@ -1,0 +1,117 @@
+#!/usr/bin/fift -s
+"TonUtil.fif" include
+"Asm.fif" include
+
+"1.pk" load-generate-keypair =: privkey0  =: pubkey0
+"2.pk" load-generate-keypair =: privkey1  =: pubkey1
+"3.pk" load-generate-keypair =: privkey2  =: pubkey2
+
+// create a messages
+<b b{010000} s, b{100} s, -1 8 i, 7 256 u, 10 Gram, 0 1 8 64 32 1 1 + + + + + u,
+b> =: msg0
+
+<b b{010000} s, b{100} s, -1 8 i, 11 256 u, 11 Gram, 0 1 8 64 32 1 1 + + + + + u,
+b> =: msg1
+
+
+3 =: mode3
+77 =: mode77
+251 =: mode251
+
+1000 =: base_valid_until 
+
+// valid_until mode msg_num - request_cell
+{ swap rot <b swap base_valid_until + 32 u, swap 8 u, swap 0 = { msg0 } { msg1 } cond ref, b>  } : create_request
+
+// pk_index valid_until_index mode msg_index - sig_high256 sig_low256
+{ create_request 
+  swap // request pk_index
+  0 =  { privkey0 } { privkey1 } cond // request pk
+  swap hashu swap ed25519_sign_uint // signature
+  256 B>u@+ swap 
+  256 B>u@+
+  swap drop swap } : make_sigs
+
+{ 10 chr $+ } : $nl
+{ $>B "signatures.fc" B>file } : file_write
+{ "signatures.fc" file>B swap $>B B+ "signatures.fc" B>file } : file_write_to_the_end
+
+ "int get_pubkey(int index) method_id  {" $nl
++"  throw_unless(1022, (index | 1) == 1);" $nl
++"  if(index == 0) {" $nl
++"    return " pubkey0 256 B>u@+ swap drop (.) $+ +";" $nl
++"  } else {" $nl
++"    return " pubkey1 256 B>u@+ swap drop (.) $+ +";" $nl
++"  }" $nl
++"}" $nl $nl
+file_write
+
+
+ "int get_valid_until(int index) method_id {" $nl
++"  return index + " base_valid_until (.) $+ +";" $nl
++"}" $nl $nl
+file_write_to_the_end
+
+ "cell get_message(int index) method_id {" $nl
++"  return begin_cell().store_uint(0x10, 6).store_uint(4, 3).store_int(-1, 8)" $nl
++"                     .store_uint( (index == 0) ? 7 : 11, 256)" $nl
++"                     .store_grams((index == 0) ? 10 : 11)" $nl
++"                     .store_uint(0, 1 + 4 + 4 + 64 + 32 + 1 + 1)" $nl
++"         .end_cell();" $nl
++"}" $nl $nl
+file_write_to_the_end
+
+ "builder get_signature(int pk_index, int valid_until_index, int mode, int msg_index)  method_id {" $nl
++"  throw_unless(1022, (pk_index | 1) == 1);" $nl
++"  throw_unless(1023, (valid_until_index < 100) & (valid_until_index >= 0));" $nl
++"  throw_unless(1024, (mode == 3) | (mode == 77) | (mode == 251));" $nl
++"  throw_unless(1022, (msg_index | 1) == 1);" $nl
+file_write_to_the_end
+
+{ swap (.) $+ } : _(.)
+0 
+{ // pk_index loop
+  0
+  { // valid_until_index
+    3
+    { // mode loop
+      0
+      {
+        4 tuple dup explode drop 
+        
+         "  if( (msg_index == " _(.) +") &" $nl
+        +"      (mode == " _(.) +") &" $nl
+        +"      (valid_until_index == " _(.) +") &" $nl
+        +"      (pk_index == " _(.) +") ) {" $nl
+        swap dup explode drop make_sigs
+        3 roll
+        +"    return begin_cell().store_uint(" _(.) +", 256)" $nl
+        +"                       .store_uint(" _(.) +", 256);" $nl
+        +"  }" $nl
+        file_write_to_the_end
+        explode drop
+        1+
+      } 2 times
+      drop
+      3 = { 77 } { 251 } cond
+    } 3 times
+    drop
+    1+    
+  } 25 times
+  drop
+  1+
+} 2 times
+
+ "return begin_cell(); ;; should never get here" $nl
++"}" $nl
+file_write_to_the_end
+
+."signature.fc generated" cr
+
+0 3 0 create_request privkey2
+swap hashu swap ed25519_sign_uint // signature
+256 B>u@+ swap 
+256 B>u@+
+swap drop swap
+."Wrong pubkey " pubkey2 256 B>u@+ swap drop . cr
+."Wrong sig " . ." " . cr

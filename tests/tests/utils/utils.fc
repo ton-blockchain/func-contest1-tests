@@ -1,0 +1,109 @@
+int equal_slices (slice a, slice b) asm "SDEQ";
+int builder_null?(builder b) asm "ISNULL";
+builder store_builder(builder to, builder from) asm "STBR";
+
+tuple empty_stack() impure method_id {
+    return unsafe_tuple([]);
+}
+
+slice get_example_address(int variant) impure method_id {
+    ;;   addr_std$10 anycast:(Maybe Anycast)
+    ;;   workchain_id:int8 address:bits256  = MsgAddressInt;
+
+    var address = 0;
+
+    if (variant == 0){
+        return my_address();
+    }
+
+    if (variant == 1){
+        ;; this is example 256 bit address (bytes -> hex -> int)
+        address = 60163661047215979614107269706106999090098320919312114703353135169949281596933;
+    }
+    if (variant == 2){
+        address = 50163661047215979614107269706106999090098320919312114703353135169949281596933;
+    }
+
+    slice address_cell =  begin_cell()
+        .store_uint(2, 2) ;; addr_std$10
+        .store_uint(0, 1) ;; anycast nothing
+        .store_int(-1, 8) ;; workchain_id: -1
+        .store_uint(address, 256)
+        .end_cell()
+        .begin_parse();
+
+    return address_cell;
+}
+
+
+cell build_message(int bounce, int src, int dest, int ton_amount, builder payload) impure method_id {
+
+    ;;   int_msg_info$0 ihr_disabled:Bool bounce:Bool bounced:Bool
+    ;;     src:MsgAddressInt dest:MsgAddressInt
+    ;;     value:CurrencyCollection ihr_fee:Grams fwd_fee:Grams
+    ;;     created_lt:uint64 created_at:uint32 = CommonMsgInfo;
+
+    slice ssrc = get_example_address(src);
+    slice sdest = get_example_address(dest);
+
+    var msg = begin_cell()
+            .store_uint(0, 1) ;; int_msg_info$0
+            .store_uint(0, 1) ;; ihr_disabled:Bool
+            .store_uint(bounce, 1) ;; bounce:Bool
+            .store_uint(0, 1) ;; bounced:Bool
+            .store_slice(ssrc) ;; src:MsgAddressInt
+            .store_slice(sdest) ;; dest:MsgAddressInt
+            .store_grams(ton_amount) ;;
+            .store_dict(null()) ;; extra currencies
+            .store_grams(0) ;; ihr_fee
+            .store_grams(0) ;; fwd_fee
+            .store_uint(1000, 64) ;; created_lt:uint64
+            .store_uint(1000, 32) ;; created_at:uint32
+            .store_uint(0, 1); ;; no init_state
+    if(msg.builder_bits() + payload.builder_bits() > 1023) {
+      msg = msg.store_uint(1,1) ;; Either ^X
+            .store_ref(payload.end_cell());
+    } else {
+      msg = msg.store_uint(1,1).store_builder(payload);
+    }
+
+    return msg.end_cell();
+}
+
+
+_ throw_if_not(var a, var b) impure method_id {
+    throw_if(a, ~(b));
+}
+
+[int, int, int, slice, int, int, tuple, slice] parse_int_message(cell message) impure method_id {
+    slice cs = message.begin_parse();
+
+    throw_if(error::not_internal_message(), cs~load_uint(1) != 0);
+
+    int ihr_disabled = cs~load_uint(1);
+    int bounce = cs~load_uint(1);
+    int bounced = cs~load_uint(1);
+    slice src = cs~load_msg_addr();
+    slice to_address = cs~load_msg_addr();
+    int money = cs~load_coins();
+    cs~load_dict(); ;; currency collection
+    int ihr_fee = cs~load_grams();
+    int fwd_fee = cs~load_grams();
+    int timestamps = cs~load_uint(96);
+    int maybe_init_state = cs~load_uint(1);
+    throw_if(error::not_supported_yet(), maybe_init_state);
+    tuple init_state = empty_tuple();
+    int body_flag = cs~load_uint(1);
+
+    var body = null();
+
+    if (body_flag == 0) {
+        ;; load main content from body
+        body = cs;
+    } else {
+        ;; just load ref of body
+        body = (cs~load_ref()).begin_parse();
+    }
+
+    return [ihr_disabled, bounce, bounced, to_address, money, timestamps, init_state, body];
+}

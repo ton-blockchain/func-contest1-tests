@@ -1,0 +1,33 @@
+
+tuple get_valid_message_32()  inline method_id {
+    cell message = begin_cell()     ;; external message body
+            .store_uint(10, 32)           ;; value to add
+            .end_cell();
+
+    return unsafe_tuple([message.begin_parse()]);
+}
+
+tuple get_valid_message_64()  inline method_id {
+    cell message = begin_cell()     ;; external message body
+            .store_uint(10, 32)           ;; value to add
+            .store_uint(10, 32)           ;; Body >32bits
+            .end_cell();
+
+    return unsafe_tuple([message.begin_parse()]);
+}
+
+tuple get_valid_max_32_message()  inline method_id {
+    cell message = begin_cell()     ;; external message body
+            .store_uint(4294967295, 32)           ;; value to add
+            .end_cell();
+
+    return unsafe_tuple([message.begin_parse()]);
+}
+
+tuple get_not_valid_message()  inline method_id {
+    cell message = begin_cell()     ;; external message body
+            .store_uint(0, 5)           ;; value to add
+            .end_cell();
+
+    return unsafe_tuple([message.begin_parse()]);
+}

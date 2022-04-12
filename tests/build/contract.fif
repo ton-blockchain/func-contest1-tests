@@ -1,0 +1,35 @@
+"Asm.fif" include
+// automatically generated from `/home/tvorogme/.config/toncli/func-libs/stdlib-tests.func` `/home/tvorogme/projects/task-1/func/code.fc` 
+PROGRAM{
+  DECLPROC recv_internal
+  128253 DECLMETHOD get_total
+  recv_internal PROC:<{
+    //  in_msg_body
+    DUP	//  in_msg_body in_msg_body
+    SBITS	//  in_msg_body _2
+    31 GTINT	//  in_msg_body _4
+    100 THROWIF
+    32 LDU	//  _24 _23
+    DROP	//  n
+    c4 PUSH	//  n _11
+    CTOS	//  n ds
+    64 LDU	//  n _26 _25
+    DROP	//  n total
+    SWAP	//  total n
+    ADD	//  _17
+    NEWC	//  _17 _18
+    64 STU	//  _20
+    ENDC	//  _21
+    c4 POP
+  }>
+  get_total PROC:<{
+    // 
+    10 PUSHINT	//  total=10
+    2 PUSHINT	//  total=10 _6=2
+    NEWC	//  total=10 _6=2 _7
+    32 STU	//  total=10 _9
+    ENDC	//  total=10 _10
+    CTOS	//  total=10 totalCs
+    DUMPSTK
+  }>
+}END>c

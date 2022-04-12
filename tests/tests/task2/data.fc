@@ -1,0 +1,7 @@
+cell get_c4() inline method_id {
+    ;; it is guaranteed that storage contains owner address only
+    cell data = begin_cell()
+        .store_slice(get_example_address(1))
+        .end_cell();
+    return data;
+}

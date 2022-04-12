@@ -1,0 +1,55 @@
+contest-1:
+  func:
+    - func/1.fc
+  tests:
+    - tests/op/op-code.fc
+    - tests/utils/utils.fc
+    - tests/utils/check_status.fc
+    - tests/task1/data.fc
+    - tests/task1/messages.fc
+    - tests/tests-1.fc
+
+contest-2:
+  func:
+    - func/2.fc
+  tests:
+    - tests/op/op-code.fc
+    - tests/utils/utils.fc
+    - tests/utils/check_status.fc
+    - tests/task2/data.fc
+    - tests/task2/messages.fc
+    - tests/tests-2.fc
+
+contest-3:
+  func:
+    - func/3.fc
+  tests:
+    - tests/op/op-code.fc
+    - tests/utils/utils.fc
+    - tests/utils/check_status.fc
+    - tests/task3/data.fc
+    - tests/task3/messages.fc
+    - tests/tests-3.fc
+
+contest-4:
+  func:
+    - func/4.fc
+  tests:
+    - tests/op/op-code.fc
+    - tests/utils/utils.fc
+    - tests/utils/check_status.fc
+    - tests/task4/data.fc
+    - tests/task4/messages.fc
+    - tests/tests-4.fc
+
+contest-5:
+  func:
+    - func/5.fc
+  tests:
+    - tests/op/op-code.fc
+    - tests/utils/utils.fc
+    - tests/utils/check_status.fc
+    - tests/task5/signatures.fc
+    - tests/task5/data.fc
+    - tests/task5/messages.fc
+    - tests/tests-5.fc

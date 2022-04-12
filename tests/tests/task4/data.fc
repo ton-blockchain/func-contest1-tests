@@ -1,0 +1,23 @@
+cell get_c4() inline method_id {
+    ;; * Tests will initially run with empty storage
+    cell data = begin_cell().end_cell();
+
+    return data;
+}
+
+
+;; c7 config (if you don't know what it is - just use as is)
+tuple get_c7_with_time(int time) inline method_id {
+    return unsafe_tuple([unsafe_tuple([
+        0x076ef1ea,           ;; magic
+        0,                    ;; actions
+        0,                    ;; msgs_sent
+        time,                ;; unixtime
+        1,                    ;; block_lt
+        1,                    ;; trans_lt
+        239,                  ;; randseed
+        unsafe_tuple([1000000000, null()]),  ;; balance_remaining
+        my_address(),         ;; myself
+        get_config()          ;; global_config
+    ])]);
+}

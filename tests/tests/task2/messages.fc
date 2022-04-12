@@ -1,0 +1,26 @@
+slice get_valid_message_body() inline method_id {
+    ;; just example of body
+    return begin_cell()
+        .store_uint(10, 32)
+        .store_ref(begin_cell().store_uint(10, 32).end_cell())
+        .end_cell()
+        .begin_parse();
+}
+
+tuple get_valid_message()  inline method_id {
+    int balance = 1100000000;
+    int msg_value = 1000000000;
+    slice in_msg_body = get_valid_message_body();
+    cell in_msg = build_message(0, 2, 0, msg_value, begin_cell().store_slice(in_msg_body));
+
+    return unsafe_tuple([balance, msg_value, in_msg, in_msg_body]);
+}
+
+tuple get_valid_message_from_owner()  inline method_id {
+    int balance = 1100000000;
+    int msg_value = 1000000000;
+    slice in_msg_body = get_valid_message_body();
+    cell in_msg = build_message(0, 1, 0, msg_value, begin_cell().store_slice(in_msg_body));
+
+    return unsafe_tuple([balance, msg_value, in_msg, in_msg_body]);
+}

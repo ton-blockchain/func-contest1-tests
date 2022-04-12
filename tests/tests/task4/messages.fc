@@ -1,0 +1,46 @@
+
+
+slice get_message_body(int op, int query_id, int key, int valid_until, int value) inline method_id {
+    return begin_cell()
+                  .store_uint(op, 32) ;; * 32-bit unsigined `op` equal to 1
+                  .store_uint(query_id, 64) ;; * 64-bit unsigned `query_id`
+                  .store_uint(key, 256) ;; * 256-bit unsgined key
+                  .store_uint(valid_until, 64) ;; * 64-bit `valid_until` unixtime
+                  .store_uint(value, 253) ;; * the rest slice is the value
+                  .store_ref(begin_cell().store_uint(10, 32).end_cell())
+                  .end_cell()
+                  .begin_parse();
+}
+
+() check_get_method_result (tuple stack, int valid_until, int value) impure method_id {
+    int valid_until = first(stack);
+    throw_if(error::data_incorrect() + 100, valid_until != valid_until);
+
+    slice data = second(stack);
+
+    slice payload = data~load_ref().begin_parse();
+    throw_if(error::data_incorrect() + 1000 + (data.preload_uint(253) % 100), data~load_uint(253) != value);
+    throw_if(error::data_incorrect() + 2000, payload~load_uint(32) != 10);
+}
+
+tuple get_message(int op, int query_id, int key, int valid_until, int value)  inline method_id {
+    int balance = 1100000000;
+    int msg_value = 1000000000;
+    slice in_msg_body = get_message_body(op, query_id, key, valid_until, value);
+
+    cell in_msg = build_message(0, 2, 0, msg_value, begin_cell().store_slice(in_msg_body)); ;; from 2 to my_address()
+    return unsafe_tuple([balance, msg_value, in_msg, in_msg_body]);
+}
+
+tuple get_delete_message(int op, int query_id)  inline method_id {
+    int balance = 1100000000;
+    int msg_value = 1000000000;
+    slice in_msg_body = begin_cell()
+                  .store_uint(op, 32) ;; * 32-bit unsigined `op` equal to 2
+                  .store_uint(query_id, 64) ;; * 64-bit unsigned `query_id`
+                  .end_cell()
+                  .begin_parse();
+
+    cell in_msg = build_message(0, 2, 0, msg_value, begin_cell().store_slice(in_msg_body)); ;; from 2 to my_address()
+    return unsafe_tuple([balance, msg_value, in_msg, in_msg_body]);
+}

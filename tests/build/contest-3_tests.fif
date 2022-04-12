@@ -1,0 +1,424 @@
+"Asm.fif" include
+// automatically generated from `/home/func/.config/toncli/func-libs/stdlib-tests.func` `/home/func/.config/toncli/func-libs/tests-helpers.func` `/home/func/Documents/shared/checker/tests/tests/op/op-code.fc` `/home/func/Documents/shared/checker/tests/tests/utils/utils.fc` `/home/func/Documents/shared/checker/tests/tests/utils/check_status.fc` `/home/func/Documents/shared/checker/tests/tests/task3/data.fc` `/home/func/Documents/shared/checker/tests/tests/task3/messages.fc` `/home/func/Documents/shared/checker/tests/tests/tests-3.fc` 
+PROGRAM{
+  85860 DECLMETHOD get_c7
+  130610 DECLMETHOD empty_stack
+  87017 DECLMETHOD get_example_address
+  87059 DECLMETHOD build_message
+  95310 DECLMETHOD throw_if_not
+  70136 DECLMETHOD parse_int_message
+  118633 DECLMETHOD check_unsuccess
+  93967 DECLMETHOD check_success
+  98055 DECLMETHOD get_c4
+  116301 DECLMETHOD get_set_message_body
+  90336 DECLMETHOD get_set_message
+  78631 DECLMETHOD get_request_address_message_body
+  97871 DECLMETHOD get_request_address_message
+  128741 DECLMETHOD get_unvalid_message
+  0 DECLMETHOD manager_set_address_data
+  1 DECLMETHOD manager_set_address
+  2 DECLMETHOD request_address_data
+  3 DECLMETHOD request_address
+  4 DECLMETHOD unvalid_message_data
+  5 DECLMETHOD unvalid_message
+  get_c7 PROC:<{
+    // 
+    124711402 PUSHINT	//  _2=124711402
+    0 PUSHINT	//  _2=124711402 _3=0
+    DUP	//  _2=124711402 _3=0 _4=0
+    NOW	//  _2=124711402 _3=0 _4=0 _5
+    1 PUSHINT	//  _2=124711402 _3=0 _4=0 _5 _6=1
+    DUP	//  _2=124711402 _3=0 _4=0 _5 _6=1 _7=1
+    239 PUSHINT	//  _2=124711402 _3=0 _4=0 _5 _6=1 _7=1 _8=239
+    1000000000 PUSHINT	//  _2=124711402 _3=0 _4=0 _5 _6=1 _7=1 _8=239 _10=1000000000
+    PUSHNULL	//  _2=124711402 _3=0 _4=0 _5 _6=1 _7=1 _8=239 _10=1000000000 _11
+    PAIR	//  _2=124711402 _3=0 _4=0 _5 _6=1 _7=1 _8=239 _12
+    MYADDR	//  _2=124711402 _3=0 _4=0 _5 _6=1 _7=1 _8=239 _12 _13
+    CONFIGROOT	//  _2=124711402 _3=0 _4=0 _5 _6=1 _7=1 _8=239 _12 _13 _14
+    10 TUPLE	//  _15
+    SINGLE	//  _16
+  }>
+  empty_stack PROC:<{
+    // 
+    0 TUPLE	//  _1
+  }>
+  get_example_address PROC:<{
+    //  variant
+    0 PUSHINT	//  variant address=0
+    OVER	//  variant address=0 variant
+    0 EQINT	//  variant address=0 _4
+    IFJMP:<{	//  variant address=0
+      2DROP	// 
+      MYADDR	//  _5
+    }>	//  variant address=0
+    OVER	//  variant address=0 variant
+    1 EQINT	//  variant address=0 _7
+    IF:<{	//  variant address=0
+      DROP	//  variant
+      60163661047215979614107269706106999090098320919312114703353135169949281596933 PUSHINT	//  variant address=60163661047215979614107269706106999090098320919312114703353135169949281596933
+    }>	//  variant address
+    SWAP	//  address variant
+    2 EQINT	//  address _10
+    IF:<{	//  address
+      DROP	// 
+      50163661047215979614107269706106999090098320919312114703353135169949281596933 PUSHINT	//  address=50163661047215979614107269706106999090098320919312114703353135169949281596933
+    }>	//  address
+    -1 PUSHINT	//  address _13=-1
+    0 PUSHINT	//  address _13=-1 _14=0
+    2 PUSHINT	//  address _13=-1 _14=0 _15=2
+    NEWC	//  address _13=-1 _14=0 _15=2 _16
+    2 STU	//  address _13=-1 _14=0 _18
+    1 STU	//  address _13=-1 _20
+    8 STI	//  address _22
+    256 STU	//  _24
+    ENDC	//  _25
+    CTOS	//  address_cell
+  }>
+  build_message PROC:<{
+    //  bounce src dest ton_amount payload
+    s0 s3 XCHG	//  bounce payload dest ton_amount src
+    get_example_address CALLDICT	//  bounce payload dest ton_amount ssrc
+    s0 s2 XCHG	//  bounce payload ssrc ton_amount dest
+    get_example_address CALLDICT	//  bounce payload ssrc ton_amount sdest
+    0 PUSHINT	//  bounce payload ssrc ton_amount sdest _10=0
+    1000 PUSHINT	//  bounce payload ssrc ton_amount sdest _10=0 _11=1000
+    DUP	//  bounce payload ssrc ton_amount sdest _10=0 _11=1000 _12=1000
+    PUSHNULL	//  bounce payload ssrc ton_amount sdest _10=0 _11=1000 _12=1000 _13
+    s3 s3 s3 PUSH3	//  bounce payload ssrc ton_amount sdest _10=0 _11=1000 _12=1000 _13 _14=0 _15=0 _16=0
+    NEWC	//  bounce payload ssrc ton_amount sdest _10=0 _11=1000 _12=1000 _13 _14=0 _15=0 _16=0 _17
+    1 STU	//  bounce payload ssrc ton_amount sdest _10=0 _11=1000 _12=1000 _13 _14=0 _15=0 _19
+    1 STU	//  bounce payload ssrc ton_amount sdest _10=0 _11=1000 _12=1000 _13 _14=0 _21
+    s1 s10 XCHG	//  _14=0 payload ssrc ton_amount sdest _10=0 _11=1000 _12=1000 _13 bounce _21
+    1 STU	//  _14=0 payload ssrc ton_amount sdest _10=0 _11=1000 _12=1000 _13 _23
+    s1 s9 XCHG	//  _13 payload ssrc ton_amount sdest _10=0 _11=1000 _12=1000 _14=0 _23
+    1 STU	//  _13 payload ssrc ton_amount sdest _10=0 _11=1000 _12=1000 _25
+    s0 s6 XCHG2	//  _13 payload _12=1000 ton_amount sdest _10=0 _11=1000 _25 ssrc
+    STSLICER	//  _13 payload _12=1000 ton_amount sdest _10=0 _11=1000 _26
+    s0 s3 XCHG2	//  _13 payload _12=1000 ton_amount _11=1000 _10=0 _26 sdest
+    STSLICER	//  _13 payload _12=1000 ton_amount _11=1000 _10=0 _27
+    s0 s3 XCHG2	//  _13 payload _12=1000 _10=0 _11=1000 _27 ton_amount
+    STGRAMS	//  _13 payload _12=1000 _10=0 _11=1000 _28
+    s1 s5 XCHG	//  _11=1000 payload _12=1000 _10=0 _13 _28
+    STDICT	//  _11=1000 payload _12=1000 _10=0 _29
+    OVER	//  _11=1000 payload _12=1000 _10=0 _29 _30=0
+    STGRAMS	//  _11=1000 payload _12=1000 _10=0 _31
+    OVER	//  _11=1000 payload _12=1000 _10=0 _31 _32=0
+    STGRAMS	//  _11=1000 payload _12=1000 _10=0 _33
+    s1 s2 XCHG	//  _11=1000 payload _10=0 _12=1000 _33
+    64 STU	//  _11=1000 payload _10=0 _35
+    s1 s3 XCHG	//  _10=0 payload _11=1000 _35
+    32 STU	//  _10=0 payload _37
+    s1 s2 XCHG	//  payload _10=0 _37
+    1 STU	//  payload msg
+    DUP	//  payload msg msg
+    BBITS	//  payload msg _40
+    s2 PUSH	//  payload msg _40 payload
+    BBITS	//  payload msg _40 _41
+    ADD	//  payload msg _42
+    10 PUSHPOW2DEC	//  payload msg _42 _43=1023
+    GREATER	//  payload msg _44
+    IF:<{	//  payload msg
+      SWAP	//  msg payload
+      ENDC	//  msg _45
+      1 PUSHINT
+      ROT	//  _45 _46=1 msg
+      1 STU	//  _45 _48
+      STREF	//  msg
+    }>ELSE<{	//  payload msg
+      1 PUSHINT	//  payload msg _50=1
+      SWAP	//  payload _50=1 msg
+      1 STU	//  payload _52
+      SWAP	//  _52 payload
+      STBR	//  msg
+    }>
+    ENDC	//  _54
+  }>
+  throw_if_not PROC:<{
+    //  a b
+    NOT	//  a _2
+    THROWANYIF
+  }>
+  parse_int_message PROC:<{
+    //  message
+    CTOS	//  cs
+    112 PUSHINT	//  cs _3
+    SWAP	//  _3 cs
+    1 LDU	//  _3 _4 cs
+    SWAP	//  _3 cs _4
+    0 NEQINT	//  _3 cs _8
+    s1 s2 XCHG	//  cs _3 _8
+    THROWANYIF
+    1 LDU	//  ihr_disabled cs
+    1 LDU	//  ihr_disabled bounce cs
+    1 LDU	//  ihr_disabled bounce bounced cs
+    LDMSGADDR	//  ihr_disabled bounce bounced _72 _71
+    NIP	//  ihr_disabled bounce bounced cs
+    LDMSGADDR	//  ihr_disabled bounce bounced to_address cs
+    LDVARUINT16	//  ihr_disabled bounce bounced to_address money cs
+    LDDICT	//  ihr_disabled bounce bounced to_address money _78 _77
+    NIP	//  ihr_disabled bounce bounced to_address money cs
+    LDGRAMS	//  ihr_disabled bounce bounced to_address money _80 _79
+    NIP	//  ihr_disabled bounce bounced to_address money cs
+    LDGRAMS	//  ihr_disabled bounce bounced to_address money _82 _81
+    NIP	//  ihr_disabled bounce bounced to_address money cs
+    96 LDU	//  ihr_disabled bounce bounced to_address money timestamps cs
+    1 LDU	//  ihr_disabled bounce bounced to_address money timestamps maybe_init_state cs
+    0xFACC PUSHINT	//  ihr_disabled bounce bounced to_address money timestamps maybe_init_state cs _47
+    ROT	//  ihr_disabled bounce bounced to_address money timestamps cs _47 maybe_init_state
+    THROWANYIF
+    NIL	//  ihr_disabled bounce bounced to_address money timestamps cs init_state
+    SWAP	//  ihr_disabled bounce bounced to_address money timestamps init_state cs
+    1 LDU	//  ihr_disabled bounce bounced to_address money timestamps init_state body_flag cs
+    SWAP	//  ihr_disabled bounce bounced to_address money timestamps init_state cs body_flag
+    0 EQINT	//  ihr_disabled bounce bounced to_address money timestamps init_state cs _58
+    IF:<{	//  ihr_disabled bounce bounced to_address money timestamps init_state body
+    }>ELSE<{	//  ihr_disabled bounce bounced to_address money timestamps init_state cs
+      LDREF	//  ihr_disabled bounce bounced to_address money timestamps init_state _90 _89
+      DROP	//  ihr_disabled bounce bounced to_address money timestamps init_state _59
+      CTOS	//  ihr_disabled bounce bounced to_address money timestamps init_state body
+    }>
+    8 TUPLE	//  _62
+  }>
+  check_unsuccess PROC:<{
+    //  exit_code
+    101 PUSHINT	//  exit_code _1
+    OVER	//  exit_code _1 exit_code
+    1 EQINT	//  exit_code _1 _3
+    s0 s2 XCHG	//  _3 _1 exit_code
+    0 EQINT	//  _3 _1 _5
+    s1 s2 XCHG	//  _1 _3 _5
+    OR	//  _1 _6
+    THROWANYIF
+  }>
+  check_success PROC:<{
+    //  exit_code
+    101 PUSHINT	//  exit_code _1
+    OVER	//  exit_code _1 exit_code
+    1 EQINT	//  exit_code _1 _3
+    s0 s2 XCHG	//  _3 _1 exit_code
+    0 EQINT	//  _3 _1 _5
+    s1 s2 XCHG	//  _1 _3 _5
+    OR	//  _1 _6
+    throw_if_not CALLDICT
+  }>
+  get_c4 PROC:<{
+    // 
+    NEWC	//  _1
+    1 PUSHINT	//  _1 _2=1
+    get_example_address CALLDICT	//  _1 _3
+    STSLICER	//  _4
+    0 PUSHINT	//  _4 _5=0
+    NEWC	//  _4 _5=0 _6
+    2 STU	//  _4 _8
+    ENDC	//  _4 _9
+    CTOS	//  _4 _10
+    STSLICER	//  _11
+    ENDC	//  data
+  }>
+  get_set_message_body PROC:<{
+    // 
+    64 PUSHPOW2DEC	//  _0=18446744073709551615
+    1 PUSHINT	//  _0=18446744073709551615 _1=1
+    NEWC	//  _0=18446744073709551615 _1=1 _2
+    32 STU	//  _0=18446744073709551615 _4
+    64 STU	//  _6
+    2 PUSHINT	//  _6 _7=2
+    get_example_address CALLDICT	//  _6 _8
+    STSLICER	//  _9
+    ENDC	//  _10
+    CTOS	//  _11
+  }>
+  get_set_message PROC:<{
+    // 
+    1100000000 PUSHINT	//  balance=1100000000
+    1000000000 PUSHINT	//  balance=1100000000 msg_value=1000000000
+    get_set_message_body INLINECALLDICT	//  balance=1100000000 msg_value=1000000000 in_msg_body
+    0 PUSHINT	//  balance=1100000000 msg_value=1000000000 in_msg_body _7=0
+    1 PUSHINT	//  balance=1100000000 msg_value=1000000000 in_msg_body _7=0 _8=1
+    OVER	//  balance=1100000000 msg_value=1000000000 in_msg_body _7=0 _8=1 _9=0
+    NEWC	//  balance=1100000000 msg_value=1000000000 in_msg_body _7=0 _8=1 _9=0 _10
+    s4 PUSH	//  balance=1100000000 msg_value=1000000000 in_msg_body _7=0 _8=1 _9=0 _10 in_msg_body
+    STSLICER	//  balance=1100000000 msg_value=1000000000 in_msg_body _7=0 _8=1 _9=0 _11
+    s5 s(-1) PUXC	//  balance=1100000000 msg_value=1000000000 in_msg_body _7=0 _8=1 _9=0 msg_value=1000000000 _11
+    build_message CALLDICT	//  balance=1100000000 msg_value=1000000000 in_msg_body in_msg
+    SWAP	//  balance=1100000000 msg_value=1000000000 in_msg in_msg_body
+    4 TUPLE	//  _14
+  }>
+  get_request_address_message_body PROC:<{
+    // 
+    7 PUSHINT	//  _0=7
+    2 PUSHINT	//  _0=7 _1=2
+    NEWC	//  _0=7 _1=2 _2
+    32 STU	//  _0=7 _4
+    64 STU	//  _6
+    ENDC	//  _7
+    CTOS	//  _8
+  }>
+  get_request_address_message PROC:<{
+    // 
+    1100000000 PUSHINT	//  balance=1100000000
+    1000000000 PUSHINT	//  balance=1100000000 msg_value=1000000000
+    get_request_address_message_body INLINECALLDICT	//  balance=1100000000 msg_value=1000000000 in_msg_body
+    0 PUSHINT	//  balance=1100000000 msg_value=1000000000 in_msg_body _7=0
+    2 PUSHINT	//  balance=1100000000 msg_value=1000000000 in_msg_body _7=0 _8=2
+    OVER	//  balance=1100000000 msg_value=1000000000 in_msg_body _7=0 _8=2 _9=0
+    NEWC	//  balance=1100000000 msg_value=1000000000 in_msg_body _7=0 _8=2 _9=0 _10
+    s4 PUSH	//  balance=1100000000 msg_value=1000000000 in_msg_body _7=0 _8=2 _9=0 _10 in_msg_body
+    STSLICER	//  balance=1100000000 msg_value=1000000000 in_msg_body _7=0 _8=2 _9=0 _11
+    s5 s(-1) PUXC	//  balance=1100000000 msg_value=1000000000 in_msg_body _7=0 _8=2 _9=0 msg_value=1000000000 _11
+    build_message CALLDICT	//  balance=1100000000 msg_value=1000000000 in_msg_body in_msg
+    SWAP	//  balance=1100000000 msg_value=1000000000 in_msg in_msg_body
+    4 TUPLE	//  _14
+  }>
+  get_unvalid_message PROC:<{
+    // 
+    1100000000 PUSHINT	//  balance=1100000000
+    1000000000 PUSHINT	//  balance=1100000000 msg_value=1000000000
+    3 PUSHINT	//  balance=1100000000 msg_value=1000000000 _5=3
+    s0 s0 PUSH2	//  balance=1100000000 msg_value=1000000000 _5=3 _6=3 _7=3
+    NEWC	//  balance=1100000000 msg_value=1000000000 _5=3 _6=3 _7=3 _8
+    32 STU	//  balance=1100000000 msg_value=1000000000 _5=3 _6=3 _10
+    64 STU	//  balance=1100000000 msg_value=1000000000 _5=3 _12
+    256 STU	//  balance=1100000000 msg_value=1000000000 _14
+    ENDC	//  balance=1100000000 msg_value=1000000000 _15
+    CTOS	//  balance=1100000000 msg_value=1000000000 in_msg_body
+    0 PUSHINT	//  balance=1100000000 msg_value=1000000000 in_msg_body _18=0
+    2 PUSHINT	//  balance=1100000000 msg_value=1000000000 in_msg_body _18=0 _19=2
+    OVER	//  balance=1100000000 msg_value=1000000000 in_msg_body _18=0 _19=2 _20=0
+    NEWC	//  balance=1100000000 msg_value=1000000000 in_msg_body _18=0 _19=2 _20=0 _21
+    s4 PUSH	//  balance=1100000000 msg_value=1000000000 in_msg_body _18=0 _19=2 _20=0 _21 in_msg_body
+    STSLICER	//  balance=1100000000 msg_value=1000000000 in_msg_body _18=0 _19=2 _20=0 _22
+    s5 s(-1) PUXC	//  balance=1100000000 msg_value=1000000000 in_msg_body _18=0 _19=2 _20=0 msg_value=1000000000 _22
+    build_message CALLDICT	//  balance=1100000000 msg_value=1000000000 in_msg_body in_msg
+    SWAP	//  balance=1100000000 msg_value=1000000000 in_msg in_msg_body
+    4 TUPLE	//  _25
+  }>
+  manager_set_address_data PROC:<{
+    // 
+    0 PUSHINT	//  _1=0
+    get_set_message INLINECALLDICT	//  _1=0 _2
+    get_c4 INLINECALLDICT	//  _1=0 _2 _3
+    get_c7 INLINECALLDICT	//  _1=0 _2 _3 _4
+    PUSHNULL	//  _1=0 _2 _3 _4 _5
+    5 TUPLE	//  _0
+  }>
+  manager_set_address PROC:<{
+    //  exit_code data stack actions gas
+    s1 s3 XCHG
+    3 BLKDROP	//  exit_code actions
+    SWAP	//  actions exit_code
+    check_success CALLDICT
+    CTOS	//  actions_slice
+    107 PUSHINT	//  actions_slice _8
+    OVER	//  actions_slice _8 actions_slice
+    SBITS	//  actions_slice _8 _9
+    0 NEQINT	//  actions_slice _8 _11
+    THROWANYIF
+    107 PUSHINT	//  actions_slice _13
+    SWAP	//  _13 actions_slice
+    SREFS	//  _13 _14
+    0 NEQINT	//  _13 _16
+    THROWANYIF
+  }>
+  request_address_data PROC:<{
+    // 
+    0 PUSHINT	//  _1=0
+    get_request_address_message INLINECALLDICT	//  _1=0 _2
+    10 GETPARAM UNPAIR DROP	//  _1=0 _2 _3
+    get_c7 INLINECALLDICT	//  _1=0 _2 _3 _4
+    PUSHNULL	//  _1=0 _2 _3 _4 _5
+    5 TUPLE	//  _0
+  }>
+  request_address PROC:<{
+    //  exit_code data stack actions gas
+    s1 s3 XCHG
+    3 BLKDROP	//  exit_code actions
+    SWAP	//  actions exit_code
+    check_success CALLDICT
+    CTOS	//  actions_list
+    LDREF	//  prev_action_list action
+    32 LDU	//  prev_action_list action_id action
+    110 PUSHINT	//  prev_action_list action_id action _16
+    s0 s2 XCHG
+    247711853 PUSHINT	//  prev_action_list _16 action action_id _17=247711853
+    NEQ	//  prev_action_list _16 action _18
+    s1 s2 XCHG	//  prev_action_list action _16 _18
+    THROWANYIF
+    8 LDU	//  prev_action_list mode action
+    111 PUSHINT	//  prev_action_list mode action _24
+    s0 s2 XCHG
+    253 PUSHINT	//  prev_action_list _24 action mode _25=253
+    AND	//  prev_action_list _24 action _26
+    64 NEQINT	//  prev_action_list _24 action _28
+    s1 s2 XCHG	//  prev_action_list action _24 _28
+    THROWANYIF
+    SWAP	//  action prev_action_list
+    CTOS	//  action actions_list
+    107 PUSHINT	//  action actions_list _31
+    SWAP	//  action _31 actions_list
+    SBITS	//  action _31 _32
+    0 GTINT	//  action _31 _34
+    THROWANYIF
+    LDREF	//  _98 _97
+    DROP	//  message
+    parse_int_message CALLDICT	//  _48
+    8 UNTUPLE	//  _99 _100 _101 _102 _103 _104 _105 _106
+    s5 POP
+    2DROP
+    s3 POP
+    s3 POP	//  to_address money body
+    107 PUSHINT	//  to_address money body _50
+    s0 s2 XCHG	//  to_address _50 body money
+    0 EQINT	//  to_address _50 body _52
+    s1 s2 XCHG	//  to_address body _50 _52
+    throw_if_not CALLDICT
+    107 PUSHINT	//  to_address body _54
+    2 PUSHINT	//  to_address body _54 _55=2
+    get_example_address CALLDICT	//  to_address body _54 _56
+    s1 s3 XCHG	//  _54 body to_address _56
+    SDEQ	//  _54 body _57
+    s1 s2 XCHG	//  body _54 _57
+    throw_if_not CALLDICT
+    32 LDU	//  _63 body
+    64 LDU	//  _63 _66 body
+    LDMSGADDR	//  _63 _66 _69 body
+    LDMSGADDR	//  _63 _66 _69 _114 _113
+    DROP	//  op query_id manager memorized
+    104 PUSHINT	//  op query_id manager memorized _73
+    s0 s4 XCHG	//  _73 query_id manager memorized op
+    3 EQINT	//  _73 query_id manager memorized _75
+    s1 s4 XCHG	//  memorized query_id manager _73 _75
+    throw_if_not CALLDICT
+    104 PUSHINT	//  memorized query_id manager _77
+    s0 s2 XCHG	//  memorized _77 manager query_id
+    7 EQINT	//  memorized _77 manager _79
+    s1 s2 XCHG	//  memorized manager _77 _79
+    throw_if_not CALLDICT
+    104 PUSHINT	//  memorized manager _81
+    1 PUSHINT	//  memorized manager _81 _82=1
+    get_example_address CALLDICT	//  memorized manager _81 _83
+    s1 s2 XCHG	//  memorized _81 manager _83
+    SDEQ	//  memorized _81 _84
+    throw_if_not CALLDICT
+    104 PUSHINT	//  memorized _86
+    2 PUSHINT	//  memorized _86 _87=2
+    get_example_address CALLDICT	//  memorized _86 _88
+    s1 s2 XCHG	//  _86 memorized _88
+    SDEQ	//  _86 _89
+    throw_if_not CALLDICT
+  }>
+  unvalid_message_data PROC:<{
+    // 
+    0 PUSHINT	//  _1=0
+    get_unvalid_message INLINECALLDICT	//  _1=0 _2
+    get_c4 INLINECALLDICT	//  _1=0 _2 _3
+    get_c7 INLINECALLDICT	//  _1=0 _2 _3 _4
+    PUSHNULL	//  _1=0 _2 _3 _4 _5
+    5 TUPLE	//  _0
+  }>
+  unvalid_message PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_unsuccess CALLDICT
+  }>
+}END>c

@@ -1,0 +1,88 @@
+"Asm.fif" include
+// automatically generated from `/home/tvorogme/.config/toncli/func-libs/stdlib-tests.func` `/home/tvorogme/.config/toncli/func-libs/tests-helpers.func` `/home/tvorogme/projects/task-1/tests/example.fc` 
+PROGRAM{
+  85860 DECLMETHOD get_c7
+  0 DECLMETHOD test_example_data
+  1 DECLMETHOD test_example
+  2 DECLMETHOD test_get_total_data
+  3 DECLMETHOD test_get_total
+  get_c7 PROC:<{
+    // 
+    124711402 PUSHINT	//  _2=124711402
+    0 PUSHINT	//  _2=124711402 _3=0
+    DUP	//  _2=124711402 _3=0 _4=0
+    NOW	//  _2=124711402 _3=0 _4=0 _5
+    1 PUSHINT	//  _2=124711402 _3=0 _4=0 _5 _6=1
+    DUP	//  _2=124711402 _3=0 _4=0 _5 _6=1 _7=1
+    239 PUSHINT	//  _2=124711402 _3=0 _4=0 _5 _6=1 _7=1 _8=239
+    1000000000 PUSHINT	//  _2=124711402 _3=0 _4=0 _5 _6=1 _7=1 _8=239 _10=1000000000
+    PUSHNULL	//  _2=124711402 _3=0 _4=0 _5 _6=1 _7=1 _8=239 _10=1000000000 _11
+    PAIR	//  _2=124711402 _3=0 _4=0 _5 _6=1 _7=1 _8=239 _12
+    MYADDR	//  _2=124711402 _3=0 _4=0 _5 _6=1 _7=1 _8=239 _12 _13
+    CONFIGROOT	//  _2=124711402 _3=0 _4=0 _5 _6=1 _7=1 _8=239 _12 _13 _14
+    10 TUPLE	//  _15
+    SINGLE	//  _16
+  }>
+  test_example_data PROC:<{
+    // 
+    0 PUSHINT	//  function_selector=0
+    10 PUSHINT	//  function_selector=0 _3=10
+    NEWC	//  function_selector=0 _3=10 _4
+    32 STU	//  function_selector=0 _6
+    ENDC	//  function_selector=0 message
+    CTOS	//  function_selector=0 _10
+    SINGLE	//  function_selector=0 stack
+    OVER	//  function_selector=0 stack _13=0
+    NEWC	//  function_selector=0 stack _13=0 _14
+    64 STU	//  function_selector=0 stack _16
+    ENDC	//  function_selector=0 stack data
+    get_c7 INLINECALLDICT	//  function_selector=0 stack data _19
+    PUSHNULL	//  function_selector=0 stack data _19 _20
+    5 TUPLE	//  _18
+  }>
+  test_example PROC:<{
+    //  exit_code data stack actions gas
+    2 1 BLKDROP2	//  exit_code data gas
+    s0 s2 XCHG	//  gas data exit_code
+    0 NEQINT	//  gas data _7
+    100 THROWIF
+    CTOS	//  gas ds
+    64 LDU	//  gas _23 _22
+    DROP	//  gas _12
+    10 NEQINT	//  gas _16
+    101 THROWIF
+    1000000 PUSHINT	//  gas _19=1000000
+    GREATER	//  _20
+    102 THROWIF
+  }>
+  test_get_total_data PROC:<{
+    // 
+    128253 PUSHINT	//  function_selector=128253
+    10 PUSHINT	//  function_selector=128253 _3=10
+    NEWC	//  function_selector=128253 _3=10 _4
+    64 STU	//  function_selector=128253 _6
+    ENDC	//  function_selector=128253 data
+    0 TUPLE	//  function_selector=128253 data _10
+    get_c7 INLINECALLDICT	//  function_selector=128253 data _10 _11
+    s1 s2 XCHG
+    PUSHNULL	//  function_selector=128253 _10 data _11 _12
+    5 TUPLE	//  _8
+  }>
+  test_get_total PROC:<{
+    //  exit_code data stack actions gas
+    s2 s3 XCHG
+    3 BLKDROP	//  exit_code stack
+    SWAP	//  stack exit_code
+    0 NEQINT	//  stack _7
+    103 THROWIF
+    DUP	//  stack stack
+    FIRST	//  stack counter
+    10 NEQINT	//  stack _13
+    104 THROWIF
+    SECOND	//  cs
+    32 LDU	//  _25 _24
+    DROP	//  _18
+    2 NEQINT	//  _22
+    105 THROWIF
+  }>
+}END>c

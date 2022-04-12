@@ -1,0 +1,76 @@
+"TonUtil.fif" include
+"Asm.fif" include
+
+<{
+    0 PUSHINT	//  index _1=0
+    OVER	//  index _1=0 index
+    0 EQINT	//  index _1=0 _3
+    IF:<{	//  index _1=0
+      7 PUSHINT	//  index _1=0 _4=7
+    }>ELSE<{	//  index _1=0
+      11 PUSHINT	//  index _1=0 _4=11
+    }>
+    -1 PUSHINT	//  index _1=0 _4 _7=-1
+    4 PUSHINT	//  index _1=0 _4 _7=-1 _8=4
+    16 PUSHINT	//  index _1=0 _4 _7=-1 _8=4 _9=16
+    NEWC	//  index _1=0 _4 _7=-1 _8=4 _9=16 _10
+    6 STU	//  index _1=0 _4 _7=-1 _8=4 _12
+    3 STU	//  index _1=0 _4 _7=-1 _14
+    8 STI	//  index _1=0 _4 _16
+    256 STU	//  index _1=0 _18
+    s0 s2 XCHG	//  _18 _1=0 index
+    0 EQINT	//  _18 _1=0 _20
+    IF:<{	//  _18 _1=0
+      10 PUSHINT	//  _18 _1=0 _21=10
+    }>ELSE<{	//  _18 _1=0
+      11 PUSHINT	//  _18 _1=0 _21=11
+    }>
+    s1 s2 XCHG	//  _1=0 _18 _21
+    STGRAMS	//  _1=0 _24
+    107 STU	//  _38
+    ENDC	//  _39
+}>c <s =: create_msg_func
+
+// 0 create_msg_func runvmcode drop
+
+"1.pk" load-generate-keypair =: privkey0  =: pubkey0
+"2.pk" load-generate-keypair =: privkey1 =: pubkey1
+
+// create a messages
+<b b{010000} s, b{100} s, -1 8 i, 7 256 u, 10 Gram, 0 1 8 64 32 1 1 + + + + + u,
+b> =: msg0
+
+<b b{010000} s, b{100} s, -1 8 i, 11 256 u, 11 Gram, 0 1 8 64 32 1 1 + + + + + u,
+b> =: msg1
+
+
+3 =: mode3
+77 =: mode77
+251 =: mode251
+
+1000 =: base_valid_until 
+
+// valid_until mode msg_num - request_cell
+{ swap rot <b swap base_valid_until + 32 u, swap 8 u, swap 0 = { msg0 } { msg1 } cond ref, b>  } : create_request
+
+// pk_index valid_until_index mode msg_index - sig_high256 sig_low256
+{ create_request 
+  swap // request pk_index
+  0 =  { privkey0 } { privkey1 } cond // request pk
+  
+  swap hashu swap .s ed25519_sign_uint // signature
+  .s
+  256 B>u@+ swap 
+  256 B>u@+
+  swap drop  } : make_sigs
+
+
+0 0 3 0 create_request =: request
+0 0 3 0 make_sigs
+<b rot 256 u, swap 256 u, b> <s =: signature
+signature csr.
+request hashu signature pubkey0 256 B>u@+ swap drop .s <{ CHKSIGNU }>c <s  runvmcode
+.s
+
+
+

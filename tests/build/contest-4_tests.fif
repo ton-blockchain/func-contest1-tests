@@ -1,0 +1,1335 @@
+"Asm.fif" include
+// automatically generated from `/home/func/.config/toncli/func-libs/stdlib-tests.func` `/home/func/.config/toncli/func-libs/tests-helpers.func` `/home/func/Documents/shared/checker/tests/tests/op/op-code.fc` `/home/func/Documents/shared/checker/tests/tests/utils/utils.fc` `/home/func/Documents/shared/checker/tests/tests/utils/check_status.fc` `/home/func/Documents/shared/checker/tests/tests/task4/data.fc` `/home/func/Documents/shared/checker/tests/tests/task4/messages.fc` `/home/func/Documents/shared/checker/tests/tests/tests-4.fc` 
+PROGRAM{
+  85860 DECLMETHOD get_c7
+  130610 DECLMETHOD empty_stack
+  87017 DECLMETHOD get_example_address
+  87059 DECLMETHOD build_message
+  95310 DECLMETHOD throw_if_not
+  70136 DECLMETHOD parse_int_message
+  118633 DECLMETHOD check_unsuccess
+  93967 DECLMETHOD check_success
+  98055 DECLMETHOD get_c4
+  103840 DECLMETHOD get_c7_with_time
+  77354 DECLMETHOD get_message_body
+  95175 DECLMETHOD check_get_method_result
+  67318 DECLMETHOD get_message
+  100152 DECLMETHOD get_delete_message
+  0 DECLMETHOD set_message_data
+  1 DECLMETHOD set_message
+  2 DECLMETHOD set_message_data_2
+  3 DECLMETHOD set_message_2
+  4 DECLMETHOD set_message_data_3
+  5 DECLMETHOD set_message_3
+  6 DECLMETHOD get_key_data
+  7 DECLMETHOD get_key
+  8 DECLMETHOD get_key_max_data
+  9 DECLMETHOD get_key_max
+  10 DECLMETHOD remove_outdated_data
+  11 DECLMETHOD remove_outdated
+  12 DECLMETHOD check_cant_get_outdated_data
+  13 DECLMETHOD check_cant_get_outdated
+  14 DECLMETHOD check_can_get_not_outdated_data
+  15 DECLMETHOD check_can_get_not_outdated
+  16 DECLMETHOD set_message_data_4
+  17 DECLMETHOD set_message_4
+  18 DECLMETHOD set_message_data_same_valid_until
+  19 DECLMETHOD set_message_same_valid_until
+  20 DECLMETHOD set_message_data_same_value
+  21 DECLMETHOD set_message_same_value
+  22 DECLMETHOD set_message_data_update_valid_until_before
+  23 DECLMETHOD set_message_update_valid_until_before
+  24 DECLMETHOD set_message_data_update_valid_until
+  25 DECLMETHOD set_message_update_valid_until
+  26 DECLMETHOD remove_outdated2_data
+  27 DECLMETHOD remove_outdated2
+  28 DECLMETHOD check_can_get_not_outdated2_data
+  29 DECLMETHOD check_can_get_not_outdated2
+  30 DECLMETHOD set_message_data_update_valid_until_again
+  31 DECLMETHOD set_message_update_valid_until_again
+  32 DECLMETHOD remove_outdated3_data
+  33 DECLMETHOD remove_outdated3
+  34 DECLMETHOD check_can_not_not_outdated2_data
+  35 DECLMETHOD check_can_not_not_outdated2
+  36 DECLMETHOD mass_key_addition1_p
+  37 DECLMETHOD mass_key_addition1
+  38 DECLMETHOD mass_key_addition2_p
+  39 DECLMETHOD mass_key_addition2
+  40 DECLMETHOD mass_key_addition3_p
+  41 DECLMETHOD mass_key_addition3
+  42 DECLMETHOD mass_key_addition4_p
+  43 DECLMETHOD mass_key_addition4
+  44 DECLMETHOD mass_key_addition5_p
+  45 DECLMETHOD mass_key_addition5
+  46 DECLMETHOD mass_key_addition6_p
+  47 DECLMETHOD mass_key_addition6
+  48 DECLMETHOD mass_key_addition7_p
+  49 DECLMETHOD mass_key_addition7
+  50 DECLMETHOD mass_key_addition8_p
+  51 DECLMETHOD mass_key_addition8
+  52 DECLMETHOD mass_key_addition9_p
+  53 DECLMETHOD mass_key_addition9
+  54 DECLMETHOD mass_key_addition10_p
+  55 DECLMETHOD mass_key_addition10
+  66 DECLMETHOD mass_key_addition11_p
+  67 DECLMETHOD mass_key_addition11
+  68 DECLMETHOD mass_key_addition12_p
+  69 DECLMETHOD mass_key_addition12
+  70 DECLMETHOD mass_key_addition13_p
+  71 DECLMETHOD mass_key_addition13
+  72 DECLMETHOD mass_key_addition14_p
+  73 DECLMETHOD mass_key_addition14
+  74 DECLMETHOD mass_key_addition15_p
+  75 DECLMETHOD mass_key_addition15
+  76 DECLMETHOD mass_key_addition16_p
+  77 DECLMETHOD mass_key_addition16
+  78 DECLMETHOD mass_key_addition17_p
+  79 DECLMETHOD mass_key_addition17
+  80 DECLMETHOD mass_key_addition18_p
+  81 DECLMETHOD mass_key_addition18
+  82 DECLMETHOD mass_key_addition19_p
+  83 DECLMETHOD mass_key_addition19
+  84 DECLMETHOD mass_key_addition110_p
+  85 DECLMETHOD mass_key_addition110
+  86 DECLMETHOD remove_outdated4_data
+  87 DECLMETHOD remove_outdated4
+  88 DECLMETHOD remove_outdated5_data
+  89 DECLMETHOD remove_outdated5
+  90 DECLMETHOD remove_outdated6_data
+  91 DECLMETHOD remove_outdated6
+  92 DECLMETHOD add_outdated_but_not_removed_p
+  93 DECLMETHOD add_outdated_but_not_removed
+  94 DECLMETHOD check_can_get_not_yet_removed_data
+  95 DECLMETHOD check_can_get_not_yet_removed
+  get_c7 PROC:<{
+    // 
+    124711402 PUSHINT	//  _2=124711402
+    0 PUSHINT	//  _2=124711402 _3=0
+    DUP	//  _2=124711402 _3=0 _4=0
+    NOW	//  _2=124711402 _3=0 _4=0 _5
+    1 PUSHINT	//  _2=124711402 _3=0 _4=0 _5 _6=1
+    DUP	//  _2=124711402 _3=0 _4=0 _5 _6=1 _7=1
+    239 PUSHINT	//  _2=124711402 _3=0 _4=0 _5 _6=1 _7=1 _8=239
+    1000000000 PUSHINT	//  _2=124711402 _3=0 _4=0 _5 _6=1 _7=1 _8=239 _10=1000000000
+    PUSHNULL	//  _2=124711402 _3=0 _4=0 _5 _6=1 _7=1 _8=239 _10=1000000000 _11
+    PAIR	//  _2=124711402 _3=0 _4=0 _5 _6=1 _7=1 _8=239 _12
+    MYADDR	//  _2=124711402 _3=0 _4=0 _5 _6=1 _7=1 _8=239 _12 _13
+    CONFIGROOT	//  _2=124711402 _3=0 _4=0 _5 _6=1 _7=1 _8=239 _12 _13 _14
+    10 TUPLE	//  _15
+    SINGLE	//  _16
+  }>
+  empty_stack PROC:<{
+    // 
+    0 TUPLE	//  _1
+  }>
+  get_example_address PROC:<{
+    //  variant
+    0 PUSHINT	//  variant address=0
+    OVER	//  variant address=0 variant
+    0 EQINT	//  variant address=0 _4
+    IFJMP:<{	//  variant address=0
+      2DROP	// 
+      MYADDR	//  _5
+    }>	//  variant address=0
+    OVER	//  variant address=0 variant
+    1 EQINT	//  variant address=0 _7
+    IF:<{	//  variant address=0
+      DROP	//  variant
+      60163661047215979614107269706106999090098320919312114703353135169949281596933 PUSHINT	//  variant address=60163661047215979614107269706106999090098320919312114703353135169949281596933
+    }>	//  variant address
+    SWAP	//  address variant
+    2 EQINT	//  address _10
+    IF:<{	//  address
+      DROP	// 
+      50163661047215979614107269706106999090098320919312114703353135169949281596933 PUSHINT	//  address=50163661047215979614107269706106999090098320919312114703353135169949281596933
+    }>	//  address
+    -1 PUSHINT	//  address _13=-1
+    0 PUSHINT	//  address _13=-1 _14=0
+    2 PUSHINT	//  address _13=-1 _14=0 _15=2
+    NEWC	//  address _13=-1 _14=0 _15=2 _16
+    2 STU	//  address _13=-1 _14=0 _18
+    1 STU	//  address _13=-1 _20
+    8 STI	//  address _22
+    256 STU	//  _24
+    ENDC	//  _25
+    CTOS	//  address_cell
+  }>
+  build_message PROC:<{
+    //  bounce src dest ton_amount payload
+    s0 s3 XCHG	//  bounce payload dest ton_amount src
+    get_example_address CALLDICT	//  bounce payload dest ton_amount ssrc
+    s0 s2 XCHG	//  bounce payload ssrc ton_amount dest
+    get_example_address CALLDICT	//  bounce payload ssrc ton_amount sdest
+    0 PUSHINT	//  bounce payload ssrc ton_amount sdest _10=0
+    1000 PUSHINT	//  bounce payload ssrc ton_amount sdest _10=0 _11=1000
+    DUP	//  bounce payload ssrc ton_amount sdest _10=0 _11=1000 _12=1000
+    PUSHNULL	//  bounce payload ssrc ton_amount sdest _10=0 _11=1000 _12=1000 _13
+    s3 s3 s3 PUSH3	//  bounce payload ssrc ton_amount sdest _10=0 _11=1000 _12=1000 _13 _14=0 _15=0 _16=0
+    NEWC	//  bounce payload ssrc ton_amount sdest _10=0 _11=1000 _12=1000 _13 _14=0 _15=0 _16=0 _17
+    1 STU	//  bounce payload ssrc ton_amount sdest _10=0 _11=1000 _12=1000 _13 _14=0 _15=0 _19
+    1 STU	//  bounce payload ssrc ton_amount sdest _10=0 _11=1000 _12=1000 _13 _14=0 _21
+    s1 s10 XCHG	//  _14=0 payload ssrc ton_amount sdest _10=0 _11=1000 _12=1000 _13 bounce _21
+    1 STU	//  _14=0 payload ssrc ton_amount sdest _10=0 _11=1000 _12=1000 _13 _23
+    s1 s9 XCHG	//  _13 payload ssrc ton_amount sdest _10=0 _11=1000 _12=1000 _14=0 _23
+    1 STU	//  _13 payload ssrc ton_amount sdest _10=0 _11=1000 _12=1000 _25
+    s0 s6 XCHG2	//  _13 payload _12=1000 ton_amount sdest _10=0 _11=1000 _25 ssrc
+    STSLICER	//  _13 payload _12=1000 ton_amount sdest _10=0 _11=1000 _26
+    s0 s3 XCHG2	//  _13 payload _12=1000 ton_amount _11=1000 _10=0 _26 sdest
+    STSLICER	//  _13 payload _12=1000 ton_amount _11=1000 _10=0 _27
+    s0 s3 XCHG2	//  _13 payload _12=1000 _10=0 _11=1000 _27 ton_amount
+    STGRAMS	//  _13 payload _12=1000 _10=0 _11=1000 _28
+    s1 s5 XCHG	//  _11=1000 payload _12=1000 _10=0 _13 _28
+    STDICT	//  _11=1000 payload _12=1000 _10=0 _29
+    OVER	//  _11=1000 payload _12=1000 _10=0 _29 _30=0
+    STGRAMS	//  _11=1000 payload _12=1000 _10=0 _31
+    OVER	//  _11=1000 payload _12=1000 _10=0 _31 _32=0
+    STGRAMS	//  _11=1000 payload _12=1000 _10=0 _33
+    s1 s2 XCHG	//  _11=1000 payload _10=0 _12=1000 _33
+    64 STU	//  _11=1000 payload _10=0 _35
+    s1 s3 XCHG	//  _10=0 payload _11=1000 _35
+    32 STU	//  _10=0 payload _37
+    s1 s2 XCHG	//  payload _10=0 _37
+    1 STU	//  payload msg
+    DUP	//  payload msg msg
+    BBITS	//  payload msg _40
+    s2 PUSH	//  payload msg _40 payload
+    BBITS	//  payload msg _40 _41
+    ADD	//  payload msg _42
+    10 PUSHPOW2DEC	//  payload msg _42 _43=1023
+    GREATER	//  payload msg _44
+    IF:<{	//  payload msg
+      SWAP	//  msg payload
+      ENDC	//  msg _45
+      1 PUSHINT
+      ROT	//  _45 _46=1 msg
+      1 STU	//  _45 _48
+      STREF	//  msg
+    }>ELSE<{	//  payload msg
+      1 PUSHINT	//  payload msg _50=1
+      SWAP	//  payload _50=1 msg
+      1 STU	//  payload _52
+      SWAP	//  _52 payload
+      STBR	//  msg
+    }>
+    ENDC	//  _54
+  }>
+  throw_if_not PROC:<{
+    //  a b
+    NOT	//  a _2
+    THROWANYIF
+  }>
+  parse_int_message PROC:<{
+    //  message
+    CTOS	//  cs
+    112 PUSHINT	//  cs _3
+    SWAP	//  _3 cs
+    1 LDU	//  _3 _4 cs
+    SWAP	//  _3 cs _4
+    0 NEQINT	//  _3 cs _8
+    s1 s2 XCHG	//  cs _3 _8
+    THROWANYIF
+    1 LDU	//  ihr_disabled cs
+    1 LDU	//  ihr_disabled bounce cs
+    1 LDU	//  ihr_disabled bounce bounced cs
+    LDMSGADDR	//  ihr_disabled bounce bounced _72 _71
+    NIP	//  ihr_disabled bounce bounced cs
+    LDMSGADDR	//  ihr_disabled bounce bounced to_address cs
+    LDVARUINT16	//  ihr_disabled bounce bounced to_address money cs
+    LDDICT	//  ihr_disabled bounce bounced to_address money _78 _77
+    NIP	//  ihr_disabled bounce bounced to_address money cs
+    LDGRAMS	//  ihr_disabled bounce bounced to_address money _80 _79
+    NIP	//  ihr_disabled bounce bounced to_address money cs
+    LDGRAMS	//  ihr_disabled bounce bounced to_address money _82 _81
+    NIP	//  ihr_disabled bounce bounced to_address money cs
+    96 LDU	//  ihr_disabled bounce bounced to_address money timestamps cs
+    1 LDU	//  ihr_disabled bounce bounced to_address money timestamps maybe_init_state cs
+    0xFACC PUSHINT	//  ihr_disabled bounce bounced to_address money timestamps maybe_init_state cs _47
+    ROT	//  ihr_disabled bounce bounced to_address money timestamps cs _47 maybe_init_state
+    THROWANYIF
+    NIL	//  ihr_disabled bounce bounced to_address money timestamps cs init_state
+    SWAP	//  ihr_disabled bounce bounced to_address money timestamps init_state cs
+    1 LDU	//  ihr_disabled bounce bounced to_address money timestamps init_state body_flag cs
+    SWAP	//  ihr_disabled bounce bounced to_address money timestamps init_state cs body_flag
+    0 EQINT	//  ihr_disabled bounce bounced to_address money timestamps init_state cs _58
+    IF:<{	//  ihr_disabled bounce bounced to_address money timestamps init_state body
+    }>ELSE<{	//  ihr_disabled bounce bounced to_address money timestamps init_state cs
+      LDREF	//  ihr_disabled bounce bounced to_address money timestamps init_state _90 _89
+      DROP	//  ihr_disabled bounce bounced to_address money timestamps init_state _59
+      CTOS	//  ihr_disabled bounce bounced to_address money timestamps init_state body
+    }>
+    8 TUPLE	//  _62
+  }>
+  check_unsuccess PROC:<{
+    //  exit_code
+    101 PUSHINT	//  exit_code _1
+    OVER	//  exit_code _1 exit_code
+    1 EQINT	//  exit_code _1 _3
+    s0 s2 XCHG	//  _3 _1 exit_code
+    0 EQINT	//  _3 _1 _5
+    s1 s2 XCHG	//  _1 _3 _5
+    OR	//  _1 _6
+    THROWANYIF
+  }>
+  check_success PROC:<{
+    //  exit_code
+    101 PUSHINT	//  exit_code _1
+    OVER	//  exit_code _1 exit_code
+    1 EQINT	//  exit_code _1 _3
+    s0 s2 XCHG	//  _3 _1 exit_code
+    0 EQINT	//  _3 _1 _5
+    s1 s2 XCHG	//  _1 _3 _5
+    OR	//  _1 _6
+    throw_if_not CALLDICT
+  }>
+  get_c4 PROC:<{
+    // 
+    NEWC	//  _1
+    ENDC	//  data
+  }>
+  get_c7_with_time PROC:<{
+    //  time
+    124711402 PUSHINT	//  time _3=124711402
+    0 PUSHINT	//  time _3=124711402 _4=0
+    DUP	//  time _3=124711402 _4=0 _5=0
+    1 PUSHINT	//  time _3=124711402 _4=0 _5=0 _6=1
+    DUP	//  time _3=124711402 _4=0 _5=0 _6=1 _7=1
+    239 PUSHINT	//  time _3=124711402 _4=0 _5=0 _6=1 _7=1 _8=239
+    1000000000 PUSHINT	//  time _3=124711402 _4=0 _5=0 _6=1 _7=1 _8=239 _10=1000000000
+    PUSHNULL	//  time _3=124711402 _4=0 _5=0 _6=1 _7=1 _8=239 _10=1000000000 _11
+    PAIR	//  time _3=124711402 _4=0 _5=0 _6=1 _7=1 _8=239 _12
+    MYADDR	//  time _3=124711402 _4=0 _5=0 _6=1 _7=1 _8=239 _12 _13
+    CONFIGROOT	//  time _3=124711402 _4=0 _5=0 _6=1 _7=1 _8=239 _12 _13 _14
+    s8 s9 XCHG
+    s7 s8 XCHG
+    s6 s7 XCHG	//  _3=124711402 _4=0 _5=0 time _6=1 _7=1 _8=239 _12 _13 _14
+    10 TUPLE	//  _15
+    SINGLE	//  _16
+  }>
+  get_message_body PROC:<{
+    //  op query_id key valid_until value
+    10 PUSHINT	//  op query_id key valid_until value _5=10
+    NEWC	//  op query_id key valid_until value _5=10 _6
+    32 STU	//  op query_id key valid_until value _8
+    ENDC	//  op query_id key valid_until value _9
+    s0 s5 XCHG
+    NEWC	//  _9 query_id key valid_until value op _10
+    32 STU	//  _9 query_id key valid_until value _12
+    s1 s4 XCHG	//  _9 value key valid_until query_id _12
+    64 STU	//  _9 value key valid_until _14
+    s1 s2 XCHG	//  _9 value valid_until key _14
+    256 STU	//  _9 value valid_until _16
+    64 STU	//  _9 value _18
+    253 STU	//  _9 _20
+    STREF	//  _21
+    ENDC	//  _22
+    CTOS	//  _23
+  }>
+  check_get_method_result PROC:<{
+    //  stack valid_until value
+    NIP	//  stack value
+    OVER	//  stack value stack
+    FIRST	//  stack value valid_until
+    104 PUSHINT	//  stack value valid_until _5
+    100 ADDCONST	//  stack value valid_until _7
+    s1 s0 XCPU	//  stack value _7 valid_until valid_until
+    NEQ	//  stack value _7 _8
+    THROWANYIF
+    SWAP	//  value stack
+    SECOND	//  value data
+    LDREF	//  value _13 data
+    SWAP	//  value data _13
+    CTOS	//  value data payload
+    104 PUSHINT	//  value data payload _16
+    1000 PUSHINT	//  value data payload _16 _17=1000
+    ADD	//  value data payload _18
+    s2 PUSH	//  value data payload _18 data
+    253 PLDU	//  value data payload _18 _20
+    100 PUSHINT	//  value data payload _18 _20 _21=100
+    MOD	//  value data payload _18 _22
+    ADD	//  value data payload _23
+    s0 s2 XCHG	//  value _23 payload data
+    253 LDU	//  value _23 payload _41 _40
+    DROP	//  value _23 payload _24
+    s0 s3 XCHG2	//  payload _23 _24 value
+    NEQ	//  payload _23 _27
+    THROWANYIF
+    104 PUSHINT	//  payload _29
+    2000 PUSHINT	//  payload _29 _30=2000
+    ADD	//  payload _31
+    SWAP	//  _31 payload
+    32 LDU	//  _31 _43 _42
+    DROP	//  _31 _32
+    10 NEQINT	//  _31 _36
+    THROWANYIF
+  }>
+  get_message PROC:<{
+    //  op query_id key valid_until value
+    s4 s3 s0 XCHG3
+    1100000000 PUSHINT
+    s5 s4 XCHG2
+    1000000000 PUSHINT
+    s0 s6 XCHG	//  msg_value=1000000000 balance=1100000000 op query_id key valid_until value
+    get_message_body INLINECALLDICT	//  msg_value=1000000000 balance=1100000000 in_msg_body
+    0 PUSHINT	//  msg_value=1000000000 balance=1100000000 in_msg_body _12=0
+    2 PUSHINT	//  msg_value=1000000000 balance=1100000000 in_msg_body _12=0 _13=2
+    OVER	//  msg_value=1000000000 balance=1100000000 in_msg_body _12=0 _13=2 _14=0
+    NEWC	//  msg_value=1000000000 balance=1100000000 in_msg_body _12=0 _13=2 _14=0 _15
+    s4 PUSH	//  msg_value=1000000000 balance=1100000000 in_msg_body _12=0 _13=2 _14=0 _15 in_msg_body
+    STSLICER	//  msg_value=1000000000 balance=1100000000 in_msg_body _12=0 _13=2 _14=0 _16
+    s6 s(-1) PUXC	//  msg_value=1000000000 balance=1100000000 in_msg_body _12=0 _13=2 _14=0 msg_value=1000000000 _16
+    build_message CALLDICT	//  msg_value=1000000000 balance=1100000000 in_msg_body in_msg
+    s3 s0 s0 XCHG3	//  balance=1100000000 msg_value=1000000000 in_msg in_msg_body
+    4 TUPLE	//  _19
+  }>
+  get_delete_message PROC:<{
+    //  op query_id
+    1100000000 PUSHINT	//  op query_id balance=1100000000
+    1000000000 PUSHINT	//  op query_id balance=1100000000 msg_value=1000000000
+    s0 s3 XCHG
+    NEWC	//  msg_value=1000000000 query_id balance=1100000000 op _7
+    32 STU	//  msg_value=1000000000 query_id balance=1100000000 _9
+    s1 s2 XCHG	//  msg_value=1000000000 balance=1100000000 query_id _9
+    64 STU	//  msg_value=1000000000 balance=1100000000 _11
+    ENDC	//  msg_value=1000000000 balance=1100000000 _12
+    CTOS	//  msg_value=1000000000 balance=1100000000 in_msg_body
+    0 PUSHINT	//  msg_value=1000000000 balance=1100000000 in_msg_body _15=0
+    2 PUSHINT	//  msg_value=1000000000 balance=1100000000 in_msg_body _15=0 _16=2
+    OVER	//  msg_value=1000000000 balance=1100000000 in_msg_body _15=0 _16=2 _17=0
+    NEWC	//  msg_value=1000000000 balance=1100000000 in_msg_body _15=0 _16=2 _17=0 _18
+    s4 PUSH	//  msg_value=1000000000 balance=1100000000 in_msg_body _15=0 _16=2 _17=0 _18 in_msg_body
+    STSLICER	//  msg_value=1000000000 balance=1100000000 in_msg_body _15=0 _16=2 _17=0 _19
+    s6 s(-1) PUXC	//  msg_value=1000000000 balance=1100000000 in_msg_body _15=0 _16=2 _17=0 msg_value=1000000000 _19
+    build_message CALLDICT	//  msg_value=1000000000 balance=1100000000 in_msg_body in_msg
+    s3 s0 s0 XCHG3	//  balance=1100000000 msg_value=1000000000 in_msg in_msg_body
+    4 TUPLE	//  _22
+  }>
+  set_message_data PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    3 PUSHINT	//  op=1 query_id=2 key=3
+    10 PUSHINT	//  op=1 query_id=2 key=3 valid_until=10
+    s3 s1 s3 XCHG3
+    5 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=3 valid_until=10 value=5
+    get_message INLINECALLDICT	//  _11=0 _12
+    get_c4 INLINECALLDICT	//  _11=0 _12 _13
+    1 PUSHINT	//  _11=0 _12 _13 _14=1
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  set_message PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  set_message_data_2 PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    3 PUSHINT	//  op=1 query_id=2 key=3
+    12 PUSHINT	//  op=1 query_id=2 key=3 valid_until=12
+    s3 s1 s3 XCHG3
+    50 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=3 valid_until=12 value=50
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    2 PUSHINT	//  _11=0 _12 _13 _14=2
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  set_message_2 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  set_message_data_3 PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    256 PUSHPOW2DEC	//  op=1 query_id=2 key=115792089237316195423570985008687907853269984665640564039457584007913129639935
+    14 PUSHINT	//  op=1 query_id=2 key=115792089237316195423570985008687907853269984665640564039457584007913129639935 valid_until=14
+    s3 s1 s3 XCHG3
+    5 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=115792089237316195423570985008687907853269984665640564039457584007913129639935 valid_until=14 value=5
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    3 PUSHINT	//  _11=0 _12 _13 _14=3
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  set_message_3 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  get_key_data PROC:<{
+    // 
+    127977 PUSHINT	//  _1=127977
+    3 PUSHINT	//  _1=127977 _3=3
+    SINGLE	//  _1=127977 _4
+    10 GETPARAM UNPAIR DROP	//  _1=127977 _4 _5
+    4 PUSHINT	//  _1=127977 _4 _5 _6=4
+    get_c7_with_time INLINECALLDICT	//  _1=127977 _4 _5 _7
+    PUSHNULL	//  _1=127977 _4 _5 _7 _8
+    5 TUPLE	//  _0
+  }>
+  get_key PROC:<{
+    //  exit_code data stack actions gas
+    s2 s3 XCHG
+    3 BLKDROP	//  exit_code stack
+    SWAP	//  stack exit_code
+    check_success CALLDICT
+    12 PUSHINT	//  stack _6=12
+    50 PUSHINT	//  stack _6=12 _7=50
+    check_get_method_result CALLDICT
+  }>
+  get_key_max_data PROC:<{
+    // 
+    127977 PUSHINT	//  _1=127977
+    256 PUSHPOW2DEC	//  _1=127977 _3=115792089237316195423570985008687907853269984665640564039457584007913129639935
+    SINGLE	//  _1=127977 _4
+    10 GETPARAM UNPAIR DROP	//  _1=127977 _4 _5
+    5 PUSHINT	//  _1=127977 _4 _5 _6=5
+    get_c7_with_time INLINECALLDICT	//  _1=127977 _4 _5 _7
+    PUSHNULL	//  _1=127977 _4 _5 _7 _8
+    5 TUPLE	//  _0
+  }>
+  get_key_max PROC:<{
+    //  exit_code data stack actions gas
+    s2 s3 XCHG
+    3 BLKDROP	//  exit_code stack
+    SWAP	//  stack exit_code
+    check_success CALLDICT
+    14 PUSHINT	//  stack _6=14
+    5 PUSHINT	//  stack _6=14 _7=5
+    check_get_method_result CALLDICT
+  }>
+  remove_outdated_data PROC:<{
+    // 
+    2 PUSHINT	//  op=2
+    DUP
+    0 PUSHINT
+    s0 s2 XCHG	//  _5=0 op=2 query_id=2
+    get_delete_message INLINECALLDICT	//  _5=0 _6
+    10 GETPARAM UNPAIR DROP	//  _5=0 _6 _7
+    13 PUSHINT	//  _5=0 _6 _7 _8=13
+    get_c7_with_time INLINECALLDICT	//  _5=0 _6 _7 _9
+    PUSHNULL	//  _5=0 _6 _7 _9 _10
+    5 TUPLE	//  _4
+  }>
+  remove_outdated PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  check_cant_get_outdated_data PROC:<{
+    // 
+    127977 PUSHINT	//  _1=127977
+    3 PUSHINT	//  _1=127977 _3=3
+    SINGLE	//  _1=127977 _4
+    10 GETPARAM UNPAIR DROP	//  _1=127977 _4 _5
+    0 PUSHINT	//  _1=127977 _4 _5 _6=0
+    get_c7_with_time INLINECALLDICT	//  _1=127977 _4 _5 _7
+    PUSHNULL	//  _1=127977 _4 _5 _7 _8
+    5 TUPLE	//  _0
+  }>
+  check_cant_get_outdated PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_unsuccess CALLDICT
+  }>
+  check_can_get_not_outdated_data PROC:<{
+    // 
+    127977 PUSHINT	//  _1=127977
+    256 PUSHPOW2DEC	//  _1=127977 _3=115792089237316195423570985008687907853269984665640564039457584007913129639935
+    SINGLE	//  _1=127977 _4
+    10 GETPARAM UNPAIR DROP	//  _1=127977 _4 _5
+    0 PUSHINT	//  _1=127977 _4 _5 _6=0
+    get_c7_with_time INLINECALLDICT	//  _1=127977 _4 _5 _7
+    PUSHNULL	//  _1=127977 _4 _5 _7 _8
+    5 TUPLE	//  _0
+  }>
+  check_can_get_not_outdated PROC:<{
+    //  exit_code data stack actions gas
+    s2 s3 XCHG
+    3 BLKDROP	//  exit_code stack
+    SWAP	//  stack exit_code
+    check_success CALLDICT
+    4749340378 PUSHINT	//  stack _6=4749340378
+    5 PUSHINT	//  stack _6=4749340378 _7=5
+    check_get_method_result CALLDICT
+  }>
+  set_message_data_4 PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    71 PUSHINT	//  op=1 query_id=2 key=71
+    112 PUSHINT	//  op=1 query_id=2 key=71 valid_until=112
+    s3 s1 s3 XCHG3
+    11 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=71 valid_until=112 value=11
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    14 PUSHINT	//  _11=0 _12 _13 _14=14
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  set_message_4 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  set_message_data_same_valid_until PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    72 PUSHINT	//  op=1 query_id=2 key=72
+    112 PUSHINT	//  op=1 query_id=2 key=72 valid_until=112
+    s3 s1 s3 XCHG3
+    12 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=72 valid_until=112 value=12
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    15 PUSHINT	//  _11=0 _12 _13 _14=15
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  set_message_same_valid_until PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  set_message_data_same_value PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    74 PUSHINT	//  op=1 query_id=2 key=74
+    112 PUSHINT	//  op=1 query_id=2 key=74 valid_until=112
+    s3 s1 s3 XCHG3
+    12 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=74 valid_until=112 value=12
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    16 PUSHINT	//  _11=0 _12 _13 _14=16
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  set_message_same_value PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  set_message_data_update_valid_until_before PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    100 PUSHINT	//  op=1 query_id=2 key=100
+    25 PUSHINT	//  op=1 query_id=2 key=100 valid_until=25
+    0 PUSHINT	//  op=1 query_id=2 key=100 valid_until=25 value=0
+    s0 s4 PUXC
+    4 -ROLL	//  _11=0 op=1 query_id=2 key=100 valid_until=25 value=0
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    17 PUSHINT	//  _11=0 _12 _13 _14=17
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  set_message_update_valid_until_before PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  set_message_data_update_valid_until PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    100 PUSHINT	//  op=1 query_id=2 key=100
+    28 PUSHINT	//  op=1 query_id=2 key=100 valid_until=28
+    0 PUSHINT	//  op=1 query_id=2 key=100 valid_until=28 value=0
+    s0 s4 PUXC
+    4 -ROLL	//  _11=0 op=1 query_id=2 key=100 valid_until=28 value=0
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    18 PUSHINT	//  _11=0 _12 _13 _14=18
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  set_message_update_valid_until PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  remove_outdated2_data PROC:<{
+    // 
+    2 PUSHINT	//  op=2
+    DUP
+    0 PUSHINT
+    s0 s2 XCHG	//  _5=0 op=2 query_id=2
+    get_delete_message INLINECALLDICT	//  _5=0 _6
+    10 GETPARAM UNPAIR DROP	//  _5=0 _6 _7
+    26 PUSHINT	//  _5=0 _6 _7 _8=26
+    get_c7_with_time INLINECALLDICT	//  _5=0 _6 _7 _9
+    PUSHNULL	//  _5=0 _6 _7 _9 _10
+    5 TUPLE	//  _4
+  }>
+  remove_outdated2 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  check_can_get_not_outdated2_data PROC:<{
+    // 
+    127977 PUSHINT	//  _1=127977
+    100 PUSHINT	//  _1=127977 _3=100
+    SINGLE	//  _1=127977 _4
+    10 GETPARAM UNPAIR DROP	//  _1=127977 _4 _5
+    0 PUSHINT	//  _1=127977 _4 _5 _6=0
+    get_c7_with_time INLINECALLDICT	//  _1=127977 _4 _5 _7
+    PUSHNULL	//  _1=127977 _4 _5 _7 _8
+    5 TUPLE	//  _0
+  }>
+  check_can_get_not_outdated2 PROC:<{
+    //  exit_code data stack actions gas
+    s2 s3 XCHG
+    3 BLKDROP	//  exit_code stack
+    SWAP	//  stack exit_code
+    check_success CALLDICT
+    28 PUSHINT	//  stack _6=28
+    0 PUSHINT	//  stack _6=28 _7=0
+    check_get_method_result CALLDICT
+  }>
+  set_message_data_update_valid_until_again PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    100 PUSHINT	//  op=1 query_id=2 key=100
+    30 PUSHINT	//  op=1 query_id=2 key=100 valid_until=30
+    0 PUSHINT	//  op=1 query_id=2 key=100 valid_until=30 value=0
+    s0 s4 PUXC
+    4 -ROLL	//  _11=0 op=1 query_id=2 key=100 valid_until=30 value=0
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    27 PUSHINT	//  _11=0 _12 _13 _14=27
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  set_message_update_valid_until_again PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  remove_outdated3_data PROC:<{
+    // 
+    2 PUSHINT	//  op=2
+    DUP
+    0 PUSHINT
+    s0 s2 XCHG	//  _5=0 op=2 query_id=2
+    get_delete_message INLINECALLDICT	//  _5=0 _6
+    10 GETPARAM UNPAIR DROP	//  _5=0 _6 _7
+    35 PUSHINT	//  _5=0 _6 _7 _8=35
+    get_c7_with_time INLINECALLDICT	//  _5=0 _6 _7 _9
+    PUSHNULL	//  _5=0 _6 _7 _9 _10
+    5 TUPLE	//  _4
+  }>
+  remove_outdated3 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  check_can_not_not_outdated2_data PROC:<{
+    // 
+    127977 PUSHINT	//  _1=127977
+    100 PUSHINT	//  _1=127977 _3=100
+    SINGLE	//  _1=127977 _4
+    10 GETPARAM UNPAIR DROP	//  _1=127977 _4 _5
+    0 PUSHINT	//  _1=127977 _4 _5 _6=0
+    get_c7_with_time INLINECALLDICT	//  _1=127977 _4 _5 _7
+    PUSHNULL	//  _1=127977 _4 _5 _7 _8
+    5 TUPLE	//  _0
+  }>
+  check_can_not_not_outdated2 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_unsuccess CALLDICT
+  }>
+  mass_key_addition1_p PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    10 PUSHPOW2DEC	//  op=1 query_id=2 key=1023
+    1112 PUSHINT	//  op=1 query_id=2 key=1023 valid_until=1112
+    s3 s1 s3 XCHG3
+    12 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=1023 valid_until=1112 value=12
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    40 PUSHINT	//  _11=0 _12 _13 _14=40
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  mass_key_addition1 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  mass_key_addition2_p PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    10 PUSHPOW2	//  op=1 query_id=2 key=1024
+    113 PUSHINT	//  op=1 query_id=2 key=1024 valid_until=113
+    s3 s1 s3 XCHG3
+    12 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=1024 valid_until=113 value=12
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    40 PUSHINT	//  _11=0 _12 _13 _14=40
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  mass_key_addition2 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  mass_key_addition3_p PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    1025 PUSHINT	//  op=1 query_id=2 key=1025
+    114 PUSHINT	//  op=1 query_id=2 key=1025 valid_until=114
+    s3 s1 s3 XCHG3
+    12 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=1025 valid_until=114 value=12
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    40 PUSHINT	//  _11=0 _12 _13 _14=40
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  mass_key_addition3 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  mass_key_addition4_p PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    1026 PUSHINT	//  op=1 query_id=2 key=1026
+    115 PUSHINT	//  op=1 query_id=2 key=1026 valid_until=115
+    s3 s1 s3 XCHG3
+    12 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=1026 valid_until=115 value=12
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    40 PUSHINT	//  _11=0 _12 _13 _14=40
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  mass_key_addition4 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  mass_key_addition5_p PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    1027 PUSHINT	//  op=1 query_id=2 key=1027
+    116 PUSHINT	//  op=1 query_id=2 key=1027 valid_until=116
+    s3 s1 s3 XCHG3
+    12 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=1027 valid_until=116 value=12
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    40 PUSHINT	//  _11=0 _12 _13 _14=40
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  mass_key_addition5 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  mass_key_addition6_p PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    1028 PUSHINT	//  op=1 query_id=2 key=1028
+    117 PUSHINT	//  op=1 query_id=2 key=1028 valid_until=117
+    s3 s1 s3 XCHG3
+    12 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=1028 valid_until=117 value=12
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    40 PUSHINT	//  _11=0 _12 _13 _14=40
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  mass_key_addition6 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  mass_key_addition7_p PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    1029 PUSHINT	//  op=1 query_id=2 key=1029
+    118 PUSHINT	//  op=1 query_id=2 key=1029 valid_until=118
+    s3 s1 s3 XCHG3
+    12 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=1029 valid_until=118 value=12
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    40 PUSHINT	//  _11=0 _12 _13 _14=40
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  mass_key_addition7 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  mass_key_addition8_p PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    1030 PUSHINT	//  op=1 query_id=2 key=1030
+    119 PUSHINT	//  op=1 query_id=2 key=1030 valid_until=119
+    s3 s1 s3 XCHG3
+    12 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=1030 valid_until=119 value=12
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    40 PUSHINT	//  _11=0 _12 _13 _14=40
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  mass_key_addition8 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  mass_key_addition9_p PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    1031 PUSHINT	//  op=1 query_id=2 key=1031
+    122 PUSHINT	//  op=1 query_id=2 key=1031 valid_until=122
+    s3 s1 s3 XCHG3
+    12 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=1031 valid_until=122 value=12
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    40 PUSHINT	//  _11=0 _12 _13 _14=40
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  mass_key_addition9 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  mass_key_addition10_p PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    1032 PUSHINT	//  op=1 query_id=2 key=1032
+    123 PUSHINT	//  op=1 query_id=2 key=1032 valid_until=123
+    s3 s1 s3 XCHG3
+    12 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=1032 valid_until=123 value=12
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    40 PUSHINT	//  _11=0 _12 _13 _14=40
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  mass_key_addition10 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  mass_key_addition11_p PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    10 PUSHPOW2DEC	//  op=1 query_id=2 key=1023
+    1000 PUSHINT	//  op=1 query_id=2 key=1023 valid_until=1000
+    s3 s1 s3 XCHG3
+    12 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=1023 valid_until=1000 value=12
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    40 PUSHINT	//  _11=0 _12 _13 _14=40
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  mass_key_addition11 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  mass_key_addition12_p PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    10 PUSHPOW2	//  op=1 query_id=2 key=1024
+    1001 PUSHINT	//  op=1 query_id=2 key=1024 valid_until=1001
+    s3 s1 s3 XCHG3
+    12 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=1024 valid_until=1001 value=12
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    40 PUSHINT	//  _11=0 _12 _13 _14=40
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  mass_key_addition12 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  mass_key_addition13_p PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    1025 PUSHINT	//  op=1 query_id=2 key=1025
+    1002 PUSHINT	//  op=1 query_id=2 key=1025 valid_until=1002
+    s3 s1 s3 XCHG3
+    12 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=1025 valid_until=1002 value=12
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    40 PUSHINT	//  _11=0 _12 _13 _14=40
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  mass_key_addition13 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  mass_key_addition14_p PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    1026 PUSHINT	//  op=1 query_id=2 key=1026
+    1003 PUSHINT	//  op=1 query_id=2 key=1026 valid_until=1003
+    s3 s1 s3 XCHG3
+    12 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=1026 valid_until=1003 value=12
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    40 PUSHINT	//  _11=0 _12 _13 _14=40
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  mass_key_addition14 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  mass_key_addition15_p PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    1027 PUSHINT	//  op=1 query_id=2 key=1027
+    1004 PUSHINT	//  op=1 query_id=2 key=1027 valid_until=1004
+    s3 s1 s3 XCHG3
+    12 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=1027 valid_until=1004 value=12
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    40 PUSHINT	//  _11=0 _12 _13 _14=40
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  mass_key_addition15 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  mass_key_addition16_p PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    1028 PUSHINT	//  op=1 query_id=2 key=1028
+    1005 PUSHINT	//  op=1 query_id=2 key=1028 valid_until=1005
+    s3 s1 s3 XCHG3
+    12 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=1028 valid_until=1005 value=12
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    40 PUSHINT	//  _11=0 _12 _13 _14=40
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  mass_key_addition16 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  mass_key_addition17_p PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    1029 PUSHINT	//  op=1 query_id=2 key=1029
+    1006 PUSHINT	//  op=1 query_id=2 key=1029 valid_until=1006
+    s3 s1 s3 XCHG3
+    12 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=1029 valid_until=1006 value=12
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    40 PUSHINT	//  _11=0 _12 _13 _14=40
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  mass_key_addition17 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  mass_key_addition18_p PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    1030 PUSHINT	//  op=1 query_id=2 key=1030
+    1007 PUSHINT	//  op=1 query_id=2 key=1030 valid_until=1007
+    s3 s1 s3 XCHG3
+    12 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=1030 valid_until=1007 value=12
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    40 PUSHINT	//  _11=0 _12 _13 _14=40
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  mass_key_addition18 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  mass_key_addition19_p PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    1031 PUSHINT	//  op=1 query_id=2 key=1031
+    1008 PUSHINT	//  op=1 query_id=2 key=1031 valid_until=1008
+    s3 s1 s3 XCHG3
+    12 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=1031 valid_until=1008 value=12
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    40 PUSHINT	//  _11=0 _12 _13 _14=40
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  mass_key_addition19 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  mass_key_addition110_p PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    1032 PUSHINT	//  op=1 query_id=2 key=1032
+    1009 PUSHINT	//  op=1 query_id=2 key=1032 valid_until=1009
+    s3 s1 s3 XCHG3
+    12 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=1032 valid_until=1009 value=12
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    40 PUSHINT	//  _11=0 _12 _13 _14=40
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  mass_key_addition110 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  remove_outdated4_data PROC:<{
+    // 
+    2 PUSHINT	//  op=2
+    DUP
+    0 PUSHINT
+    s0 s2 XCHG	//  _5=0 op=2 query_id=2
+    get_delete_message INLINECALLDICT	//  _5=0 _6
+    10 GETPARAM UNPAIR DROP	//  _5=0 _6 _7
+    40 PUSHINT	//  _5=0 _6 _7 _8=40
+    get_c7_with_time INLINECALLDICT	//  _5=0 _6 _7 _9
+    PUSHNULL	//  _5=0 _6 _7 _9 _10
+    5 TUPLE	//  _4
+  }>
+  remove_outdated4 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  remove_outdated5_data PROC:<{
+    // 
+    2 PUSHINT	//  op=2
+    DUP
+    0 PUSHINT
+    s0 s2 XCHG	//  _5=0 op=2 query_id=2
+    get_delete_message INLINECALLDICT	//  _5=0 _6
+    10 GETPARAM UNPAIR DROP	//  _5=0 _6 _7
+    113 PUSHINT	//  _5=0 _6 _7 _8=113
+    get_c7_with_time INLINECALLDICT	//  _5=0 _6 _7 _9
+    PUSHNULL	//  _5=0 _6 _7 _9 _10
+    5 TUPLE	//  _4
+  }>
+  remove_outdated5 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  remove_outdated6_data PROC:<{
+    // 
+    2 PUSHINT	//  op=2
+    DUP
+    0 PUSHINT
+    s0 s2 XCHG	//  _5=0 op=2 query_id=2
+    get_delete_message INLINECALLDICT	//  _5=0 _6
+    10 GETPARAM UNPAIR DROP	//  _5=0 _6 _7
+    1200 PUSHINT	//  _5=0 _6 _7 _8=1200
+    get_c7_with_time INLINECALLDICT	//  _5=0 _6 _7 _9
+    PUSHNULL	//  _5=0 _6 _7 _9 _10
+    5 TUPLE	//  _4
+  }>
+  remove_outdated6 PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  add_outdated_but_not_removed_p PROC:<{
+    // 
+    1 PUSHINT	//  op=1
+    2 PUSHINT	//  op=1 query_id=2
+    1032 PUSHINT	//  op=1 query_id=2 key=1032
+    1009 PUSHINT	//  op=1 query_id=2 key=1032 valid_until=1009
+    s3 s1 s3 XCHG3
+    12 PUSHINT
+    s2 s4 XCHG2
+    0 PUSHINT
+    s0 s5 XCHG	//  _11=0 op=1 query_id=2 key=1032 valid_until=1009 value=12
+    get_message INLINECALLDICT	//  _11=0 _12
+    10 GETPARAM UNPAIR DROP	//  _11=0 _12 _13
+    1201 PUSHINT	//  _11=0 _12 _13 _14=1201
+    get_c7_with_time INLINECALLDICT	//  _11=0 _12 _13 _15
+    PUSHNULL	//  _11=0 _12 _13 _15 _16
+    5 TUPLE	//  _10
+  }>
+  add_outdated_but_not_removed PROC:<{
+    //  exit_code data stack actions gas
+    4 BLKDROP	//  exit_code
+    check_success CALLDICT
+  }>
+  check_can_get_not_yet_removed_data PROC:<{
+    // 
+    127977 PUSHINT	//  _1=127977
+    1032 PUSHINT	//  _1=127977 _3=1032
+    SINGLE	//  _1=127977 _4
+    10 GETPARAM UNPAIR DROP	//  _1=127977 _4 _5
+    0 PUSHINT	//  _1=127977 _4 _5 _6=0
+    get_c7_with_time INLINECALLDICT	//  _1=127977 _4 _5 _7
+    PUSHNULL	//  _1=127977 _4 _5 _7 _8
+    5 TUPLE	//  _0
+  }>
+  check_can_get_not_yet_removed PROC:<{
+    //  exit_code data stack actions gas
+    s2 s3 XCHG
+    3 BLKDROP	//  exit_code stack
+    SWAP	//  stack exit_code
+    check_success CALLDICT
+    1009 PUSHINT	//  stack _6=1009
+    12 PUSHINT	//  stack _6=1009 _7=12
+    check_get_method_result CALLDICT
+  }>
+}END>c
