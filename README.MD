@@ -1,5 +1,5 @@
 # Setup
-Install python, tar and [toncli](https://github.com/disintar/toncli).
+Install python, tar, [update toncli to 0.0.33 version](https://github.com/disintar/toncli) and update toncli libs (`toncli update_libs`).
 
 # Run tests
 Put `tar` archive which you submitted to bot into submitions directory.

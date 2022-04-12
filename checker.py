@@ -32,7 +32,7 @@ def move_solution(path):
   os.system('cp %s tests/func/'%path)
   
 def score(success, gas_usage, etalon):
-  print( " + ".join([ str(i) for i in gas_usage.values()]))
+  #print( " + ".join([ str(i) for i in gas_usage.values()]))
   if not success:
     return 0
   else:
@@ -99,6 +99,13 @@ def check_5(path):
 def clean_up():
   os.system('rm -rf current_solution/* current_solution/.??* ; rm tests/func/* tests/func/.??* ;');
 
+
+def show_results(results, presence):
+  for i,r in enumerate(results):
+    print("Task {0}:\tsubmitted {1: >5},\taccepted {2: >5},\tscore:{3: .2f}".format(i+1, str(presence[i]), str(results[i]>5), results[i]))
+  print("Total score: %.2f"%sum(results))
+    
+
 def check_all():
   with open("result.csv", "w") as f:
     f.write("Archive, score, address, username, codeforces, out, score1, score2, score3, score4, score5, exist1, exist2, exist3, exist4, exist5\n")  
@@ -126,6 +133,7 @@ def check_all():
     except Exception as e:
       print(submition)
       raise e
+    show_results(results, presence)
     total = [submition, sum(results), participant.get("address"), participant.get("username"), participant.get("codeforces")] +\
             [solutions["out"]]+\
             results+\
