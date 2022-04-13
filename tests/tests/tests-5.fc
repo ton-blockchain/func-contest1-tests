@@ -5,6 +5,9 @@ _ prerare_storage() method_id(0) {
 }
 () prerare_storage_result(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(1) {
   check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+  if( ~ data.begin_parse().slice_bits()) {
+    data = stack.first();
+  }
   save_storage_with_tag(1, data);
 }
 
