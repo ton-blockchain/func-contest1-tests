@@ -59,13 +59,19 @@ def check(path, name, etalon_gas, measured, external = False, non_accepted = [])
       if i["name"] in measured:
           gas_usage[i["name"]] = i["gas_used"]
       if external:
+        accepted = (i["gas_limit_vm"] == i["gas_max_vm"])
         if i["name"] in non_accepted:
-          res = res and (not (i["gas_limit_vm"] == i["gas_max_vm"]))
+          if accepted:
+            print("ERROR:\t%s was wrongly accepted"%i["name"])
+            res = False
         else:
-          res = res and (i["gas_limit_vm"] == i["gas_max_vm"])
+          if not accepted:
+            print("ERROR:\t%s was wrongly not accepted"%i["name"])
+            res = False
   except Exception as e:
     print(e)
     return 0
+  print("")
   os.system("rm tests/tests_output.json")
   return score(res, gas_usage, etalon_gas)
   
