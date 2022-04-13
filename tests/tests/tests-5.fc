@@ -334,7 +334,7 @@ _ get_coupled_ext_message_data() method_id(4) {
 
 [int, tuple, cell, tuple, tuple] mass_second_sign_11_77_() method_id(60) {
     return [-1, get_external_message(1, 11, 77, 0),
-            get_prev_c4(), get_c7_with_time(get_valid_until(0) ), unsafe_tuple([10000, 1000000000])];
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) + 6 ), unsafe_tuple([10000, 1000000000])];
 }
 
 () mass_second_sign_11_77(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(61) {
