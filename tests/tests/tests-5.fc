@@ -5,6 +5,9 @@ _ prerare_storage() method_id(0) {
 }
 () prerare_storage_result(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(1) {
   check_success(exit_code); ;; Note this check is not sufficient, we need check gl == max_gl to detect accept message
+  if( ~ data.begin_parse().slice_bits()) {
+    data = stack.first();
+  }
   save_storage_with_tag(1, data);
 }
 
@@ -318,9 +321,12 @@ _ get_coupled_ext_message_data() method_id(4) {
     check_message_correctness(actions, 77, 0);
 }
 
+;; in the case when requests are treated not as Request from description, but any external message
+;; test with get_valid_until(0) may not satisfy requirement 'no more than 10 requests per minute'
+;; thus move it 6 seconds to the future
 [int, tuple, cell, tuple, tuple] mass_second_sign_10_77_() method_id(58) {
     return [-1, get_external_message(1, 10, 77, 0),
-            get_prev_c4(), get_c7_with_time(get_valid_until(0) ), unsafe_tuple([10000, 1000000000])];
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) + 6 ), unsafe_tuple([10000, 1000000000])];
 }
 
 () mass_second_sign_10_77(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(59) {
@@ -331,7 +337,7 @@ _ get_coupled_ext_message_data() method_id(4) {
 
 [int, tuple, cell, tuple, tuple] mass_second_sign_11_77_() method_id(60) {
     return [-1, get_external_message(1, 11, 77, 0),
-            get_prev_c4(), get_c7_with_time(get_valid_until(0) ), unsafe_tuple([10000, 1000000000])];
+            get_prev_c4(), get_c7_with_time(get_valid_until(0) + 6 ), unsafe_tuple([10000, 1000000000])];
 }
 
 () mass_second_sign_11_77(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(61) {
