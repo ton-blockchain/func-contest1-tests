@@ -1,3 +1,5 @@
+forall X -> int is_null?(X x) asm "ISNULL";
+
 slice get_valid_message_body() inline method_id {
     ;; just example of body
     return begin_cell()
@@ -23,4 +25,11 @@ tuple get_valid_message_from_owner()  inline method_id {
     cell in_msg = build_message(0, 1, 0, msg_value, begin_cell().store_slice(in_msg_body));
 
     return unsafe_tuple([balance, msg_value, in_msg, in_msg_body]);
+}
+
+_ check_one_action_by_id(tuple actions, int action_id) inline {
+;;     if (~ is_null?(actions)) {
+        int action_id = actions.first().first();
+        throw_if(error::actions_unvalid(), -1 );
+;;     }
 }

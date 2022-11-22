@@ -1,0 +1,125 @@
+{-
+
+TASK 4 - HASHMAP STORAGE.
+
+* Add-new-entry message has the following structure:
+    * 32-bit unsigned `op` equal to 1
+    * 64-bit unsigned `query_id`
+    * 256-bit unsgined key
+    * 64-bit `valid_until` unixtime
+    * the rest slice is the value
+
+    Upon receipt of such a message, the contract must add a new key/value entry to its data.
+    Clarification: if the key already exists then the entry must be replaced.
+    Contract storage format is arbitrary, you are free to change it.
+
+* Remove-outdated message has the following stucture:
+    * 32-bit unsigned `op` equal to 2
+    * 64-bit unsigned `query_id`
+
+    Upon receipt of such a message, the contract must delete all otudated entries from its data (those with `valid_until` < now()). Note, tests will not cover cases when messages contain valid `op=2`, `query_id` and then something else (that means that participants may handle such messages at their discretion).
+
+* For all other internal messages an error (exit_code > 1) should be thrown
+
+* Get-method `get_key` accepts 256-bit unsigned key and should return `valid_until` integer and value data slice for this key. Note: unixtime of running `get_key` method should not affect result.
+
+  If there is no entry for this key then an error (exit_code > 1) should be thrown.
+
+* Tests will initially run with empty storage
+
+-}
+
+
+
+
+(cell, cell) load_data() {
+    slice ds = get_data().begin_parse();
+    if (slice_data_empty?(ds)) {
+        return (null(), null());
+    } else {
+        return (ds~load_dict(), ds~load_dict());
+    }
+}
+
+() save_data(cell data_dict, cell valid_until_dict) impure {
+    set_data(begin_cell().store_dict(data_dict).store_dict(valid_until_dict).end_cell());
+}
+;;
+;; ;; testable
+() recv_internal(int balance, int msg_value, cell in_msg_full, slice in_msg_body) {
+    int op = in_msg_body~load_uint(32);
+    int query_id = in_msg_body~load_uint(64);
+
+    (cell data_dict, cell valid_until_dict) = load_data();
+
+    if (op == 1) { ;; add new entry
+
+        int key = in_msg_body~load_uint(256); ;; get key of new entry from message
+        int new_valid_until = in_msg_body~load_int(64); ;; get unix time valid_until for new entry
+        slice new_cs_valid_until = begin_cell()             ;; create slice with new valid_until
+                .store_int(new_valid_until, 64)
+                .end_cell()
+                .begin_parse();
+
+        slice new_value = in_msg_body;                ;; get new value for new entry
+
+        ;; check is it new entry via replace
+        (data_dict, int found_val) = data_dict.udict_replace?(256, key,new_value);
+        (valid_until_dict, int found_valid) = valid_until_dict.udict_replace?(256, key, new_cs_valid_until);
+        throw_if(66, found_val != found_valid); ;;impossible case
+
+        if (found_valid ^ found_val) {
+            throw(77); ;;double impossible case
+        }
+
+        if (~ (found_valid & found_val)) {
+            data_dict~udict_set(256, key, new_value);
+            valid_until_dict~udict_set(256, key, new_cs_valid_until);
+        }
+
+
+    }
+
+            elseif (op == 2) { ;; remove outdated
+
+                int key = -1;
+                int f = -1;
+                int current_time = now();
+
+                while (f) {
+                    (key, slice cs, f) = valid_until_dict.udict_get_next?(256, key);
+                    if (f) {
+                        int valid_until = cs~load_int(64);
+                        if (valid_until < current_time) {
+                            valid_until_dict~udict_delete?(256, key);
+                            data_dict~udict_delete?(256, key);
+                        }
+                    }
+                }
+
+            }
+
+                    else {
+                        throw(897); ;; another op exception
+                    }
+
+    save_data(data_dict, valid_until_dict);
+}
+
+;; testable (but not gas-measured)
+(int, slice) get_key(int key) method_id {
+
+    (cell data_dict, cell valid_until_dict) = load_data();
+
+    var (slice valid_until_slice, int success1) = valid_until_dict.udict_get?(256, key);
+    var (slice value , int success2) = data_dict.udict_get?(256, key);
+
+    if (success1 & success2) {
+        int valid_until = valid_until_slice~load_uint(64);
+        return (valid_until, value);
+    }
+    else {
+        throw(395);
+    }
+    return (0, null()); ;;for toncli
+}

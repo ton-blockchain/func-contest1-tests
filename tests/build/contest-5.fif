@@ -1,0 +1,172 @@
+"Asm.fif" include
+// automatically generated from `/Users/alexg/Library/Application Support/toncli/func-libs/stdlib-tests.func` `/Users/alexg/Dev/func-contest1-tests/tests/func/5.fc` 
+PROGRAM{
+  DECLPROC recv_internal
+  90427 DECLMETHOD pack_data
+  DECLPROC recv_external
+  recv_internal PROC:<{
+    // 
+  }>
+  pack_data PROC:<{
+    //  public_key1 public_key2
+    NEWDICT	//  public_key1 public_key2 _2
+    NEWDICT	//  public_key1 public_key2 _2 _3
+    s0 s3 XCHG
+    NEWC	//  _3 public_key2 _2 public_key1 _4
+    256 STU	//  _3 public_key2 _2 _6
+    s1 s2 XCHG	//  _3 _2 public_key2 _6
+    256 STU	//  _3 _2 _8
+    s1 s2 XCHG	//  _2 _3 _8
+    STDICT	//  _2 _9
+    STDICT	//  _10
+    ENDC	//  _11
+  }>
+  recv_external PROC:<{
+    //  in_msg_body
+    55 THROW
+    256 LDU	//  incpbk in_msg_body
+    0 PUSHINT	//  incpbk in_msg_body fl=0
+    SWAP
+    9 PUSHPOW2	//  incpbk fl=0 in_msg_body _13=512
+    LDSLICEX	//  incpbk fl=0 signature in_msg_body
+    c4 PUSH	//  incpbk fl=0 signature in_msg_body _16
+    CTOS	//  incpbk fl=0 signature in_msg_body ds
+    256 LDU	//  incpbk fl=0 signature in_msg_body pbk_1 ds
+    256 LDU	//  incpbk fl=0 signature in_msg_body pbk_1 pbk_2 ds
+    s6 s2 PUSH2	//  incpbk fl=0 signature in_msg_body pbk_1 pbk_2 ds incpbk pbk_1
+    EQUAL	//  incpbk fl=0 signature in_msg_body pbk_1 pbk_2 ds _26
+    IF:<{	//  incpbk fl=0 signature in_msg_body pbk_1 pbk_2 ds
+      s5 POP	//  incpbk ds signature in_msg_body pbk_1 pbk_2
+      1 PUSHINT	//  incpbk ds signature in_msg_body pbk_1 pbk_2 fl=1
+    }>ELSE<{	//  incpbk fl=0 signature in_msg_body pbk_1 pbk_2 ds
+      s6 s1 PUSH2	//  incpbk fl=0 signature in_msg_body pbk_1 pbk_2 ds incpbk pbk_2
+      EQUAL	//  incpbk fl=0 signature in_msg_body pbk_1 pbk_2 ds _28
+      IF:<{	//  incpbk fl=0 signature in_msg_body pbk_1 pbk_2 ds
+        2 PUSHINT
+        s6 POP	//  incpbk fl=2 signature in_msg_body pbk_1 pbk_2 ds
+      }>	//  incpbk fl signature in_msg_body pbk_1 pbk_2 ds
+      s0 s5 XCHG	//  incpbk ds signature in_msg_body pbk_1 pbk_2 fl
+    }>
+    DUP	//  incpbk ds signature in_msg_body pbk_1 pbk_2 fl fl
+    0 EQINT	//  incpbk ds signature in_msg_body pbk_1 pbk_2 fl _32
+    33 THROWIF
+    s0 s5 XCHG	//  incpbk fl signature in_msg_body pbk_1 pbk_2 ds
+    LDDICT	//  incpbk fl signature in_msg_body pbk_1 pbk_2 d1 ds
+    LDDICT	//  incpbk fl signature in_msg_body pbk_1 pbk_2 d1 _130 _129
+    DROP	//  incpbk fl signature in_msg_body pbk_1 pbk_2 d1 d2
+    s0 s4 XCHG	//  incpbk fl signature d2 pbk_1 pbk_2 d1 in_msg_body
+    LDREF	//  incpbk fl signature d2 pbk_1 pbk_2 d1 _132 _131
+    DROP	//  incpbk fl signature d2 pbk_1 pbk_2 d1 _41
+    CTOS	//  incpbk fl signature d2 pbk_1 pbk_2 d1 rqs
+    DUP	//  incpbk fl signature d2 pbk_1 pbk_2 d1 rqs rqs
+    HASHSU	//  incpbk fl signature d2 pbk_1 pbk_2 d1 rqs rhsh
+    OVER	//  incpbk fl signature d2 pbk_1 pbk_2 d1 rqs rhsh rqs
+    32 PLDU	//  incpbk fl signature d2 pbk_1 pbk_2 d1 rqs rhsh valid_until
+    NOW	//  incpbk fl signature d2 pbk_1 pbk_2 d1 rqs rhsh valid_until _50
+    LEQ	//  incpbk fl signature d2 pbk_1 pbk_2 d1 rqs rhsh _51
+    56 THROWIF
+    s1 s6 s8 PUXC2	//  rqs fl rhsh d2 pbk_1 pbk_2 d1 rqs signature incpbk
+    CHKSIGNS	//  rqs fl rhsh d2 pbk_1 pbk_2 d1 _54
+    33 THROWIFNOT
+    0 PUSHINT	//  rqs fl rhsh d2 pbk_1 pbk_2 d1 ss=0
+    s0 s6 XCHG	//  rqs ss=0 rhsh d2 pbk_1 pbk_2 d1 fl
+    1 EQINT	//  rqs ss=0 rhsh d2 pbk_1 pbk_2 d1 _59
+    IF:<{	//  rqs ss=0 rhsh d2 pbk_1 pbk_2 d1
+      s4 s0 PUSH2
+      8 PUSHPOW2	//  rqs ss=0 rhsh d2 pbk_1 pbk_2 d1 rhsh d1 _62=256
+      DICTUDEL	//  rqs ss=0 rhsh d2 pbk_1 pbk_2 d1 _133 _134
+      NIP	//  rqs ss=0 rhsh d2 pbk_1 pbk_2 d1 dtry
+      s5 s4 PUSH2
+      8 PUSHPOW2	//  rqs ss=0 rhsh d2 pbk_1 pbk_2 d1 dtry rhsh d2 _66=256
+      DICTUGET
+      NULLSWAPIFNOT	//  rqs ss=0 rhsh d2 pbk_1 pbk_2 d1 dtry _135 _136
+      NIP	//  rqs ss=0 rhsh d2 pbk_1 pbk_2 d1 dtry rtry
+      SWAP	//  rqs ss=0 rhsh d2 pbk_1 pbk_2 d1 rtry dtry
+      IF:<{	//  rqs ss=0 rhsh d2 pbk_1 pbk_2 d1 rtry
+        DROP
+        s4 POP
+        s4 POP	//  rqs pbk_2 d1 d2 pbk_1
+        -1 PUSHINT	//  rqs pbk_2 d1 d2 pbk_1 ss=-1
+      }>ELSE<{	//  rqs ss=0 rhsh d2 pbk_1 pbk_2 d1 rtry
+        NOT	//  rqs ss=0 rhsh d2 pbk_1 pbk_2 d1 _69
+        IF:<{	//  rqs ss=0 rhsh d2 pbk_1 pbk_2 d1
+          s5 POP	//  rqs d1 rhsh d2 pbk_1 pbk_2
+          s5 s3 s2 PUXC2
+          8 PUSHPOW2	//  rqs d1 pbk_2 pbk_1 rqs rhsh d2 _71=256
+          DICTUSET	//  rqs d1 pbk_2 pbk_1 d2
+          1 PUSHINT	//  rqs d1 pbk_2 pbk_1 d2 ss=1
+          s0 s4 XCHG
+          s2 s3 XCHG2	//  rqs ss=1 d1 d2 pbk_1 pbk_2
+        }>ELSE<{
+          s4 POP	//  rqs ss d1 d2 pbk_1 pbk_2
+        }>
+        s0 s4 XCHG	//  rqs pbk_2 d1 d2 pbk_1 ss
+      }>
+    }>ELSE<{	//  rqs ss=0 rhsh d2 pbk_1 pbk_2 d1
+      s4 s3 PUSH2
+      8 PUSHPOW2	//  rqs ss=0 rhsh d2 pbk_1 pbk_2 d1 rhsh d2 _76=256
+      DICTUDEL	//  rqs ss=0 rhsh d2 pbk_1 pbk_2 d1 _137 _138
+      NIP	//  rqs ss=0 rhsh d2 pbk_1 pbk_2 d1 dtry
+      s5 s1 PUSH2
+      8 PUSHPOW2	//  rqs ss=0 rhsh d2 pbk_1 pbk_2 d1 dtry rhsh d1 _80=256
+      DICTUGET
+      NULLSWAPIFNOT	//  rqs ss=0 rhsh d2 pbk_1 pbk_2 d1 dtry _139 _140
+      NIP	//  rqs ss=0 rhsh d2 pbk_1 pbk_2 d1 dtry rtry
+      SWAP	//  rqs ss=0 rhsh d2 pbk_1 pbk_2 d1 rtry dtry
+      IF:<{	//  rqs ss=0 rhsh d2 pbk_1 pbk_2 d1 rtry
+        DROP
+        s4 POP
+        s4 POP	//  rqs pbk_2 d1 d2 pbk_1
+        -1 PUSHINT	//  rqs pbk_2 d1 d2 pbk_1 ss=-1
+      }>ELSE<{	//  rqs ss=0 rhsh d2 pbk_1 pbk_2 d1 rtry
+        NOT	//  rqs ss=0 rhsh d2 pbk_1 pbk_2 d1 _83
+        IF:<{	//  rqs ss=0 rhsh d2 pbk_1 pbk_2 d1
+          s5 POP	//  rqs d1 rhsh d2 pbk_1 pbk_2
+          s5 s3 s4 PUXC2
+          8 PUSHPOW2	//  rqs pbk_1 pbk_2 d2 rqs rhsh d1 _85=256
+          DICTUSET	//  rqs pbk_1 pbk_2 d2 d1
+          1 PUSHINT	//  rqs pbk_1 pbk_2 d2 d1 ss=1
+          s4 s4 XCHG2
+          s0 s3 XCHG	//  rqs ss=1 d1 d2 pbk_1 pbk_2
+        }>ELSE<{
+          s4 POP	//  rqs ss d1 d2 pbk_1 pbk_2
+        }>
+        s0 s4 XCHG	//  rqs pbk_2 d1 d2 pbk_1 ss
+      }>
+    }>
+    DUP	//  rqs pbk_2 d1 d2 pbk_1 ss ss
+    0 EQINT	//  rqs pbk_2 d1 d2 pbk_1 ss _90
+    99 THROWIF
+    ACCEPT
+    DUP	//  rqs pbk_2 d1 d2 pbk_1 ss ss
+    0 EQINT	//  rqs pbk_2 d1 d2 pbk_1 ss _94
+    IF:<{	//  rqs pbk_2 d1 d2 pbk_1 ss
+      DROP
+      s4 POP	//  pbk_1 pbk_2 d1 d2
+      666 THROW
+    }>ELSE<{	//  rqs pbk_2 d1 d2 pbk_1 ss
+      -1 EQINT	//  rqs pbk_2 d1 d2 pbk_1 _98
+      IF:<{	//  rqs pbk_2 d1 d2 pbk_1
+        s0 s4 XCHG
+        32 PUSHINT	//  pbk_1 pbk_2 d1 d2 rqs _100=32
+        SDSKIPFIRST	//  pbk_1 pbk_2 d1 d2 rqs
+        8 LDU	//  pbk_1 pbk_2 d1 d2 mode rqs
+        LDREF	//  pbk_1 pbk_2 d1 d2 mode _144 _143
+        DROP	//  pbk_1 pbk_2 d1 d2 mode msg_to_send
+        SWAP	//  pbk_1 pbk_2 d1 d2 msg_to_send mode
+        SENDRAWMSG
+      }>ELSE<{
+        s4 POP	//  pbk_1 pbk_2 d1 d2
+      }>
+    }>
+    s0 s3 XCHG
+    NEWC	//  d2 pbk_2 d1 pbk_1 _110
+    256 STU	//  d2 pbk_2 d1 _112
+    s1 s2 XCHG	//  d2 d1 pbk_2 _112
+    256 STU	//  d2 d1 _114
+    STDICT	//  d2 _115
+    STDICT	//  _116
+    ENDC	//  _117
+    c4 POP
+  }>
+}END>c

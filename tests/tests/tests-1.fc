@@ -1,68 +1,62 @@
 ;; Main funtion tests
-
-[int, tuple, cell, tuple, int] not_valid_data() method_id(0) {
+_ __test_not_valid_data() { ;;id(0)
     ;; data with <32 bit message
-    return [0, get_not_valid_message(), get_c4(), get_c7(), null()];
+    set_data(get_c4());
+    slice msg = get_not_valid_message().first();
+
+    ;;checkd fail with not valid message
+    invoke_method_expect_fail(recv_internal, [msg]);
 }
 
-_ not_valid(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(1) {
-    throw_unless(777, exit_code > 0); ;; check fail with not valid message
-}
 
 ;; Add 3 times by 10
+_ __test_add_10_data() { ;;id(2)
+    ;;set total in contract storage
+    set_data(get_c4());
 
-[int, tuple, cell, tuple, int] add_10_data() method_id(2) {
-    return [0, get_valid_message_32(), get_c4(), get_c7(), null()];
+    slice msg = get_valid_message_32().first();
+    invoke_method(recv_internal, [msg]);
 }
 
-_ add_10(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(3) {
-    check_success(exit_code); ;; check fail with not valid message
+_ __test_second_add_10_data() { ;;id(4)
+
+    set_data(get_prev_c4());
+
+    slice msg = get_valid_message_32().first();
+    invoke_method(recv_internal, [msg]);
 }
 
-[int, tuple, cell, tuple, int] second_add_10_data() method_id(4) {
-    return [0, get_valid_message_32(), get_prev_c4(), get_c7(), null()];
+_ __test_third_add_10_data() { ;;id(6)
+    set_data(get_prev_c4());
+
+    slice msg = get_valid_message_32().first();
+    invoke_method(recv_internal, [msg]);
 }
 
-_ second_add_10(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(5) {
-    check_success(exit_code); ;; check fail with not valid message
-}
 
-[int, tuple, cell, tuple, int] third_add_10_data() method_id(6) {
-    return [0, get_valid_message_32(), get_prev_c4(), get_c7(), null()];
-}
+_ __test_check_get_total_30_data() { ;;id(10)
+    set_data(get_prev_c4());
 
-_ third_add_10(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(7) {
-    check_success(exit_code); ;; check fail with not valid message
-}
-
-[int, tuple, cell, tuple, int] check_get_total_30_data() method_id(10) {
-    return [128253, empty_stack(), get_prev_c4(), get_c7(), null()];
-}
-
-_ check_get_total_30(int exit_code, cell data, tuple stack, cell actions, int gas)method_id(11) {
-    check_success(exit_code); ;; check fail with not valid message
+;;     slice msg = get_valid_message_32().first();
+    var (int gas, tuple stack) = invoke_method(get_total, []);
     int total = first(stack);
     if (total != 30) {
         throw(error::data_incorrect());
     }
 }
+;; ;; Check 64bits message
 
-;; Check 64bits message
+_ __test_add_64_data() { ;;id(12)
+    set_data(get_prev_c4());
 
-[int, tuple, cell, tuple, int] add_64_data() method_id(12) {
-    return [0, get_valid_message_64(), get_prev_c4(), get_c7(), null()];
+    slice msg = get_valid_message_64().first();
+    invoke_method(recv_internal, [msg]);
 }
 
-_ add_64(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(13) {
-    check_success(exit_code); ;; check fail with not valid message
-}
+_ __test_check_get_total_40_data() { ;;id(14)
+    set_data(get_prev_c4());
 
-[int, tuple, cell, tuple, int] check_get_total_40_data() method_id(14) {
-    return [128253, empty_stack(), get_prev_c4(), get_c7(), null()];
-}
-
-_ check_get_total_40(int exit_code, cell data, tuple stack, cell actions, int gas)method_id(15) {
-    check_success(exit_code); ;; check fail with not valid message
+    var (int gas, tuple stack) = invoke_method(get_total, []);
     int total = first(stack);
     if (total != 30 + 10) {
         throw(error::data_incorrect());
@@ -70,30 +64,24 @@ _ check_get_total_40(int exit_code, cell data, tuple stack, cell actions, int ga
 }
 
 ;; Check 64bits total
+_ __test_add_max_32_data() { ;;id(16)
+    set_data(get_c4());
 
-[int, tuple, cell, tuple, int] add_max_32_data() method_id(16) {
-    return [0, get_valid_max_32_message(), get_c4(), get_c7(), null()];
+    slice msg = get_valid_max_32_message().first();
+    invoke_method(recv_internal, [msg]);
 }
 
-_ add_max_32(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(17) {
-    check_success(exit_code); ;; check fail with not valid message
+_ __test_add_max_32_twice_data() { ;;id(18)
+    set_data(get_prev_c4());
+
+    slice msg = get_valid_max_32_message().first();
+    invoke_method(recv_internal, [msg]);
 }
 
-[int, tuple, cell, tuple, int] add_max_32_twice_data() method_id(18) {
-    return [0, get_valid_max_32_message(), get_prev_c4(), get_c7(), null()];
-}
+_ __test_check_64_max_data() { ;;id(20)
+    set_data(get_prev_c4());
 
-_ add_max_32_twice(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(19) {
-    check_success(exit_code); ;; check fail with not valid message
-}
-
-
-[int, tuple, cell, tuple, int] check_64_max_data() method_id(20) {
-    return [128253, empty_stack(), get_prev_c4(), get_c7(), null()];
-}
-
-_ check_64_max(int exit_code, cell data, tuple stack, cell actions, int gas)method_id(21) {
-    check_success(exit_code); ;; check fail with not valid message
+    var (int gas, tuple stack) = invoke_method(get_total, []);
     int total = first(stack);
     if (total != 4294967295 + 4294967295) {
         throw(error::data_incorrect());

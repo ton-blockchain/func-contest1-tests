@@ -1,26 +1,42 @@
-[int, tuple, cell, tuple, int] manager_set_address_data() method_id(0) {
-    return [0, get_set_message(), get_c4(), get_c7(), null()];
-}
 
-_ manager_set_address(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(1) {
+_ __test_manager_set_address() { ;;id(0)
+    set_data(get_c4());
+    set_now(0);
+    tuple tdata = get_set_message();
     ;; message from manager must be accepted, but we need to check there is no outgoing messages
-    check_success(exit_code);
+
+    int balance = tdata.first();
+    int msg_value = tdata.second();
+    cell in_msg_full = tdata.third();
+    slice in_msg_body = tdata.fourth();
+
+    invoke_method(recv_internal, [balance, msg_value, in_msg_full, in_msg_body]);
 
     ;; No out messages, just in case
-    slice actions_slice = actions.begin_parse();
+    slice actions_slice = get_actions();
     throw_if(error::actions_unvalid(), actions_slice.slice_bits() != 0);
     throw_if(error::actions_unvalid(), actions_slice.slice_refs() != 0);
+
 }
 
-[int, tuple, cell, tuple, int] request_address_data() method_id(2) {
-    return [0, get_request_address_message(), get_prev_c4(), get_c7(), null()];
-}
+_ __test_request_address() { ;;id(2)
 
-_ request_address(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(3) {
-    check_success(exit_code);
-    slice actions_list = actions.begin_parse();
+    set_data(get_prev_c4());
+
+    tuple tdata = get_request_address_message();
+    int balance = tdata.first();
+    int msg_value = tdata.second();
+    cell in_msg_full = tdata.third();
+    slice in_msg_body = tdata.fourth();
+
+    invoke_method(recv_internal, [balance, msg_value, in_msg_full, in_msg_body]);
+
+    slice actions_list = get_actions();
+
     cell prev_action_list = actions_list~load_ref();
+
     slice action = actions_list;
+
     ;; action_send_msg#0ec3c86d mode:(## 8)
     ;;   out_msg:^(MessageRelaxed Any) = OutAction;
 
@@ -64,13 +80,15 @@ _ request_address(int exit_code, cell data, tuple stack, cell actions, int gas) 
     throw_if_not(error::data_incorrect(), query_id == 7);
     throw_if_not(error::data_incorrect(), equal_slices(manager, get_example_address(1)));
     throw_if_not(error::data_incorrect(), equal_slices(memorized, get_example_address(2)));
+
 }
 
-;; * when address memorizer get any internal message which is not covered by description above it should throw with any exit code > 1.
-[int, tuple, cell, tuple, int] unvalid_message_data() method_id(4) {
-    return [0, get_unvalid_message(), get_c4(), get_c7(), null()];
-}
-
-_ unvalid_message(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(5) {
-    check_unsuccess(exit_code);
+ ;; * when address memorizer get any internal message which is not covered by description above it should throw with any exit code > 1.
+_ __test_unvalid_message_data() { ;;id(4)
+    tuple tdata = get_unvalid_message();
+    int balance = tdata.first();
+    int msg_value = tdata.second();
+    cell in_msg_full = tdata.third();
+    slice in_msg_body = tdata.fourth();
+    invoke_method_expect_fail(recv_internal, [balance, msg_value, in_msg_full, in_msg_body]);
 }
