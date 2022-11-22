@@ -5,19 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d3d29e4-6e3c-4c5a-bf59-0568f3505780" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/tests/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tests/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/build/contest-1_tests.fif" beforeDir="false" afterPath="$PROJECT_DIR$/tests/build/contest-1_tests.fif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/build/contest-2_tests.fif" beforeDir="false" afterPath="$PROJECT_DIR$/tests/build/contest-2_tests.fif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/build/contest-3_tests.fif" beforeDir="false" afterPath="$PROJECT_DIR$/tests/build/contest-3_tests.fif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/build/contest-4_tests.fif" beforeDir="false" afterPath="$PROJECT_DIR$/tests/build/contest-4_tests.fif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/build/contest-5_tests.fif" beforeDir="false" afterPath="$PROJECT_DIR$/tests/build/contest-5_tests.fif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tests/op/op-code.fc" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests/op/op-code.fc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tests/task5/data.fc" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests/task5/data.fc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tests/tests-1.fc" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests/tests-1.fc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/tests/tests-2.fc" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests/tests-2.fc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tests/tests-3.fc" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests/tests-3.fc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tests/tests-4.fc" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests/tests-4.fc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tests/tests-5.fc" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests/tests-5.fc" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +61,7 @@
       <updated>1667929101685</updated>
       <workItem from="1667929102875" duration="1064000" />
       <workItem from="1668412388391" duration="13199000" />
-      <workItem from="1669017969812" duration="17319000" />
+      <workItem from="1669017969812" duration="18317000" />
     </task>
     <servers />
   </component>

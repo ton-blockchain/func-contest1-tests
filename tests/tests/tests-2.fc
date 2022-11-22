@@ -75,7 +75,7 @@ slice __test_message_from_owner_data(){ ;;id(2)
     ;; check_success(exit_code); ;; message from owner must be accepted, but we need to check there is no outgoing messages
 
     slice actions_slice = get_actions();
-    return actions_slice;
-;;     throw_if(error::actions_unvalid(), actions_slice.slice_bits() != 0);
-;;     throw_if(error::actions_unvalid(), actions_slice.slice_refs() != 0);
+    ;;actions_slice is not hollow
+    throw_if(error::actions_unvalid(), actions_slice.slice_bits() != 0);
+    throw_if(error::actions_unvalid(), actions_slice.slice_refs() != 0);
 }
