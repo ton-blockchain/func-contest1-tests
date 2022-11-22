@@ -1,16 +1,20 @@
 ;; Main funtion tests
 
-[int, tuple, cell, tuple, int] valid_data() method_id(0) {
-    return [0, get_valid_message(), get_c4(), get_c7(), null()];
-}
+_ __test_valid_data(){ ;;id(0)
+    set_data(get_c4());
+    var tdata = get_valid_message();
 
-_ valid(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(1) {
-    check_success(exit_code);
+    int balance = tdata.first();
+    int msg_value = tdata.second();
+    cell in_msg_full = tdata.third();
+    slice in_msg_body = tdata.fourth();
+
+    invoke_method(recv_internal, [balance, msg_value, in_msg_full, in_msg_body]);
 
     ;; TODO: could it be, that contract send several messages, so we need to find out wich own is ours
     ;; By now - just don't allow to send any more messages
 
-    slice actions_list = actions.begin_parse();
+    slice actions_list = get_actions();
     cell prev_action_list = actions_list~load_ref();
     slice action = actions_list;
     ;; action_send_msg#0ec3c86d mode:(## 8)
@@ -57,21 +61,21 @@ _ valid(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(
 }
 
 
-[int, tuple, cell, tuple, int] message_from_owner_data() method_id(2) {
-    return [0, get_valid_message_from_owner(), get_prev_c4(), get_c7(), null()];
-}
+slice __test_message_from_owner_data(){ ;;id(2)
 
-_ message_from_owner(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(3) {
-    ;; For messages from owner tests will check absence of outgoing messages.
+    set_data(get_c4());
+    var tdata = get_valid_message();
 
-    ;; If exit code is unsuccess - there is no actions
-    if (~((exit_code == 0) | (exit_code == 1))) {
-        throw(0);
-    }
+    int balance = tdata.first();
+    int msg_value = tdata.second();
+    cell in_msg_full = tdata.third();
+    slice in_msg_body = tdata.fourth();
 
+    invoke_method(recv_internal, [balance, msg_value, in_msg_full, in_msg_body]);
     ;; check_success(exit_code); ;; message from owner must be accepted, but we need to check there is no outgoing messages
 
-    slice actions_slice = actions.begin_parse();
-    throw_if(error::actions_unvalid(), actions_slice.slice_bits() != 0);
-    throw_if(error::actions_unvalid(), actions_slice.slice_refs() != 0);
+    slice actions_slice = get_actions();
+    return actions_slice;
+;;     throw_if(error::actions_unvalid(), actions_slice.slice_bits() != 0);
+;;     throw_if(error::actions_unvalid(), actions_slice.slice_refs() != 0);
 }

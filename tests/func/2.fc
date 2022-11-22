@@ -1,0 +1,77 @@
+{-
+
+TASK 2 - PROXY.
+
+The aim of proxy contract is to forward all messages to it's owner.
+
+In particular for each message A (except messages from owner itself) such contract
+should send the message B to owner with body which contains address of A's sender followed by A's message body in reference (child cell).
+
+The Toncoin value attached to the message should be equal A's value minus fees related to processing (computational and message forwarding fees).
+The owner address is stored in contract storage (it is guaranteed that storage contains owner address only).
+
+You may find useful https://ton.org/docs/#/smart-contracts/messages
+
+For messages from owner tests will check absence of outgoing messages.
+
+-}
+
+
+int equal_slices (slice a, slice b) asm "SDEQ";
+
+slice load_data () inline {
+    slice ds = get_data().begin_parse();
+    return ds~load_msg_addr();
+}
+
+() save_data (slice owner_address) impure {
+    set_data(begin_cell().store_slice(owner_address).end_cell());
+}
+
+;; Parse sender address from incoming message
+slice parse_sender_address (cell in_msg_full) {
+    var cs = in_msg_full.begin_parse();
+    cs~skip_bits(4);
+    slice sender_address = cs~load_msg_addr();
+    return sender_address;
+}
+
+;; Get msg body from valid message cell
+cell get_msg_body(cell msg) {
+    slice cs = msg.begin_parse();
+    throw_if(35, cs.slice_refs_empty?());
+    return (cs~load_ref());
+}
+;; testable
+() recv_internal (int balance, int msg_value, cell in_msg_full, slice in_msg_body) {
+
+    slice sender_address = parse_sender_address(in_msg_full);
+    slice owner_address = load_data();
+
+    slice proxy_address = my_address();
+    if (~ equal_slices(owner_address, sender_address))
+            {
+                cell sender_body = get_msg_body(in_msg_full);
+                ;; create body cell with sender address and sender body
+                ;;                 cell new_body = begin_cell()
+                ;;                         .store_slice(sender_address)
+                ;;                         .store_ref(sender_body)
+                ;;                         .end_cell();
+
+
+                var msg = begin_cell()
+                        .store_uint(0, 1)
+                        .store_uint(1, 1)
+                        .store_uint(1, 1)
+                        .store_uint(0, 1)
+                        .store_uint(0, 2)
+                        .store_slice(owner_address)
+                        .store_coins(0)
+                        .store_uint(0, 1 + 4 + 4 + 64 + 32 + 1 + 1)
+                        .store_slice(sender_address)
+                        .store_ref(sender_body)
+                        .end_cell();
+                send_raw_message(msg, 64);
+            }
+    save_data(owner_address);
+}

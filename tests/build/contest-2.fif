@@ -1,0 +1,80 @@
+"Asm.fif" include
+// automatically generated from `/Users/alexg/Library/Application Support/toncli/func-libs/stdlib-tests.func` `/Users/alexg/Dev/func-contest1-tests/tests/func/2.fc` 
+PROGRAM{
+  DECLPROC load_data
+  DECLPROC save_data
+  DECLPROC parse_sender_address
+  DECLPROC get_msg_body
+  DECLPROC recv_internal
+  load_data PROC:<{
+    // 
+    c4 PUSH	//  _1
+    CTOS	//  ds
+    LDMSGADDR	//  _6 _5
+    DROP	//  _3
+  }>
+  save_data PROC:<{
+    //  owner_address
+    NEWC	//  owner_address _1
+    SWAP	//  _1 owner_address
+    STSLICER	//  _2
+    ENDC	//  _3
+    c4 POP
+  }>
+  parse_sender_address PROC:<{
+    //  in_msg_full
+    CTOS	//  cs
+    4 PUSHINT	//  cs _4=4
+    SDSKIPFIRST	//  cs
+    LDMSGADDR	//  _10 _9
+    DROP	//  sender_address
+  }>
+  get_msg_body PROC:<{
+    //  msg
+    CTOS	//  cs
+    DUP	//  cs cs
+    SREMPTY	//  cs _4
+    35 THROWIF
+    LDREF	//  _9 _8
+    DROP	//  _6
+  }>
+  recv_internal PROC:<{
+    //  balance msg_value in_msg_full in_msg_body
+    s1 s3 XCHG
+    3 BLKDROP	//  in_msg_full
+    DUP	//  in_msg_full in_msg_full
+    parse_sender_address CALLDICT	//  in_msg_full sender_address
+    load_data INLINECALLDICT	//  in_msg_full sender_address owner_address
+    s0 s1 PUSH2	//  in_msg_full sender_address owner_address owner_address sender_address
+    SDEQ	//  in_msg_full sender_address owner_address _10
+    NOT	//  in_msg_full sender_address owner_address _11
+    IF:<{	//  in_msg_full sender_address owner_address
+      s0 s2 XCHG	//  owner_address sender_address in_msg_full
+      get_msg_body CALLDICT	//  owner_address sender_address sender_body
+      0 PUSHINT	//  owner_address sender_address sender_body _15=0
+      s0 s0 PUSH2	//  owner_address sender_address sender_body _15=0 _16=0 _17=0
+      1 PUSHINT	//  owner_address sender_address sender_body _15=0 _16=0 _17=0 _18=1
+      s0 s1 PUSH2	//  owner_address sender_address sender_body _15=0 _16=0 _17=0 _18=1 _19=1 _20=0
+      NEWC	//  owner_address sender_address sender_body _15=0 _16=0 _17=0 _18=1 _19=1 _20=0 _21
+      1 STU	//  owner_address sender_address sender_body _15=0 _16=0 _17=0 _18=1 _19=1 _23
+      1 STU	//  owner_address sender_address sender_body _15=0 _16=0 _17=0 _18=1 _25
+      1 STU	//  owner_address sender_address sender_body _15=0 _16=0 _17=0 _27
+      1 STU	//  owner_address sender_address sender_body _15=0 _16=0 _29
+      2 STU	//  owner_address sender_address sender_body _15=0 _31
+      s4 PUSH	//  owner_address sender_address sender_body _15=0 _31 owner_address
+      STSLICER	//  owner_address sender_address sender_body _15=0 _32
+      OVER	//  owner_address sender_address sender_body _15=0 _32 _33=0
+      STVARUINT16	//  owner_address sender_address sender_body _15=0 _34
+      107 STU	//  owner_address sender_address sender_body _48
+      ROT	//  owner_address sender_body _48 sender_address
+      STSLICER	//  owner_address sender_body _49
+      STREF	//  owner_address _50
+      ENDC	//  owner_address msg
+      64 PUSHINT	//  owner_address msg _52=64
+      SENDRAWMSG
+    }>ELSE<{
+      2 1 BLKDROP2	//  owner_address
+    }>
+    save_data CALLDICT
+  }>
+}END>c

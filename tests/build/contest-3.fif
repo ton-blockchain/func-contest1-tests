@@ -1,0 +1,99 @@
+"Asm.fif" include
+// automatically generated from `/Users/alexg/Library/Application Support/toncli/func-libs/stdlib-tests.func` `/Users/alexg/Dev/func-contest1-tests/tests/func/3.fc` 
+PROGRAM{
+  DECLPROC load_data
+  DECLPROC save_data
+  DECLPROC parse_sender_address
+  DECLPROC recv_internal
+  load_data PROC:<{
+    // 
+    c4 PUSH	//  _1
+    CTOS	//  ds
+    LDMSGADDR	//  _3 ds
+    LDMSGADDR	//  _3 _10 _9
+    DROP	//  _3 _5
+  }>
+  save_data PROC:<{
+    //  manager_address memorized_address
+    NEWC
+    ROT	//  memorized_address _2 manager_address
+    STSLICER	//  memorized_address _3
+    SWAP	//  _3 memorized_address
+    STSLICER	//  _4
+    ENDC	//  _5
+    c4 POP
+  }>
+  parse_sender_address PROC:<{
+    //  in_msg_full
+    CTOS	//  cs
+    4 LDU	//  flags cs
+    LDMSGADDR	//  flags _13 _12
+    DROP	//  flags sender_address
+    SWAP	//  sender_address flags
+  }>
+  recv_internal PROC:<{
+    //  balance msg_value in_msg_full in_msg_body
+    s3 POP
+    NIP	//  in_msg_body in_msg_full
+    CTOS	//  in_msg_body cs
+    4 PUSHINT	//  in_msg_body cs _7=4
+    SDSKIPFIRST	//  in_msg_body cs
+    LDMSGADDR	//  in_msg_body _78 _77
+    DROP	//  in_msg_body sender_address
+    c4 PUSH	//  in_msg_body sender_address _13
+    CTOS	//  in_msg_body sender_address contractdata
+    s0 s2 XCHG	//  contractdata sender_address in_msg_body
+    32 LDU	//  contractdata sender_address op in_msg_body
+    64 LDU	//  contractdata sender_address op query_id in_msg_body
+    s2 PUSH	//  contractdata sender_address op query_id in_msg_body op
+    1 EQINT	//  contractdata sender_address op query_id in_msg_body _24
+    IF:<{	//  contractdata sender_address op query_id in_msg_body
+      2 1 BLKDROP2	//  contractdata sender_address in_msg_body
+      s0 s2 XCHG	//  in_msg_body sender_address contractdata
+      LDMSGADDR	//  in_msg_body sender_address _84 _83
+      DROP	//  in_msg_body sender_address manager_address
+      TUCK	//  in_msg_body manager_address sender_address manager_address
+      SDEQ	//  in_msg_body manager_address _29
+      NOT	//  in_msg_body manager_address _30
+      39 THROWIF
+      SWAP	//  manager_address in_msg_body
+      LDMSGADDR	//  manager_address _86 _85
+      DROP	//  manager_address new_memorized_address
+      NEWC
+      ROT	//  new_memorized_address _36 manager_address
+      STSLICER	//  new_memorized_address _37
+      SWAP	//  _37 new_memorized_address
+      STSLICER	//  _38
+      ENDC	//  new_data
+      c4 POP
+    }>ELSE<{	//  contractdata sender_address op query_id in_msg_body
+      DROP	//  contractdata sender_address op query_id
+      SWAP	//  contractdata sender_address query_id op
+      2 EQINT	//  contractdata sender_address query_id _42
+      IF:<{	//  contractdata sender_address query_id
+        3 PUSHINT	//  contractdata sender_address query_id _44=3
+        0 PUSHINT	//  contractdata sender_address query_id _44=3 _45=0
+        24 PUSHINT	//  contractdata sender_address query_id _44=3 _45=0 _46=24
+        NEWC	//  contractdata sender_address query_id _44=3 _45=0 _46=24 _47
+        6 STU	//  contractdata sender_address query_id _44=3 _45=0 _49
+        s0 s4 XCHG2	//  contractdata _45=0 query_id _44=3 _49 sender_address
+        STSLICER	//  contractdata _45=0 query_id _44=3 _50
+        s3 PUSH	//  contractdata _45=0 query_id _44=3 _50 _51=0
+        STGRAMS	//  contractdata _45=0 query_id _44=3 _52
+        s1 s3 XCHG	//  contractdata _44=3 query_id _45=0 _52
+        107 STU	//  contractdata _44=3 query_id _66
+        s1 s2 XCHG	//  contractdata query_id _44=3 _66
+        32 STU	//  contractdata query_id _68
+        64 STU	//  contractdata _70
+        SWAP	//  _70 contractdata
+        STSLICER	//  _71
+        ENDC	//  msg
+        64 PUSHINT	//  msg _73=64
+        SENDRAWMSG
+      }>ELSE<{	//  contractdata sender_address query_id
+        3 BLKDROP	// 
+        697 THROW
+      }>
+    }>
+  }>
+}END>c

@@ -1,0 +1,93 @@
+{-
+
+TASK 3 - ADDRESS MEMORIZER.
+
+The aim of address memorizer contract is to remember the address set by Manager and report it to anyone who request this information.
+
+In particular:
+
+* when contract get internal message from Manager which contains the following three fields:
+  * 32-bit unsigned `op` equal to 1 [more on op's here](https://ton.org/docs/#/howto/smart-contract-guidelines?id=internal-messages)
+  * immediately followed by some 64-bit unsigned `query_id`,
+  * immediately followed by valid MsgAddress,
+it should store obtained address in the storage. Note, tests will not cover cases when messages contain valid `op`, `query_id`, `address` and then something else (that means that participants may handle such messages at their discretion).
+
+* when contract get internal message from any address which contains the following two fields:
+  32-bit unsigned `op` equal to `2` immediately followed by some 64-bit unsigned `query_id`, it should response to sender with message with body containing:
+  1) 32-bit ungisned `op` equal to 3
+  2) the same 64-bit unsigned `query_id`
+  3) Manager's address
+  4) Address which was memorized since last Manager request (empty address `addr_none` if there were no Manager request yet)
+  5) TON value attached to message should be incoming value minus processing fees
+
+Note, tests will not cover cases when messages contain valid `op=2`, `query_id` and then something else (that means that participants may handle such messages at their discretion).
+
+* when address memorizer get any internal message which is not covered by description above it should throw with any exit code > 1.
+
+The initial address memorizer storage contains Manager address immediately followed by empty address (`addr_none` constructor for MsgAddress).
+
+-}
+
+int equal_slices (slice a, slice b) asm "SDEQ";
+
+(slice, slice) load_data () {
+    var ds = get_data().begin_parse();
+    return (ds~load_msg_addr(), ds~load_msg_addr());
+}
+
+() save_data (slice manager_address, slice memorized_address) {
+    set_data(begin_cell().store_slice(manager_address).store_slice(memorized_address).end_cell());
+}
+
+;; Parse sender address from incoming message
+(slice, int) parse_sender_address (cell in_msg_full) {
+    var cs = in_msg_full.begin_parse();
+    var flags = cs~load_uint(4);
+    slice sender_address = cs~load_msg_addr();
+    return (sender_address, flags);
+}
+
+;; testable
+() recv_internal (int balance, int msg_value, cell in_msg_full, slice in_msg_body) {
+    slice cs = in_msg_full.begin_parse();
+    cs~skip_bits(4);
+    slice sender_address = cs~load_msg_addr(); ;;get current sender from message
+
+    slice contractdata = get_data().begin_parse(); ;; read data with adresses from contract
+
+    int op = in_msg_body~load_uint(32);
+    int query_id = in_msg_body~load_uint(64);
+
+    if (op == 1) {
+        slice manager_address = contractdata~load_msg_addr();
+        throw_if(39, ~ equal_slices(sender_address, manager_address)); ;; check that  sender is manager
+        slice new_memorized_address = in_msg_body~load_msg_addr();
+
+        cell new_data = begin_cell()
+                .store_slice(manager_address)
+                .store_slice(new_memorized_address)
+                .end_cell();
+
+        set_data(new_data);
+
+    }
+
+    elseif (op == 2) {
+        cell msg = begin_cell()
+                .store_uint(0x18, 6)
+                .store_slice(sender_address)
+                .store_grams(0)
+                .store_uint(0, 1 + 4 + 4 + 64 + 32 + 1 + 1)
+                .store_uint(3, 32)
+                .store_uint(query_id, 64)
+                .store_slice(contractdata)
+                .end_cell();
+        send_raw_message(msg, 64);
+
+
+    }
+
+    else {
+        throw(697);
+    }
+}
