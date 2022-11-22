@@ -7,12 +7,6 @@
     <list default="true" id="0d3d29e4-6e3c-4c5a-bf59-0568f3505780" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.MD" beforeDir="false" afterPath="$PROJECT_DIR$/README.MD" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/build/contest-2_tests.fif" beforeDir="false" afterPath="$PROJECT_DIR$/tests/build/contest-2_tests.fif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/func/4.fc" beforeDir="false" afterPath="$PROJECT_DIR$/tests/func/4.fc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tests/task2/messages.fc" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests/task2/messages.fc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tests/tests-2.fc" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests/tests-2.fc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tests/tests-3.fc" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests/tests-3.fc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tests/tests-4.fc" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests/tests-4.fc" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +62,7 @@
       <updated>1667929101685</updated>
       <workItem from="1667929102875" duration="1064000" />
       <workItem from="1668412388391" duration="13199000" />
-      <workItem from="1669017969812" duration="29038000" />
+      <workItem from="1669017969812" duration="29668000" />
     </task>
     <servers />
   </component>
