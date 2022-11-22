@@ -2515,7 +2515,9 @@ PROGRAM{
   }>
   __test_set_message_data PROC:<{
     // 
-    1 PUSHINT	//  _0=1
+    get_c4 INLINECALLDICT	//  _0
+    c4 POP
+    1 PUSHINT	//  _2=1
     c7 PUSH DUP FIRST
     ROT
     3 SETINDEX
@@ -2527,25 +2529,18 @@ PROGRAM{
     10 PUSHINT	//  op=1 query_id=2 key=3 valid_until=10
     5 PUSHINT	//  op=1 query_id=2 key=3 valid_until=10 value=5
     get_message INLINECALLDICT	//  tdata
-    DUP	//  tdata tdata
-    FIRST	//  tdata balance
-    OVER	//  tdata balance tdata
-    SECOND	//  tdata balance msg_value
-    s2 PUSH	//  tdata balance msg_value tdata
-    THIRD	//  tdata balance msg_value in_msg_full
-    s0 s3 XCHG	//  in_msg_full balance msg_value tdata
-    3 INDEX	//  in_msg_full balance msg_value in_msg_body
     CONT:<{
       recv_internal CALLDICT
-    }>	//  in_msg_full balance msg_value in_msg_body _22
-    s4 s4 XCHG2	//  _22 balance msg_value in_msg_full in_msg_body
-    4 TUPLE	//  _22 _23
-    invoke_method CALLDICT	//  _25 _26
+    }>	//  tdata _16
+    SWAP	//  _16 tdata
+    invoke_method CALLDICT	//  _18 _19
     2DROP	// 
   }>
   __test_set_message_data_2 PROC:<{
     // 
-    2 PUSHINT	//  _0=2
+    10 GETPARAM UNPAIR DROP	//  _0
+    c4 POP
+    2 PUSHINT	//  _2=2
     c7 PUSH DUP FIRST
     ROT
     3 SETINDEX
@@ -2557,25 +2552,18 @@ PROGRAM{
     12 PUSHINT	//  op=1 query_id=2 key=3 valid_until=12
     50 PUSHINT	//  op=1 query_id=2 key=3 valid_until=12 value=50
     get_message INLINECALLDICT	//  tdata
-    DUP	//  tdata tdata
-    FIRST	//  tdata balance
-    OVER	//  tdata balance tdata
-    SECOND	//  tdata balance msg_value
-    s2 PUSH	//  tdata balance msg_value tdata
-    THIRD	//  tdata balance msg_value in_msg_full
-    s0 s3 XCHG	//  in_msg_full balance msg_value tdata
-    3 INDEX	//  in_msg_full balance msg_value in_msg_body
     CONT:<{
       recv_internal CALLDICT
-    }>	//  in_msg_full balance msg_value in_msg_body _22
-    s4 s4 XCHG2	//  _22 balance msg_value in_msg_full in_msg_body
-    4 TUPLE	//  _22 _23
-    invoke_method CALLDICT	//  _25 _26
+    }>	//  tdata _16
+    SWAP	//  _16 tdata
+    invoke_method CALLDICT	//  _18 _19
     2DROP	// 
   }>
   __test_set_message_data_3 PROC:<{
     // 
-    3 PUSHINT	//  _0=3
+    10 GETPARAM UNPAIR DROP	//  _0
+    c4 POP
+    3 PUSHINT	//  _2=3
     c7 PUSH DUP FIRST
     ROT
     3 SETINDEX
@@ -2587,20 +2575,11 @@ PROGRAM{
     14 PUSHINT	//  op=1 query_id=2 key=115792089237316195423570985008687907853269984665640564039457584007913129639935 valid_until=14
     5 PUSHINT	//  op=1 query_id=2 key=115792089237316195423570985008687907853269984665640564039457584007913129639935 valid_until=14 value=5
     get_message INLINECALLDICT	//  tdata
-    DUP	//  tdata tdata
-    FIRST	//  tdata balance
-    OVER	//  tdata balance tdata
-    SECOND	//  tdata balance msg_value
-    s2 PUSH	//  tdata balance msg_value tdata
-    THIRD	//  tdata balance msg_value in_msg_full
-    s0 s3 XCHG	//  in_msg_full balance msg_value tdata
-    3 INDEX	//  in_msg_full balance msg_value in_msg_body
     CONT:<{
       recv_internal CALLDICT
-    }>	//  in_msg_full balance msg_value in_msg_body _22
-    s4 s4 XCHG2	//  _22 balance msg_value in_msg_full in_msg_body
-    4 TUPLE	//  _22 _23
-    invoke_method CALLDICT	//  _25 _26
+    }>	//  tdata _16
+    SWAP	//  _16 tdata
+    invoke_method CALLDICT	//  _18 _19
     2DROP	// 
   }>
   __test_get_key PROC:<{
@@ -2647,22 +2626,22 @@ PROGRAM{
   }>
   __test_remove_outdated_data PROC:<{
     // 
-    10 GETPARAM UNPAIR DROP	//  _0
-    c4 POP
-    13 PUSHINT	//  _2=13
+    13 PUSHINT	//  _0=13
     c7 PUSH DUP FIRST
     ROT
     3 SETINDEX
     0 SETINDEX
     c7 POP
+    10 GETPARAM UNPAIR DROP	//  _2
+    c4 POP
     2 PUSHINT	//  op=2
     DUP	//  op=2 query_id=2
+    get_delete_message INLINECALLDICT	//  tdata
     CONT:<{
-      get_delete_message CALLDICT
-    }>	//  op=2 query_id=2 _10
-    -ROT	//  _10 op=2 query_id=2
-    PAIR	//  _10 _11
-    invoke_method CALLDICT	//  _13 _14
+      recv_internal CALLDICT
+    }>	//  tdata _10
+    SWAP	//  _10 tdata
+    invoke_method CALLDICT	//  _12 _13
     2DROP	// 
   }>
   __test_check_cant_get_outdated_data PROC:<{
@@ -2876,12 +2855,12 @@ PROGRAM{
     c7 POP
     2 PUSHINT	//  op=2
     DUP	//  op=2 query_id=2
+    get_delete_message INLINECALLDICT	//  tdata
     CONT:<{
-      get_delete_message CALLDICT
-    }>	//  op=2 query_id=2 _8
-    -ROT	//  _8 op=2 query_id=2
-    PAIR	//  _8 _9
-    invoke_method CALLDICT	//  _11 _12
+      recv_internal CALLDICT
+    }>	//  tdata _10
+    SWAP	//  _10 tdata
+    invoke_method CALLDICT	//  _12 _13
     2DROP	// 
   }>
   __test_check_can_get_not_outdated2_data PROC:<{
@@ -2949,12 +2928,12 @@ PROGRAM{
     c7 POP
     2 PUSHINT	//  op=2
     DUP	//  op=2 query_id=2
+    get_delete_message INLINECALLDICT	//  tdata
     CONT:<{
-      get_delete_message CALLDICT
-    }>	//  op=2 query_id=2 _8
-    -ROT	//  _8 op=2 query_id=2
-    PAIR	//  _8 _9
-    invoke_method CALLDICT	//  _11 _12
+      recv_internal CALLDICT
+    }>	//  tdata _10
+    SWAP	//  _10 tdata
+    invoke_method CALLDICT	//  _12 _13
     2DROP	// 
   }>
   __test_check_can_not_not_outdated2_data PROC:<{

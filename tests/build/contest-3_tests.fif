@@ -80,7 +80,7 @@ PROGRAM{
   97871 DECLMETHOD get_request_address_message
   128741 DECLMETHOD get_unvalid_message
   DECLPROC __test_manager_set_address
-  DECLPROC __test_request_address_data
+  DECLPROC __test_request_address
   DECLPROC __test_unvalid_message_data
   power PROCREF:<{
     //  x exponent
@@ -2390,7 +2390,9 @@ PROGRAM{
   }>
   __test_manager_set_address PROC:<{
     // 
-    0 PUSHINT	//  _0=0
+    get_c4 INLINECALLDICT	//  _0
+    c4 POP
+    0 PUSHINT	//  _2=0
     c7 PUSH DUP FIRST
     ROT
     3 SETINDEX
@@ -2407,28 +2409,28 @@ PROGRAM{
     3 INDEX	//  in_msg_full balance msg_value in_msg_body
     CONT:<{
       recv_internal CALLDICT
-    }>	//  in_msg_full balance msg_value in_msg_body _12
-    s4 s4 XCHG2	//  _12 balance msg_value in_msg_full in_msg_body
-    4 TUPLE	//  _12 _13
-    invoke_method CALLDICT	//  _27 _28
+    }>	//  in_msg_full balance msg_value in_msg_body _14
+    s4 s4 XCHG2	//  _14 balance msg_value in_msg_full in_msg_body
+    4 TUPLE	//  _14 _15
+    invoke_method CALLDICT	//  _29 _30
     2DROP	// 
     c5 PUSH CTOS	//  actions_slice
-    107 PUSHINT	//  actions_slice _17
-    OVER	//  actions_slice _17 actions_slice
-    SBITS	//  actions_slice _17 _18
-    0 NEQINT	//  actions_slice _17 _20
+    107 PUSHINT	//  actions_slice _19
+    OVER	//  actions_slice _19 actions_slice
+    SBITS	//  actions_slice _19 _20
+    0 NEQINT	//  actions_slice _19 _22
     THROWANYIF
-    107 PUSHINT	//  actions_slice _22
-    SWAP	//  _22 actions_slice
-    SREFS	//  _22 _23
-    0 NEQINT	//  _22 _25
+    107 PUSHINT	//  actions_slice _24
+    SWAP	//  _24 actions_slice
+    SREFS	//  _24 _25
+    0 NEQINT	//  _24 _27
     THROWANYIF
   }>
-  __test_request_address_data PROC:<{
+  __test_request_address PROC:<{
     // 
     10 GETPARAM UNPAIR DROP	//  _0
     c4 POP
-    get_set_message INLINECALLDICT	//  tdata
+    get_request_address_message INLINECALLDICT	//  tdata
     DUP	//  tdata tdata
     FIRST	//  tdata balance
     OVER	//  tdata balance tdata

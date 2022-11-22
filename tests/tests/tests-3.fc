@@ -1,5 +1,6 @@
 
 _ __test_manager_set_address() { ;;id(0)
+    set_data(get_c4());
     set_now(0);
     tuple tdata = get_set_message();
     ;; message from manager must be accepted, but we need to check there is no outgoing messages
@@ -18,19 +19,24 @@ _ __test_manager_set_address() { ;;id(0)
 
 }
 
-_ __test_request_address_data() { ;;id(2)
+_ __test_request_address() { ;;id(2)
 
     set_data(get_prev_c4());
-    tuple tdata = get_set_message();
+
+    tuple tdata = get_request_address_message();
     int balance = tdata.first();
     int msg_value = tdata.second();
     cell in_msg_full = tdata.third();
     slice in_msg_body = tdata.fourth();
+
     invoke_method(recv_internal, [balance, msg_value, in_msg_full, in_msg_body]);
 
     slice actions_list = get_actions();
+
     cell prev_action_list = actions_list~load_ref();
+
     slice action = actions_list;
+
     ;; action_send_msg#0ec3c86d mode:(## 8)
     ;;   out_msg:^(MessageRelaxed Any) = OutAction;
 

@@ -118,8 +118,8 @@ TASK 4 - HASHMAP STORAGE.
         int valid_until = valid_until_slice~load_uint(64);
         return (valid_until, value);
     }
-            else {
-                throw(395);
-            }
-    return (0, null());
+    else {
+        throw(395);
+    }
+    return (0, null()); ;;for toncli
 }

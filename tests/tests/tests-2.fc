@@ -61,10 +61,10 @@ _ __test_valid_data(){ ;;id(0)
 }
 
 
-slice __test_message_from_owner_data(){ ;;id(2)
+_ __test_message_from_owner_data(){ ;;id(2)
 
     set_data(get_c4());
-    var tdata = get_valid_message();
+    var tdata = get_valid_message_from_owner();
 
     int balance = tdata.first();
     int msg_value = tdata.second();
@@ -72,10 +72,10 @@ slice __test_message_from_owner_data(){ ;;id(2)
     slice in_msg_body = tdata.fourth();
 
     invoke_method(recv_internal, [balance, msg_value, in_msg_full, in_msg_body]);
-    ;; check_success(exit_code); ;; message from owner must be accepted, but we need to check there is no outgoing messages
 
-    slice actions_slice = get_actions();
-    ;;actions_slice is not hollow
-    throw_if(error::actions_unvalid(), actions_slice.slice_bits() != 0);
-    throw_if(error::actions_unvalid(), actions_slice.slice_refs() != 0);
+    var actions = parse_c5();
+    if (~ is_null?(actions)) {
+        int action_id = actions.first().first();
+        throw_if(error::actions_unvalid(), action_id == 0 );
+    }
 }

@@ -78,6 +78,7 @@ PROGRAM{
   98911 DECLMETHOD get_valid_message_body
   128658 DECLMETHOD get_valid_message
   90059 DECLMETHOD get_valid_message_from_owner
+  DECLPROC check_one_action_by_id
   DECLPROC __test_valid_data
   DECLPROC __test_message_from_owner_data
   power PROCREF:<{
@@ -2327,6 +2328,12 @@ PROGRAM{
     SWAP	//  balance=1100000000 msg_value=1000000000 in_msg in_msg_body
     4 TUPLE	//  _14
   }>
+  check_one_action_by_id PROCINLINE:<{
+    //  actions action_id
+    2DROP	// 
+    107 PUSHINT	//  _5
+    THROWANY
+  }>
   __test_valid_data PROC:<{
     // 
     get_c4 INLINECALLDICT	//  _0
@@ -2412,7 +2419,7 @@ PROGRAM{
     // 
     get_c4 INLINECALLDICT	//  _0
     c4 POP
-    get_valid_message INLINECALLDICT	//  tdata
+    get_valid_message_from_owner INLINECALLDICT	//  tdata
     DUP	//  tdata tdata
     FIRST	//  tdata balance
     OVER	//  tdata balance tdata
@@ -2426,8 +2433,21 @@ PROGRAM{
     }>	//  in_msg_full balance msg_value in_msg_body _12
     s4 s4 XCHG2	//  _12 balance msg_value in_msg_full in_msg_body
     4 TUPLE	//  _12 _13
-    invoke_method CALLDICT	//  _17 _18
+    invoke_method CALLDICT	//  _26 _27
     2DROP	// 
-    c5 PUSH CTOS	//  actions_slice
+    parse_c5 INLINECALLDICT	//  actions
+    DUP	//  actions actions
+    ISNULL	//  actions _17
+    NOT	//  actions _18
+    IF:<{	//  actions
+      FIRST	//  _20
+      FIRST	//  action_id
+      107 PUSHINT	//  action_id _22
+      SWAP	//  _22 action_id
+      0 EQINT	//  _22 _24
+      THROWANYIF
+    }>ELSE<{
+      DROP	// 
+    }>
   }>
 }END>c

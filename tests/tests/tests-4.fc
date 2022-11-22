@@ -1,5 +1,5 @@
 _ __test_set_message_data() { ;;id(0)
-
+    set_data(get_c4());
     set_now(1);
     int op = 1;
     int query_id = 2;
@@ -8,16 +8,12 @@ _ __test_set_message_data() { ;;id(0)
     int value = 5;
 
     var tdata = get_message(op, query_id, key, valid_until, value);
-    int balance = tdata.first();
-    int msg_value = tdata.second();
-    cell in_msg_full = tdata.third();
-    slice in_msg_body = tdata.fourth();
 
-    invoke_method(recv_internal, [balance, msg_value, in_msg_full, in_msg_body]);
+    invoke_method(recv_internal, tdata);
 }
 
 _ __test_set_message_data_2() { ;;id(2)
-
+    set_data(get_prev_c4());
     set_now(2);
     int op = 1;
     int query_id = 2;
@@ -27,18 +23,13 @@ _ __test_set_message_data_2() { ;;id(2)
 
     var tdata = get_message(op, query_id, key, valid_until, value);
 
-    int balance = tdata.first();
-    int msg_value = tdata.second();
-    cell in_msg_full = tdata.third();
-    slice in_msg_body = tdata.fourth();
-
-    invoke_method(recv_internal, [balance, msg_value, in_msg_full, in_msg_body]);
+    invoke_method(recv_internal, tdata);
 }
 
 
 
 _ __test_set_message_data_3() { ;;id(4)
-
+    set_data(get_prev_c4());
     set_now(3);
     int op = 1;
     int query_id = 2;
@@ -47,16 +38,10 @@ _ __test_set_message_data_3() { ;;id(4)
     int value = 5;
 
     var tdata = get_message(op, query_id, key, valid_until, value);
-    int balance = tdata.first();
-    int msg_value = tdata.second();
-    cell in_msg_full = tdata.third();
-    slice in_msg_body = tdata.fourth();
-
-    invoke_method(recv_internal, [balance, msg_value, in_msg_full, in_msg_body]);
+    invoke_method(recv_internal, tdata);
 }
 
 _ __test_get_key() { ;;id(6)
-
     set_now(4);
     set_data(get_prev_c4());
 
@@ -76,15 +61,18 @@ _ __test_key_max() { ;;id(8)
 
 }
 
-_ __test_remove_outdated_data() { ;;id(10)
-
-    set_data(get_prev_c4());
+_ __test_remove_outdated_data() impure { ;;id(10)
     set_now(13);
+    set_data(get_prev_c4());
+
 
     int op = 2;
     int query_id = 2;
 
-    (_, var stack) = invoke_method(get_delete_message, [op, query_id]);
+    var tdata = get_delete_message(op, query_id);
+    invoke_method(recv_internal, tdata);
+    ;;invoke_method(get_delete_message, [op, query_id]);
+    ;;invoke_method_expect_fail(get_key, [3]);
 
 }
 
@@ -211,8 +199,9 @@ _ __test_remove_outdated2_data() { ;;id(26)
 
     int op = 2;
     int query_id = 2;
+    var tdata = get_delete_message(op, query_id);
 
-    invoke_method(get_delete_message, [op, query_id]);
+    invoke_method(recv_internal, tdata);
 
 }
 
@@ -254,7 +243,8 @@ _ __test_remove_outdated3_data() { ;;id(32)
     int op = 2;
     int query_id = 2;
 
-    invoke_method(get_delete_message, [op, query_id]);
+    var tdata = get_delete_message(op, query_id);
+    invoke_method(recv_internal, tdata);
 }
 
 
